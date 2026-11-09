@@ -238,7 +238,7 @@ const AG={
  seo:{ic:"🔎",nom:"SEO",role:"Mot-clé placé dans la voix, l'écran, le titre, les hashtags."},
  visuels:{ic:"🎨",nom:"Visuels",role:"Prompts d'images 9:16 ou plan de découpe de tes clips."},
  montage:{ic:"🎬",nom:"Montage",role:"Pack de montage (pack.json) pour le moteur de rendu."},
- openmontage:{ic:"🎞️",nom:"OpenMontage",role:"Monteur IA gratuit sur ton PC : voix, images libres, sous-titres, vidéo 9:16."},
+ openmontage:{ic:"🎞️",nom:"Monty",role:"OpenMontage — monteur IA gratuit sur ton PC : voix, images libres, sous-titres, vidéo 9:16."},
  publication:{ic:"📣",nom:"Publication",role:"Titre, description qui fait commenter, 5 hashtags."},
  analyste:{ic:"📈",nom:"Analyste",role:"Lit tes stats, garde les mots-clés qui marchent."}
 };
@@ -390,7 +390,7 @@ LIVRAISON
 - Copie-le dans ../../${omDossier(v)}/video.mp4
 - Montre-moi le storyboard avant le rendu final.`}
 function omCard(v){if(!OM.includes(v.niche))return"";const ok=v.etapes.script?.st==="done";
- return`<div class="step ${ok?"done":""}" id="s-openmontage" style="--c:var(--c-${v.niche});margin-top:12px"><div class="sh"><div class="who"><span class="o">🎞️</span><div><b>OpenMontage</b><small>Monteur IA gratuit sur ton PC : il fabrique la vidéo complète à partir de ce brief.</small></div></div>
+ return`<div class="step ${ok?"done":""}" id="s-openmontage" style="--c:var(--c-${v.niche});margin-top:12px"><div class="sh"><div class="who"><span class="o">🎞️</span><div><b>Monty</b><small>OpenMontage — monteur IA gratuit sur ton PC : il fabrique la vidéo complète à partir de ce brief.</small></div></div>
   <div class="btns" style="margin:0;align-items:center"><span class="state mono ${ok?"done":"wait"}">${ok?"Brief prêt":"Attend le script"}</span>
    <button class="btn sm" data-omcopy="1" ${ok?"":"disabled"}>Copier le brief</button>
    ${downloads?`<button class="btn sm sec" data-omdl="1" ${ok?"":"disabled"}>⬇ brief.md</button>`:""}</div></div>
@@ -504,7 +504,7 @@ document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)r
  if(t.dataset.new){if(running){toast("Une équipe travaille déjà : attends ou arrête-la");show("atelier");return}return newVideo(t.dataset.new)}
  if(t.dataset.ag){const a=t.dataset.ag,d=D(t.dataset.d);
   if(a==="analyste")return show("videos");
-  if(a==="openmontage"&&!(v&&v.niche===d.id&&OM.includes(d.id)))return info(`<h3>🎞️ OpenMontage · ${d.nom}</h3><p>${AG.openmontage.role}</p>
+  if(a==="openmontage"&&!(v&&v.niche===d.id&&OM.includes(d.id)))return info(`<h3>🎞️ Monty · ${d.nom}</h3><p>${AG.openmontage.role}</p>
    <p>${OM.includes(d.id)?"Lance une vidéo dans ce département : dès que le script est écrit, l'Atelier prépare le brief à coller dans OpenMontage.":d.id==="countryball"?"Le countryball garde son propre moteur de rendu (render_countryball.py), déjà réglé sur ton format.":"Le nettoyage auto se monte sur tes propres clips dans CapCut, avec la voix off du Script."}</p>
    <p>Installation sur ton PC : double-clique <code>04_atelier\\installer-openmontage.bat</code>, puis ouvre Claude Code dans <code>04_atelier\\OpenMontage</code>.</p>`);
   if(v&&v.niche===d.id){show("atelier");setTimeout(()=>$("#s-"+a)?.scrollIntoView({behavior:"smooth",block:"center"}),60);return}
