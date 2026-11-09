@@ -1,0 +1,12 @@
+USINE À TIKTOK — VERSION HANGAR (Claude Code)
+
+1. Dézippe ce dossier où tu veux (ex. Documents\usine-tiktok).
+2. Double-clique installer.bat (installe la voix Henri gratuite, Pillow, numpy et ffmpeg).
+3. Ouvre Claude Code dans ce dossier. Il lit CLAUDE.md tout seul : il connaît les 5 niches, les agents,
+   les règles du coach et le format countryball.
+4. Premier test : dis-lui « lance le test countryball ». Il fabrique exemple\test.mp4 avec la voix Henri
+   (les images d'exemple sont des boules factices, juste pour tester la chaîne).
+5. Vraie vidéo : « fais une vidéo countryball sur <sujet> ». Il écrit le pack et les prompts, tu génères
+   les images, tu les déposes dans le dossier images qu'il t'indique, il monte la vidéo.
+
+references\ contient ta vidéo countryball de référence et son analyse (planche, transition).

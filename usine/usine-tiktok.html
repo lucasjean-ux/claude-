@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Usine à TikTok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#dfe4ea; --panel:#f6f8fa; --ink:#14213d; --muted:#56627a; --line:#b9c2cf;
+  --signal:#f2b705; --signal-ink:#1a1400; --live:#e63946; --ok:#1f9d55; --cyan:#0aa5a0;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10161f; --panel:#18212d; --ink:#e8edf3; --muted:#9aa7b8; --line:#2c3a4b;
+    --signal:#f2b705; --signal-ink:#1a1400; --live:#ff5a66; --ok:#3ecf7f; --cyan:#25d6d0;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10161f; --panel:#18212d; --ink:#e8edf3; --muted:#9aa7b8; --line:#2c3a4b;
+  --signal:#f2b705; --signal-ink:#1a1400; --live:#ff5a66; --ok:#3ecf7f; --cyan:#25d6d0;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.45}
+.wrap{max-width:760px;margin:0 auto;padding:16px 14px 60px}
+h1{font-stretch:125%;font-weight:900;font-size:clamp(30px,8vw,46px);line-height:.95;margin:6px 0 4px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 16px;font-size:15px}
+.belt{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--ink);border-radius:10px;overflow:hidden;background:var(--panel)}
+.belt div{padding:10px 12px;border-right:2px solid var(--ink)}
+.belt div:last-child{border-right:0}
+.belt b{display:block;font-stretch:112%;font-weight:850;font-size:26px;line-height:1}
+.belt span{font-size:13px;color:var(--muted)}
+.coach{margin:14px 0;padding:12px 14px;border-left:6px solid var(--signal);background:var(--panel);border-radius:0 10px 10px 0}
+.coach strong{display:block;font-stretch:112%;font-weight:800;margin-bottom:2px}
+.coach p{margin:0;font-size:15px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tab .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--bg);font-size:12px}
+.tab[aria-selected="true"]{background:var(--signal);color:var(--signal-ink);border-color:var(--signal)}
+.tab[aria-selected="true"] .n{background:var(--signal-ink);color:var(--signal)}
+.tab:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.niche{background:var(--panel);border:2px solid var(--ink);border-radius:14px;padding:14px}
+.niche h2{margin:0 0 4px;font-stretch:118%;font-weight:850;font-size:22px}
+.niche .desc{margin:0 0 12px;color:var(--muted);font-size:14px}
+label{display:block;font-weight:700;font-size:14px;margin:10px 0 4px}
+textarea,input[type=number]{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:10px}
+textarea{min-height:84px;resize:vertical}
+.row{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.row>div{flex:1 1 140px}
+.go{margin-top:12px;width:100%;background:var(--ink);color:var(--bg);border:0;border-radius:10px;padding:14px;font:inherit;font-weight:850;font-stretch:115%;font-size:18px;cursor:pointer}
+.go:disabled{opacity:.55;cursor:wait}
+.line{margin-top:16px;position:relative}
+.station{position:relative;padding:0 0 14px 34px}
+.station::before{content:"";position:absolute;left:11px;top:22px;bottom:0;width:2px;background:repeating-linear-gradient(var(--line) 0 6px,transparent 6px 10px)}
+.station:last-child::before{display:none}
+.lamp{position:absolute;left:2px;top:3px;width:20px;height:20px;border-radius:50%;border:2px solid var(--ink);background:var(--panel)}
+.station[data-s="run"] .lamp{background:var(--signal);animation:pulse 1s infinite}
+.station[data-s="done"] .lamp{background:var(--ok);border-color:var(--ok)}
+.station[data-s="err"] .lamp{background:var(--live);border-color:var(--live)}
+@keyframes pulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--signal) 35%,transparent)}}
+@media (prefers-reduced-motion:reduce){.station[data-s="run"] .lamp{animation:none}}
+.st-head{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.st-name{font-weight:800}
+.st-state{font-size:13px;color:var(--muted)}
+.out{margin-top:6px;white-space:pre-wrap;font-size:14.5px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;max-height:320px;overflow:auto;display:none}
+.station[data-s="run"] .out,.station[data-s="done"] .out,.station[data-s="err"] .out{display:block}
+.mini{font:inherit;font-size:13px;font-weight:700;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:6px;padding:4px 10px;cursor:pointer;margin-top:6px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.actions .mini{padding:8px 12px;font-size:14px}
+.hist{margin-top:18px}
+.hist h3{font-size:16px;margin:0 0 6px;font-weight:800}
+.item{border-top:1px solid var(--line);padding:10px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.item .t{font-weight:700;font-size:14.5px}
+.item .m{font-size:13px;color:var(--muted)}
+.pill{font-size:12px;font-weight:800;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.pill.p{background:var(--ok);color:#fff}
+.pill.c{background:var(--line);color:var(--ink)}
+.empty{color:var(--muted);font-size:14px;margin:4px 0 0}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Usine à TikTok</h1>
+  <p class="sub">Filiale TikTok Money. Tu choisis une niche, tu donnes le sujet, les agents fabriquent tout jusqu’au plan de montage.</p>
+
+  <div class="belt" aria-label="Compteurs">
+    <div><b id="cCreated">0</b><span>vidéos créées</span></div>
+    <div><b id="cPosted">0</b><span>postées</span></div>
+    <div><b id="cMoney">0 €</b><span>gagnés</span></div>
+  </div>
+
+  <div class="coach" id="coach"><strong>Le coach</strong><p>Chargement…</p></div>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <section class="niche" id="niche"></section>
+
+  <div class="hist">
+    <h3 id="histTitle">Dernières vidéos</h3>
+    <div id="hist"></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const NICHES = [
+  { id:"auto", n:1, name:"Nettoyage auto", desc:"Voix off storytime posée sur tes clips de nettoyage, révélation gardée pour la fin.",
+    placeholder:"Ex. intérieur de Clio couvert de poils de chien, le client revient 2 ans après…",
+    count:false,
+    rules:`Format : voix off à la 1re personne d'un détaileur, storytime sur un clip de nettoyage auto. Hook choc dans la 1re phrase, un mystère annoncé tôt (« je vous dis à la fin ce que j'ai trouvé »), étapes du nettoyage racontées dans l'ordre (aspiration, shampoing, vapeur, plastiques, carrosserie), révélation finale. Ton oral, phrases courtes.`,
+    visuals:`Pas d'images à générer : les visuels sont les clips de l'utilisateur. Donne un plan de découpe : pour chaque phrase du script, quel type de plan du clip mettre (vue large saleté, gros plan eau noire, avant/après, etc.) et la durée.` },
+  { id:"tier", n:2, name:"Tier list flippante", desc:"Tableau de 6 à 7 éléments du plus calme au plus terrifiant, comme un iceberg qui descend.",
+    placeholder:"Ex. les paradoxes les plus dérangeants, les lieux les plus hantés, les expériences interdites…",
+    count:true, countLabel:"Nombre d'éléments", countDefault:6,
+    rules:`Format : tier list descendante. Ouverture : « Ces N … sont classés du plus … au plus …, et le dernier … ». Puis chaque élément numéroté, 1 à 3 phrases, du plus léger au plus glauque. Uniquement des faits vérifiables ; si un fait est une légende, le dire (« on raconte que »). Finir sur le pire élément avec une phrase qui donne froid.`,
+    visuals:`Visuels : 1) le tableau d'ouverture : une ligne par élément avec une icône de visage stylisé en noir et blanc qui devient de plus en plus inquiétant (du visage calme au crâne rouge glitché), décris chaque icône. 2) Pour chaque élément, 2 prompts d'images d'illustration format vertical 9:16, style photo d'archive ou illustration sombre, sans aucun texte dans l'image.` },
+  { id:"ball", n:3, name:"Countryball", desc:"Histoire racontée en illustrations de countryballs, un plan toutes les 4 secondes avec 2-3 mots en gros.",
+    placeholder:"Ex. 9 tueurs de films d'horreur en countryball, ou pourquoi Singapour a interdit le chewing-gum…",
+    count:true, countLabel:"Nombre de countryballs / plans", countDefault:9,
+    rules:`Format : countryballs. Une seule histoire ou une liste, racontée plan par plan. Chaque phrase du script = un plan, précédé du texte à l'écran entre crochets en MAJUSCULES (2 à 4 mots). La boule France peut servir de narrateur. Faits vérifiables uniquement.`,
+    visuals:`Prompts images : un par plan, format vertical 9:16. Style IDENTIQUE pour tous : countryball dessiné, sphère parfaite avec drapeau, gros contour noir épais, deux yeux blancs ovales sans pupille, couleurs plates, fond uni coloré, style cartoon webcomic. Ne jamais écrire de texte dans l'image (le texte est ajouté au montage). Pour un personnage de film, décris seulement son apparence générique (masque, tenue, accessoire) sans citer le nom du personnage ni du film dans le prompt image.` },
+  { id:"stoic", n:4, name:"Stoïcisme", desc:"Motivation stoïcienne en voix off grave, déclinable sur plusieurs comptes avec variantes.",
+    placeholder:"Ex. pourquoi Marc Aurèle se levait avant tout le monde, contrôler ses émotions…",
+    count:true, countLabel:"Nombre de variantes (une par compte)", countDefault:2,
+    rules:`Format : voix off grave et lente, 2e personne (« tu »). Hook dur, une idée stoïcienne (Marc Aurèle, Sénèque, Épictète) avec une citation courte et exacte de l'auteur, application concrète à la vie d'aujourd'hui, chute forte. Si plusieurs variantes sont demandées, chaque variante a un hook, un angle et une citation différents pour ne pas être un doublon.`,
+    visuals:`Prompts images vertical 9:16, cinématiques : statues antiques en marbre, ruines romaines au lever du soleil, silhouette solitaire sous la pluie, tons sombres et dorés, sans aucun texte dans l'image. Un prompt toutes les 4 à 5 secondes.` },
+  { id:"stick", n:5, name:"Stickman finance", desc:"Finance perso expliquée avec des stickmans, simple et concret.",
+    placeholder:"Ex. pourquoi les riches ne paient pas de loyer, la règle 50/30/20…",
+    count:false,
+    rules:`Format : explication finance perso pour débutants, avec un personnage stickman qu'on suit (« voici Tom »). Hook avec un chiffre ou une question, explication en étapes, exemple chiffré simple, chute utile. Pas de promesse de gain, pas de conseil d'investissement personnalisé.`,
+    visuals:`Prompts images vertical 9:16 : stickman noir minimaliste sur fond blanc, traits épais, quelques accents de couleur (vert pour l'argent, rouge pour les pertes), sans aucun texte dans l'image. Un prompt par idée du script.` }
+];
+
+const AGENTS = [
+  {k:"angle", name:"Agent Angle", job:"trouve l’angle et 3 hooks"},
+  {k:"script", name:"Agent Script", job:"écrit la voix off de 1 min 02"},
+  {k:"visu", name:"Agent Visuels", job:"prompts images ou plan de découpe"},
+  {k:"montage", name:"Agent Montage", job:"plan de montage pour le hangar"},
+  {k:"pub", name:"Agent Publication", job:"titre, description, hashtags"}
+];
+
+let current = NICHES[0];
+let videos = [];
+let db = null, sample = null, downloads = null, uid = null;
+let lastRun = null;
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove("on"),2200)}
+
+function renderTabs(){
+  $("#tabs").innerHTML = NICHES.map(n=>`<button class="tab" role="tab" aria-selected="${n.id===current.id}" data-id="${n.id}"><span class="n">${n.n}</span>${esc(n.name)}</button>`).join("");
+  document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{current=NICHES.find(x=>x.id===b.dataset.id);lastRun=null;renderTabs();renderNiche();renderHist();});
+}
+
+function renderNiche(){
+  const n=current;
+  $("#niche").innerHTML = `
+    <h2>${n.n}. ${esc(n.name)}</h2>
+    <p class="desc">${esc(n.desc)}</p>
+    <label for="brief">Sujet de la vidéo</label>
+    <textarea id="brief" placeholder="${esc(n.placeholder)}"></textarea>
+    ${n.count?`<div class="row"><div><label for="cnt">${esc(n.countLabel)}</label><input id="cnt" type="number" min="1" max="12" value="${n.countDefault}"></div></div>`:""}
+    <button class="go" id="go">Lancer la chaîne</button>
+    <div class="line" id="line">${AGENTS.map(a=>`
+      <div class="station" data-k="${a.k}" data-s="idle">
+        <span class="lamp" aria-hidden="true"></span>
+        <div class="st-head"><span class="st-name">${a.name}</span><span class="st-state">${a.job}</span></div>
+        <div class="out"></div>
+      </div>`).join("")}</div>
+    <div class="actions" id="acts" hidden>
+      <button class="mini" id="copyAll">Copier tout</button>
+      <button class="mini" id="dl">Télécharger le pack montage</button>
+    </div>
+    <p class="note">Le montage final tourne sur ton PC dans le hangar (Claude Code) : il lit le pack montage et assemble images, voix et textes.</p>`;
+  $("#go").onclick = run;
+  if(!sample){ $("#go").disabled=true; $("#go").textContent="Agents indisponibles ici"; }
+}
+
+function setStation(k,state,text){
+  const st=document.querySelector(`.station[data-k="${k}"]`); if(!st) return;
+  st.dataset.s=state;
+  const lbl={idle:AGENTS.find(a=>a.k===k).job,run:"au travail…",done:"terminé",err:"en panne"}[state];
+  st.querySelector(".st-state").textContent=lbl;
+  if(text!==undefined) st.querySelector(".out").textContent=text;
+}
+
+async function ask(k,prompt){
+  setStation(k,"run","…");
+  try{
+    const r = await sample(prompt,{onText:({text})=>setStation(k,"run",text)});
+    setStation(k,"done",r.text.trim());
+    return r.text.trim();
+  }catch(e){
+    const msg = e&&e.code==="rate_limited" ? "Trop de demandes d’affilée. Attends une minute et relance." :
+                e&&e.code==="not_granted" ? "Autorise les agents (fenêtre de permission) pour lancer la chaîne." :
+                "L’agent n’a pas pu répondre. Relance la chaîne.";
+    setStation(k,"err",msg); throw e;
+  }
+}
+
+async function run(){
+  const brief=$("#brief").value.trim();
+  if(!brief){ $("#brief").focus(); toast("Donne un sujet à l’usine"); return; }
+  const n=current, cnt=n.count?Math.max(1,Math.min(12,+$("#cnt").value||n.countDefault)):null;
+  const btn=$("#go"); btn.disabled=true; btn.textContent="La chaîne tourne…";
+  $("#acts").hidden=true;
+  AGENTS.forEach(a=>setStation(a.k,"idle",""));
+  const base=`Tu travailles pour une usine de vidéos TikTok sans visage en français, monétisées par le Creator Rewards (vidéo d'au moins 1 min, idéalement 1 min 02). Niche : ${n.name}.\n${n.rules}\nSujet donné par le créateur : ${brief}${cnt?`\nNombre demandé : ${cnt}`:""}\nRéponds en français, sans markdown, sans astérisques.`;
+  try{
+    const angle = await ask("angle", `${base}\n\nTâche : propose l'angle le plus viral pour ce sujet en 2 phrases, puis 3 hooks différents (première phrase de la vidéo, max 15 mots chacun), numérotés. Indique lequel tu recommandes.`);
+    const script = await ask("script", `${base}\n\nAngle et hooks retenus :\n${angle}\n\nTâche : écris la voix off complète avec le hook recommandé. Longueur : entre 150 et 170 mots (≈ 1 min 02 à voix posée)${cnt&&n.id==="stoic"?`, et écris ${cnt} variantes séparées par une ligne « — Variante X — »`:""}. Donne uniquement le texte à lire${n.id==="ball"?" avec les textes à l'écran entre crochets":""}.`);
+    const visu = await ask("visu", `${base}\n\n${n.visuals}\n\nScript :\n${script}\n\nTâche : produis la liste numérotée des visuels dans l'ordre du script. Pour chaque ligne : le passage du script concerné entre guillemets, puis le prompt ou le plan. Prompts images en anglais (meilleurs résultats), le reste en français.`);
+    const montageTxt = await ask("montage", `Tu prépares un plan de montage machine pour un outil ffmpeg. Vidéo verticale 1080x1920, durée cible 62 secondes.\nScript :\n${script}\n\nVisuels :\n${visu}\n\nRéponds UNIQUEMENT avec un JSON valide, sans texte autour, de la forme {"niche":"${n.id}","duree":62,"voix":"Henri","scenes":[{"debut":0,"fin":4,"voix_off":"...","texte_ecran":"...","visuel":"numéro du visuel ou description du plan","effet":"zoom lent | coupe | secousse | fondu"}]}. texte_ecran vide si aucun. Les scènes couvrent toute la durée sans trou.`);
+    const pub = await ask("pub", `${base}\n\nScript :\n${script}\n\nTâche : donne un titre TikTok accrocheur (max 70 caractères), une description de 2 phrases qui pousse au commentaire, et 5 hashtags pertinents en français. Format : Titre : … / Description : … / Hashtags : …`);
+    let montage=null; try{ montage=JSON.parse(montageTxt.replace(/```json|```/g,"").trim()); setStation("montage","done",JSON.stringify(montage,null,2)); }catch(_){}
+    const titre=(pub.match(/Titre\s*:\s*(.+)/i)||[])[1]||brief.slice(0,60);
+    lastRun={niche:n.id,brief,angle,script,visu,montage:montage||montageTxt,pub,titre:titre.trim()};
+    $("#acts").hidden=false;
+    $("#copyAll").onclick=()=>{navigator.clipboard?.writeText(`${titre}\n\nSCRIPT\n${script}\n\nVISUELS\n${visu}\n\nPUBLICATION\n${pub}`).then(()=>toast("Copié"),()=>toast("Copie impossible ici"))};
+    $("#dl").onclick=saveFile;
+    if(!downloads) $("#dl").hidden=true;
+    await addVideo({niche:n.id,titre:titre.trim(),created:Date.now(),posted:false,gains:0});
+    toast("Vidéo prête, ajoutée au compteur");
+  }catch(e){ /* station already shows the error */ }
+  btn.disabled=false; btn.textContent="Lancer la chaîne";
+}
+
+async function saveFile(){
+  if(!lastRun||!downloads) return;
+  const data=JSON.stringify(lastRun,null,2);
+  const name=`pack-${lastRun.niche}-${new Date().toISOString().slice(0,10)}.json`;
+  try{ await downloads.save({filename:name,data}); }catch(_){ toast("Téléchargement annulé"); }
+}
+
+/* ---------- stockage ---------- */
+function vcol(){ return db.collection(`data/users/${uid}/videos`); }
+async function addVideo(v){
+  const id="v"+v.created;
+  videos.unshift({id,...v}); renderAll();
+  if(db&&uid){ try{ await vcol().doc(id).set(v);}catch(_){toast("Compteur non sauvegardé");} }
+  else saveLocal();
+}
+async function patchVideo(id,patch){
+  const v=videos.find(x=>x.id===id); if(!v) return; Object.assign(v,patch); renderAll();
+  if(db&&uid){ try{ await vcol().doc(id).update(patch);}catch(_){toast("Modification non sauvegardée");} }
+  else saveLocal();
+}
+function saveLocal(){ try{localStorage.setItem("usine-tt",JSON.stringify(videos))}catch(_){} }
+function loadLocal(){ try{videos=JSON.parse(localStorage.getItem("usine-tt")||"[]")}catch(_){videos=[]} }
+
+/* ---------- affichage ---------- */
+function renderCounters(){
+  $("#cCreated").textContent=videos.length;
+  $("#cPosted").textContent=videos.filter(v=>v.posted).length;
+  const m=videos.reduce((s,v)=>s+(+v.gains||0),0);
+  $("#cMoney").textContent=m.toLocaleString("fr-FR",{maximumFractionDigits:2})+" €";
+}
+function renderCoach(){
+  const today=new Date().toDateString();
+  const t=videos.filter(v=>new Date(v.created).toDateString()===today);
+  const autoToday=t.filter(v=>v.niche==="auto").length;
+  const notPosted=videos.filter(v=>!v.posted).length;
+  let msg;
+  if(autoToday<2) msg=`Priorité du jour : le nettoyage auto. ${autoToday}/2 vidéo${autoToday>1?"s":""} faite${autoToday>1?"s":""}. Tu ne passes aux autres niches qu’après.`;
+  else if(notPosted>4) msg=`Stop la production : ${notPosted} vidéos attendent d’être postées. Poste avant d’en créer d’autres.`;
+  else if(t.filter(v=>v.niche!=="auto").length<2) msg=`Nettoyage auto validé. Maintenant 1 tier list et 1 countryball, puis tu t’arrêtes pour aujourd’hui.`;
+  else msg=`Journée bouclée. Note tes gains dès que TikTok les affiche, et reviens demain.`;
+  $("#coach").innerHTML=`<strong>Le coach</strong><p>${esc(msg)}</p>`;
+}
+function renderHist(){
+  const list=videos.filter(v=>v.niche===current.id).slice(0,12);
+  $("#histTitle").textContent=`Dernières vidéos · ${current.name}`;
+  if(!list.length){ $("#hist").innerHTML=`<p class="empty">Aucune vidéo encore dans cette niche. Lance la chaîne au-dessus.</p>`; return; }
+  $("#hist").innerHTML=list.map(v=>`
+    <div class="item">
+      <div><div class="t">${esc(v.titre)}</div><div class="m">${new Date(v.created).toLocaleDateString("fr-FR")} · ${(+v.gains||0).toLocaleString("fr-FR")} €</div>
+        <div class="actions">
+          ${v.posted?"":`<button class="mini" data-post="${v.id}">Marquer postée</button>`}
+          <button class="mini" data-gain="${v.id}">Ajouter des gains</button>
+        </div></div>
+      <span class="pill ${v.posted?"p":"c"}">${v.posted?"postée":"créée"}</span>
+    </div>`).join("");
+  document.querySelectorAll("[data-post]").forEach(b=>b.onclick=()=>patchVideo(b.dataset.post,{posted:true,postedAt:Date.now()}));
+  document.querySelectorAll("[data-gain]").forEach(b=>b.onclick=()=>{
+    const v=videos.find(x=>x.id===b.dataset.gain);
+    const box=b.parentElement;
+    box.innerHTML=`<input type="number" min="0" step="0.01" inputmode="decimal" aria-label="Gains en euros" value="${+v.gains||0}" style="width:110px;padding:6px"><button class="mini">Enregistrer</button>`;
+    const inp=box.querySelector("input"); inp.focus(); inp.select();
+    box.querySelector("button").onclick=()=>{
+      const val=parseFloat(String(inp.value).replace(",","."));
+      if(isNaN(val)||val<0){toast("Entre un montant en euros");return;}
+      patchVideo(v.id,{gains:val});
+    };
+  });
+}
+function renderAll(){ renderCounters(); renderCoach(); renderHist(); }
+
+/* ---------- démarrage ---------- */
+loadLocal(); renderTabs(); renderNiche(); renderAll();
+(async()=>{
+  if(!window.claude||!claude.use){ return; }
+  const [s,d,u,dl]=await Promise.all([claude.use("sample"),claude.use("db"),claude.use("user"),claude.use("downloads")]);
+  sample=s; downloads=dl;
+  renderNiche();
+  if(d&&u){
+    try{
+      uid=await u.id(); db=d;
+      const timer=setTimeout(()=>toast("Compteurs lents à charger"),10000);
+      vcol().onSnapshot(snap=>{
+        clearTimeout(timer);
+        videos=snap.docs.filter(x=>x.exists).map(x=>({id:x.id,...x.data()})).sort((a,b)=>b.created-a.created);
+        renderAll();
+      },()=>{clearTimeout(timer);toast("Compteurs indisponibles")});
+    }catch(_){ db=null; }
+  }
+})();
+</script>
+</body>
+</html>
