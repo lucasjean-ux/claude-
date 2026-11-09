@@ -11,6 +11,10 @@ USINE À TIKTOK — VERSION HANGAR (Claude Code)
 
 05_references\videos\ contient ta vidéo countryball de référence et son analyse (planche, transition).
 
+ESPACE DE TRAVAIL
+Double-clique ESPACE-DE-TRAVAIL.html : tu vois le CEO, les 6 agents et leur statut, et la journée.
+Claude le met à jour à chaque étape ; recharge la page (F5) pour voir où il en est.
+
 LE BUREAU
 01_ceo\         bureau du CEO : tableau de bord, compteurs, décisions, bilans  ← ouvre-le en premier chaque jour
 02_seo\         service SEO : guide + mots-clés par niche

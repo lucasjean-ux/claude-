@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espace de travail — Usine à TikTok</title>
+<style>
+:root{
+  --bg:#f6f5f2; --card:#ffffff; --ink:#1c1c1e; --muted:#8b8a86; --line:#e7e5df;
+  --accent:#5f7f6a; --wait:#c9c6be; --run:#d29a3a; --done:#5f7f6a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#141414; --card:#1c1c1d; --ink:#ededeb; --muted:#8e8d89; --line:#2a2a2b;
+  --accent:#8fb39a; --wait:#4a4946; --run:#e0ad55; --done:#8fb39a; color-scheme:dark;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Inter","Segoe UI",-apple-system,system-ui,sans-serif;font-size:15px;line-height:1.55;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:64px 28px 96px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:56px}
+.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+h1{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-weight:400;font-size:44px;line-height:1.05;margin:0;letter-spacing:-.01em}
+.date{color:var(--muted);font-size:14px;text-align:right}
+.stats{display:flex;gap:40px}
+.stat b{display:block;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-weight:400;font-size:30px;line-height:1}
+.stat span{font-size:12px;color:var(--muted);letter-spacing:.04em}
+
+.ceo{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px 36px;margin-bottom:20px;
+  display:grid;grid-template-columns:1fr auto;gap:12px 32px;align-items:start}
+.ceo h2{margin:0;font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ceo .msg{grid-column:1/2;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:24px;line-height:1.35;margin:4px 0 0}
+.ceo .cur{grid-column:1/2;color:var(--muted);font-size:14px;margin:0}
+.ceo .side{grid-row:1/4;grid-column:2/3;text-align:right}
+
+.section{display:flex;justify-content:space-between;align-items:baseline;margin:56px 0 18px}
+.section h3{margin:0;font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.section p{margin:0;color:var(--muted);font-size:13px}
+
+.agents{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.agent{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 24px 20px;
+  display:flex;flex-direction:column;gap:10px;transition:border-color .2s, transform .2s}
+.agent:hover{transform:translateY(-2px)}
+.agent[data-s="en_cours"]{border-color:var(--run)}
+.top{display:flex;justify-content:space-between;align-items:center}
+.num{font-size:12px;color:var(--muted);letter-spacing:.08em}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--wait)}
+[data-s="en_cours"] .dot{background:var(--run);box-shadow:0 0 0 4px color-mix(in srgb,var(--run) 22%,transparent);animation:pulse 1.8s infinite}
+[data-s="fait"] .dot{background:var(--done)}
+@keyframes pulse{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--run) 0%,transparent)}}
+.agent h4{margin:4px 0 0;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-weight:400;font-size:24px}
+.role{margin:0;color:var(--ink);opacity:.82}
+.meta{margin:0;font-size:13px;color:var(--muted)}
+.meta code{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:12px}
+.note{margin:0;font-size:13px;color:var(--run);min-height:0}
+.say{margin-top:auto;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;
+  padding:10px 12px;font:inherit;font-size:13px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+.say:hover{border-color:var(--ink)}
+.say small{color:var(--muted);white-space:nowrap}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.cols{grid-template-columns:1fr}.ceo{grid-template-columns:1fr}.ceo .side{grid-row:auto;grid-column:auto;text-align:left}.stats{gap:24px}h1{font-size:34px}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.panel ol,.panel ul{list-style:none;margin:0;padding:0}
+.panel li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.panel li:last-child{border-bottom:0}
+.panel li span:last-child{color:var(--muted);font-size:13px;text-align:right}
+.check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--wait);display:inline-grid;place-items:center;margin-right:12px;vertical-align:-3px;font-size:11px}
+.ok .check{background:var(--done);border-color:var(--done);color:var(--card)}
+.ok .lbl{color:var(--muted);text-decoration:line-through}
+.warn{margin:14px 0 0;font-size:13px;color:var(--run)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:var(--bg);
+  padding:10px 18px;border-radius:999px;font-size:13px;transition:.25s}
+.toast.on{opacity:1;transform:translateX(-50%)}
+footer{margin-top:72px;color:var(--muted);font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <p class="kicker">TikTok Money · Usine</p>
+      <h1>Espace de travail</h1>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <section class="ceo" id="ceo"></section>
+
+  <div class="section"><h3>Les agents</h3><p>Clique sur une phrase pour la copier, puis colle-la à Claude.</p></div>
+  <div class="agents" id="agents"></div>
+
+  <div class="cols">
+    <div>
+      <div class="section"><h3>Aujourd'hui</h3><p id="jour"></p></div>
+      <div class="panel"><ol id="journee"></ol><p class="warn" id="warn" hidden></p></div>
+    </div>
+    <div>
+      <div class="section"><h3>Le bureau</h3><p>Dossiers</p></div>
+      <div class="panel"><ul>
+        <li><span>01 · CEO</span><span>tableau de bord, compteurs, décisions</span></li>
+        <li><span>02 · SEO</span><span>guide, mots-clés</span></li>
+        <li><span>03 · Productions</span><span>une vidéo par dossier</span></li>
+        <li><span>04 · Atelier</span><span>moteurs de rendu, musique</span></li>
+        <li><span>05 · Références</span><span>vidéos modèles, test</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <footer>Mis à jour par le CEO dans <code>01_ceo/etat.js</code> — recharge la page pour voir le dernier état.</footer>
+</div>
+<div class="toast" id="toast">Copié</div>
+
+<script src="01_ceo/etat.js"></script>
+<script>
+const AGENTS = [
+  {id:"angle", nom:"Angle", role:"Trouve l'angle viral et 3 hooks de 15 mots max, en recommande un.", livre:"hook choisi", dossier:"—",
+   dire:"CEO, lance l'agent Angle sur : "},
+  {id:"script", nom:"Script", role:"Écrit la voix off : 150 à 170 mots, oral, pour tenir 1 min 01.", livre:"script", dossier:"03_productions/",
+   dire:"CEO, lance l'agent Script."},
+  {id:"seo", nom:"SEO", role:"Choisit le mot-clé et le place dans la voix, l'écran, le titre et les hashtags.", livre:"seo.txt", dossier:"02_seo/",
+   dire:"CEO, lance l'agent SEO."},
+  {id:"visuels", nom:"Visuels", role:"Écrit les prompts d'images 9:16, style identique, aucun texte dans l'image.", livre:"prompts", dossier:"03_productions/…/images/",
+   dire:"CEO, lance l'agent Visuels."},
+  {id:"montage", nom:"Montage", role:"Assemble le pack, la voix Henri et les images en vidéo verticale.", livre:"video.mp4", dossier:"04_atelier/",
+   dire:"CEO, mes images sont prêtes, lance le Montage."},
+  {id:"publication", nom:"Publication", role:"Titre, description qui fait commenter, 5 hashtags.", livre:"publication.txt", dossier:"03_productions/",
+   dire:"CEO, lance l'agent Publication."}
+];
+const LIB = {attente:"En attente", en_cours:"En cours", fait:"Terminé"};
+const E = window.ETAT || {agents:{},journee:[],message_ceo:"Fichier 01_ceo/etat.js introuvable."};
+const st = id => (E.agents[id]||{}).statut || "attente";
+const note = id => (E.agents[id]||{}).note || "";
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+document.getElementById("stats").innerHTML = [
+  [E.total_videos||0,"vidéos"],[E.total_postees||0,"postées"],[(E.gains||0)+" €","gains"]
+].map(([v,l])=>`<div class="stat"><b>${esc(v)}</b><span>${l}</span></div>`).join("");
+
+document.getElementById("ceo").innerHTML = `
+  <h2>CEO · Claude</h2>
+  <p class="msg">${esc(E.message_ceo||"")}</p>
+  <p class="cur">${E.video_en_cours ? "En cours : "+esc(E.video_en_cours)+(E.dossier?" — "+esc(E.dossier):"") : "Aucune vidéo en cours"}</p>
+  <div class="side" data-s="${st("ceo")}">
+    <span class="pill"><span class="dot"></span>${LIB[st("ceo")]}</span>
+    <button class="say" style="margin-top:14px" data-t="Bonjour CEO, on fait quoi aujourd'hui ?">Bonjour CEO, on fait quoi ? <small>copier</small></button>
+  </div>`;
+
+document.getElementById("agents").innerHTML = AGENTS.map((a,i)=>`
+  <article class="agent" data-s="${st(a.id)}">
+    <div class="top"><span class="num">0${i+1}</span><span class="pill"><span class="dot"></span>${LIB[st(a.id)]}</span></div>
+    <h4>${a.nom}</h4>
+    <p class="role">${a.role}</p>
+    <p class="meta">Livre : ${a.livre} · <code>${a.dossier}</code></p>
+    ${note(a.id)?`<p class="note">${esc(note(a.id))}</p>`:""}
+    <button class="say" data-t="${esc(a.dire)}">${esc(a.dire)} <small>copier</small></button>
+  </article>`).join("");
+
+const j = E.journee||[];
+document.getElementById("journee").innerHTML = j.map(x=>`
+  <li class="${x.fait?"ok":""}"><span><span class="check">${x.fait?"✓":""}</span><span class="lbl">${esc(x.etape)}</span></span>
+  <span>${x.fait?"fait":""}</span></li>`).join("");
+document.getElementById("jour").textContent = (E.date? new Date(E.date+"T12:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"}) : "") + ` · ${j.filter(x=>x.fait).length}/${j.length}`;
+if((E.non_postees||0)>4){const w=document.getElementById("warn");w.hidden=false;w.textContent=`${E.non_postees} vidéos non postées : on arrête de produire, on poste.`;}
+else if(E.non_postees){const w=document.getElementById("warn");w.hidden=false;w.style.color="var(--muted)";w.textContent=`${E.non_postees} vidéo(s) en attente de publication.`;}
+
+const toast=document.getElementById("toast");
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".say"); if(!b) return;
+  navigator.clipboard?.writeText(b.dataset.t).catch(()=>{});
+  toast.classList.add("on"); setTimeout(()=>toast.classList.remove("on"),1200);
+});
+</script>
+</body>
+</html>
