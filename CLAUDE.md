@@ -98,3 +98,8 @@ Tiens 01_ceo/compteurs.json : pour chaque vidéo {date, niche, titre, postee, ga
 - Plus de 4 vidéos créées non postées : on arrête de produire, on poste.
 - Ensuite 1 tier list + 1 countryball, et c'est fini pour la journée.
 - Ne jamais lancer une 6e niche tant que les 5 ne tournent pas.
+
+## Outils interdits
+- Higgsfield (connecteur et projets « Open Higgsfield ») : décision de Lucas du 2026-11-09. Ne jamais le
+  proposer ni l'appeler. Images : Fooocus/ComfyUI sur le PC de Lucas, ou images libres via Monty (OpenMontage).
+  Publication et stats : Metricool.
