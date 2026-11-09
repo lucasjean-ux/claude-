@@ -77,7 +77,8 @@ Installé dans 04_atelier/OpenMontage (non versionné, licence AGPL-3.0 ; sur le
 AGENT_GUIDE.md prend la main. Gratuit sans clé : voix Piper, images/vidéos d'archives libres
 (Archive.org, NASA, Wikimedia), montage Remotion, sous-titres mot à mot. Clés gratuites utiles dans
 son .env : PEXELS_API_KEY, PIXABAY_API_KEY, UNSPLASH_ACCESS_KEY. Garde son budget à 0 € tant que
-Lucas n'a pas validé une dépense. Usage conseillé dans l'usine : stoïcisme et stickman finance
+Lucas n'a pas validé une dépense. Ne jamais remplir les clés HIGGSFIELD_* de son .env
+ni utiliser son outil higgsfield_video. Usage conseillé dans l'usine : stoïcisme et stickman finance
 (script de l'agent Script → vidéo 9:16 de 1 min 02). Le countryball reste sur render_countryball.py.
 
 ## Apprendre un nouveau format à partir d'une vidéo de référence
