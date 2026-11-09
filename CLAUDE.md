@@ -14,7 +14,10 @@ de le recadrer : rappelle-lui la priorité du jour et empêche-le de s'éparpill
   Marcus stoïcisme, Tom finance) → 3 équipes par département (Écriture : Angle, Script, SEO ; Image : Visuels,
   Montage ; Diffusion : Publication, Analyste) → Mémoire commune (compteurs, mots-clés, bilans, décisions).
   L'agent Analyste note vues et gains dans compteurs.json et marque les mots-clés ✅/❌.
-  Il lit 01_ceo/etat.js : niche_en_cours = département actif (nettoyage, tierlist, countryball, stoicisme, finance).
+  Version en ligne (fonctionnelle, agents réels) : https://claude.ai/artifact/HXkSBQadcFZjKttyUUse9e
+  Lucas y lance les vidéos, les agents écrivent dans la page, il entre ses vues/gains et lance l'Analyste.
+  Ouverte en local (double-clic), la page n'a pas Claude : chaque bouton copie la commande à te coller.
+  01_ceo/etat.js reste le résumé de l'état pour les sessions Claude Code.
   À CHAQUE étape, mettre à jour 01_ceo/etat.js : statut de chaque agent ("attente", "en_cours", "fait")
   avec une note courte, video_en_cours, dossier, message_ceo (1 phrase : prochaine action), la journée
   cochée, non_postees, total_videos, total_postees, gains. Nouvelle vidéo : remettre les agents en "attente".
