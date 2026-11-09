@@ -2,7 +2,7 @@
 name: montage-countryball
 description: Format vidéo countryball (« bulles ») de l'Usine à TikTok — rythme, mise en page, animation, voix. À lire avant d'écrire un pack countryball ou de lancer render_countryball.py.
 ---
-# Format countryball (analysé sur references/countryball_reference.mp4, 1 min 13)
+# Format countryball (analysé sur 05_references/videos/countryball_reference.mp4, 1 min 13)
 
 Structure
 - Plan 1 : miniature-liste (4 countryballs sous un grand titre, ex. « FILMS INTERDITS »), puis on raconte UNE histoire.
