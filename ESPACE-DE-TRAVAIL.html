@@ -2,176 +2,222 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Espace de travail — Usine à TikTok</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Usine à TikTok — Espace de travail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#f6f5f2; --card:#ffffff; --ink:#1c1c1e; --muted:#8b8a86; --line:#e7e5df;
-  --accent:#5f7f6a; --wait:#c9c6be; --run:#d29a3a; --done:#5f7f6a;
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){:root{
-  --bg:#141414; --card:#1c1c1d; --ink:#ededeb; --muted:#8e8d89; --line:#2a2a2b;
-  --accent:#8fb39a; --wait:#4a4946; --run:#e0ad55; --done:#8fb39a; color-scheme:dark;
-}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font-family:"Inter","Segoe UI",-apple-system,system-ui,sans-serif;font-size:15px;line-height:1.55;
-  -webkit-font-smoothing:antialiased}
-.wrap{max-width:1040px;margin:0 auto;padding:64px 28px 96px}
-header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:56px}
-.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
-h1{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-weight:400;font-size:44px;line-height:1.05;margin:0;letter-spacing:-.01em}
-.date{color:var(--muted);font-size:14px;text-align:right}
-.stats{display:flex;gap:40px}
-.stat b{display:block;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-weight:400;font-size:30px;line-height:1}
-.stat span{font-size:12px;color:var(--muted);letter-spacing:.04em}
-
-.ceo{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px 36px;margin-bottom:20px;
-  display:grid;grid-template-columns:1fr auto;gap:12px 32px;align-items:start}
-.ceo h2{margin:0;font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.ceo .msg{grid-column:1/2;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:24px;line-height:1.35;margin:4px 0 0}
-.ceo .cur{grid-column:1/2;color:var(--muted);font-size:14px;margin:0}
-.ceo .side{grid-row:1/4;grid-column:2/3;text-align:right}
-
-.section{display:flex;justify-content:space-between;align-items:baseline;margin:56px 0 18px}
-.section h3{margin:0;font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.section p{margin:0;color:var(--muted);font-size:13px}
-
-.agents{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.agent{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 24px 20px;
-  display:flex;flex-direction:column;gap:10px;transition:border-color .2s, transform .2s}
-.agent:hover{transform:translateY(-2px)}
-.agent[data-s="en_cours"]{border-color:var(--run)}
-.top{display:flex;justify-content:space-between;align-items:center}
-.num{font-size:12px;color:var(--muted);letter-spacing:.08em}
-.pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--wait)}
-[data-s="en_cours"] .dot{background:var(--run);box-shadow:0 0 0 4px color-mix(in srgb,var(--run) 22%,transparent);animation:pulse 1.8s infinite}
-[data-s="fait"] .dot{background:var(--done)}
-@keyframes pulse{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--run) 0%,transparent)}}
-.agent h4{margin:4px 0 0;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-weight:400;font-size:24px}
-.role{margin:0;color:var(--ink);opacity:.82}
-.meta{margin:0;font-size:13px;color:var(--muted)}
-.meta code{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:12px}
-.note{margin:0;font-size:13px;color:var(--run);min-height:0}
-.say{margin-top:auto;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;
-  padding:10px 12px;font:inherit;font-size:13px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
-.say:hover{border-color:var(--ink)}
-.say small{color:var(--muted);white-space:nowrap}
-
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media (max-width:760px){.cols{grid-template-columns:1fr}.ceo{grid-template-columns:1fr}.ceo .side{grid-row:auto;grid-column:auto;text-align:left}.stats{gap:24px}h1{font-size:34px}}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
-.panel ol,.panel ul{list-style:none;margin:0;padding:0}
-.panel li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
-.panel li:last-child{border-bottom:0}
-.panel li span:last-child{color:var(--muted);font-size:13px;text-align:right}
-.check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--wait);display:inline-grid;place-items:center;margin-right:12px;vertical-align:-3px;font-size:11px}
-.ok .check{background:var(--done);border-color:var(--done);color:var(--card)}
-.ok .lbl{color:var(--muted);text-decoration:line-through}
-.warn{margin:14px 0 0;font-size:13px;color:var(--run)}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:var(--bg);
-  padding:10px 18px;border-radius:999px;font-size:13px;transition:.25s}
-.toast.on{opacity:1;transform:translateX(-50%)}
-footer{margin-top:72px;color:var(--muted);font-size:12px;text-align:center}
+:root{--bg:#F4F1EA;--panel:#FFFFFF;--panel2:#ECE7DC;--ink:#15171C;--soft:#5D6170;--line:#DCD5C6;--accent:#E8432A;--gold:#C98A00;--ok:#1F8A4C;--onaccent:#FFFFFF;
+ color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#0E1015;--panel:#171A21;--panel2:#1F232C;--ink:#F1EEE6;--soft:#9EA3B2;--line:#2B303B;--accent:#FF5A36;--gold:#FFC83D;--ok:#3CCB7F;color-scheme:dark}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,.brand{font-family:"Bricolage Grotesque","DM Sans",system-ui,sans-serif;letter-spacing:-.01em}
+.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{max-width:1080px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.3rem;display:flex;align-items:center;gap:8px;margin-right:auto}
+.brand i{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff8a73,#c2261a 60%,#5a0d07);box-shadow:0 0 0 3px var(--ink)}
+.tabs{display:flex;gap:4px;background:var(--panel2);padding:4px;border-radius:12px;overflow-x:auto;max-width:100%;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{border:0;background:transparent;color:var(--soft);font:600 .9rem "DM Sans",sans-serif;padding:8px 14px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 60px}
+.hero h1{font-size:clamp(1.9rem,6vw,3rem);line-height:1.05;margin:4px 0 8px}
+.hero p{color:var(--soft);margin:0 0 20px;max-width:60ch}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.kpi b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.8rem;line-height:1.1}
+.kpi small{color:var(--soft);font-size:.8rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px}
+.ceo{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:start;border:2px solid var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent);margin-bottom:22px}
+.ceo .ic{font-size:2rem;grid-row:1/4}
+.ceo h2{margin:0;font-size:1.25rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ceo .msg{margin:0;font-size:1.05rem}
+.ceo .cur{margin:0;color:var(--soft);font-size:.9rem}
+h2.sec{margin:26px 0 4px;font-size:1.35rem}
+.hint{color:var(--soft);font-size:.85rem;margin:0 0 12px}
+.agents{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.fmt{position:relative;text-align:left;border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:16px;padding:14px;cursor:pointer;font:inherit;min-height:150px;display:flex;flex-direction:column;gap:6px}
+.fmt:hover{border-color:color-mix(in srgb,var(--ink) 35%,var(--line))}
+.fmt[data-s="en_cours"]{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.fmt .ic{font-size:1.7rem}
+.fmt b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.1rem}
+.fmt small{color:var(--soft);font-size:.8rem;line-height:1.35}
+.fmt .nt{color:var(--accent);font-size:.8rem;font-weight:700;margin-top:auto}
+.tag{position:absolute;top:10px;right:10px;font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--panel2);color:var(--soft)}
+.tag.en_cours{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}
+.tag.fait{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.ceo .tag{position:static}
+.stkflow{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0 0 14px}
+.stkflow li{font:600 .8rem "DM Sans",sans-serif;background:var(--panel2);border:1px solid var(--line);border-radius:99px;padding:5px 11px;color:var(--soft)}
+.stkflow li b{color:var(--accent);font-weight:800}
+.stkflow li.on{border-color:var(--accent);color:var(--ink)}
+.stkflow li.ok{color:var(--ok)}
+.day{display:grid;gap:8px}
+.step{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.step .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--panel2);font-weight:800;color:var(--soft);font-size:.85rem;flex:none}
+.step.ok .n{background:var(--ok);color:#fff}
+.step.next{border:2px solid var(--accent)}
+.step.next .n{background:var(--accent);color:#fff}
+.step b{display:block}
+.step small{color:var(--soft)}
+.step.ok b{text-decoration:line-through;color:var(--soft)}
+.warn{margin-top:12px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);font-weight:700;font-size:.9rem}
+.poles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.pole h3{margin:0 0 4px;display:flex;align-items:center}
+.pole p{margin:0 0 6px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;background:var(--soft);flex:none}
+.dot.on{background:var(--ok)}
+.dot.go{background:var(--accent)}
+.btn{font:700 1rem "DM Sans",sans-serif;border:0;border-radius:12px;padding:13px 18px;cursor:pointer;background:var(--accent);color:var(--onaccent);display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn.sec{background:var(--panel2);color:var(--ink);border:1px solid var(--line)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.say{font-size:.9rem;background:var(--panel2);border-radius:12px;padding:10px 12px;overflow-wrap:anywhere}
+dialog{border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--ink);padding:20px;max-width:440px;width:calc(100% - 32px)}
+dialog::backdrop{background:rgba(0,0,0,.35)}
+dialog h3{margin:0 0 4px;font-size:1.3rem;display:flex;gap:8px;align-items:center}
+dialog dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:12px 0;font-size:.9rem}
+dialog dt{color:var(--soft)}
+dialog dd{margin:0}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.85em}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:99px;font-weight:700;font-size:.9rem;opacity:0;transition:.2s;pointer-events:none}
+.toast.on{opacity:1}
+[hidden]{display:none!important}
+@media (max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div>
-      <p class="kicker">TikTok Money · Usine</p>
-      <h1>Espace de travail</h1>
-    </div>
-    <div class="stats" id="stats"></div>
-  </header>
+<header class="top"><div class="bar">
+  <div class="brand"><i></i>Usine à TikTok</div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-v="bureau">Bureau</button>
+    <button role="tab" aria-selected="false" data-v="journee">Aujourd'hui</button>
+    <button role="tab" aria-selected="false" data-v="niches">Niches</button>
+    <button role="tab" aria-selected="false" data-v="dossiers">Dossiers</button>
+  </nav>
+</div></header>
 
-  <section class="ceo" id="ceo"></section>
-
-  <div class="section"><h3>Les agents</h3><p>Clique sur une phrase pour la copier, puis colle-la à Claude.</p></div>
-  <div class="agents" id="agents"></div>
-
-  <div class="cols">
-    <div>
-      <div class="section"><h3>Aujourd'hui</h3><p id="jour"></p></div>
-      <div class="panel"><ol id="journee"></ol><p class="warn" id="warn" hidden></p></div>
-    </div>
-    <div>
-      <div class="section"><h3>Le bureau</h3><p>Dossiers</p></div>
-      <div class="panel"><ul>
-        <li><span>01 · CEO</span><span>tableau de bord, compteurs, décisions</span></li>
-        <li><span>02 · SEO</span><span>guide, mots-clés</span></li>
-        <li><span>03 · Productions</span><span>une vidéo par dossier</span></li>
-        <li><span>04 · Atelier</span><span>moteurs de rendu, musique</span></li>
-        <li><span>05 · Références</span><span>vidéos modèles, test</span></li>
-      </ul></div>
-    </div>
+<main>
+<section id="v-bureau">
+  <div class="hero">
+    <h1>Un CEO.<br>Six agents. Une vidéo à la fois.</h1>
+    <p>Claude dirige l'usine. Clique sur un agent pour voir ce qu'il fait et copier la phrase à lui dire. Appuie sur F5 pour voir l'avancement.</p>
   </div>
+  <div class="kpis" id="kpis"></div>
+  <div class="card ceo" id="ceo"></div>
+  <h2 class="sec">Les agents</h2>
+  <p class="hint">Ils passent dans cet ordre pour chaque vidéo.</p>
+  <ol class="stkflow" id="flow"></ol>
+  <div class="agents" id="agents"></div>
+</section>
 
-  <footer>Mis à jour par le CEO dans <code>01_ceo/etat.js</code> — recharge la page pour voir le dernier état.</footer>
-</div>
-<div class="toast" id="toast">Copié</div>
+<section id="v-journee" hidden>
+  <div class="hero"><h1 id="jtitre">Aujourd'hui.</h1><p>Les règles du coach : d'abord 2 nettoyages auto, puis 1 tier list et 1 countryball. Ensuite, c'est fini pour la journée.</p></div>
+  <div class="day" id="day"></div>
+  <div id="warn"></div>
+</section>
+
+<section id="v-niches" hidden>
+  <h2 class="sec" style="margin-top:6px">Les niches</h2>
+  <p class="hint">Dans l'ordre de priorité. Pas de 6e niche tant que les 5 ne tournent pas.</p>
+  <div class="poles" id="niches"></div>
+</section>
+
+<section id="v-dossiers" hidden>
+  <h2 class="sec" style="margin-top:6px">Le bureau</h2>
+  <p class="hint">Tout est rangé dans 5 dossiers. Rien à la racine.</p>
+  <div class="poles" id="dossiers"></div>
+</section>
+</main>
+
+<dialog id="dlg">
+  <h3 id="dnom"></h3>
+  <p class="hint" id="drole" style="margin:0"></p>
+  <dl id="ddl"></dl>
+  <div class="say" id="dsay"></div>
+  <div class="btns"><button class="btn" id="dcopy">Copier la phrase</button><button class="btn sec" id="dclose">Fermer</button></div>
+</dialog>
+<div class="toast" id="toast">Copié — colle-le à Claude</div>
 
 <script src="01_ceo/etat.js"></script>
 <script>
-const AGENTS = [
-  {id:"angle", nom:"Angle", role:"Trouve l'angle viral et 3 hooks de 15 mots max, en recommande un.", livre:"hook choisi", dossier:"—",
-   dire:"CEO, lance l'agent Angle sur : "},
-  {id:"script", nom:"Script", role:"Écrit la voix off : 150 à 170 mots, oral, pour tenir 1 min 01.", livre:"script", dossier:"03_productions/",
-   dire:"CEO, lance l'agent Script."},
-  {id:"seo", nom:"SEO", role:"Choisit le mot-clé et le place dans la voix, l'écran, le titre et les hashtags.", livre:"seo.txt", dossier:"02_seo/",
-   dire:"CEO, lance l'agent SEO."},
-  {id:"visuels", nom:"Visuels", role:"Écrit les prompts d'images 9:16, style identique, aucun texte dans l'image.", livre:"prompts", dossier:"03_productions/…/images/",
-   dire:"CEO, lance l'agent Visuels."},
-  {id:"montage", nom:"Montage", role:"Assemble le pack, la voix Henri et les images en vidéo verticale.", livre:"video.mp4", dossier:"04_atelier/",
-   dire:"CEO, mes images sont prêtes, lance le Montage."},
-  {id:"publication", nom:"Publication", role:"Titre, description qui fait commenter, 5 hashtags.", livre:"publication.txt", dossier:"03_productions/",
-   dire:"CEO, lance l'agent Publication."}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const E=window.ETAT||{agents:{},journee:[],message_ceo:"Fichier 01_ceo/etat.js introuvable."};
+const LIB={attente:"En attente",en_cours:"En cours",fait:"Terminé"};
+const st=id=>(E.agents[id]||{}).statut||"attente";
+const note=id=>(E.agents[id]||{}).note||"";
+
+const AGENTS=[
+ {id:"angle",ic:"🎯",nom:"Angle",role:"Trouve l'angle viral et 3 hooks de 15 mots max, en recommande un.",livre:"Le hook choisi",dossier:"—",dire:"CEO, lance l'agent Angle sur : "},
+ {id:"script",ic:"✍️",nom:"Script",role:"Écrit la voix off : 150 à 170 mots, oral, pour tenir 1 min 01.",livre:"Le script",dossier:"03_productions/",dire:"CEO, lance l'agent Script."},
+ {id:"seo",ic:"🔎",nom:"SEO",role:"Choisit le mot-clé et le place dans la voix, l'écran, le titre et les hashtags.",livre:"seo.txt",dossier:"02_seo/",dire:"CEO, lance l'agent SEO."},
+ {id:"visuels",ic:"🎨",nom:"Visuels",role:"Écrit les prompts d'images 9:16, style identique, aucun texte dans l'image.",livre:"Les prompts d'images",dossier:"03_productions/…/images/",dire:"CEO, lance l'agent Visuels."},
+ {id:"montage",ic:"🎬",nom:"Montage",role:"Assemble le pack, la voix Henri et les images en vidéo verticale.",livre:"video.mp4",dossier:"04_atelier/",dire:"CEO, mes images sont prêtes, lance le Montage."},
+ {id:"publication",ic:"📣",nom:"Publication",role:"Titre, description qui fait commenter, 5 hashtags.",livre:"publication.txt",dossier:"03_productions/",dire:"CEO, lance l'agent Publication."}
 ];
-const LIB = {attente:"En attente", en_cours:"En cours", fait:"Terminé"};
-const E = window.ETAT || {agents:{},journee:[],message_ceo:"Fichier 01_ceo/etat.js introuvable."};
-const st = id => (E.agents[id]||{}).statut || "attente";
-const note = id => (E.agents[id]||{}).note || "";
-const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-document.getElementById("stats").innerHTML = [
-  [E.total_videos||0,"vidéos"],[E.total_postees||0,"postées"],[(E.gains||0)+" €","gains"]
-].map(([v,l])=>`<div class="stat"><b>${esc(v)}</b><span>${l}</span></div>`).join("");
-
-document.getElementById("ceo").innerHTML = `
-  <h2>CEO · Claude</h2>
-  <p class="msg">${esc(E.message_ceo||"")}</p>
-  <p class="cur">${E.video_en_cours ? "En cours : "+esc(E.video_en_cours)+(E.dossier?" — "+esc(E.dossier):"") : "Aucune vidéo en cours"}</p>
-  <div class="side" data-s="${st("ceo")}">
-    <span class="pill"><span class="dot"></span>${LIB[st("ceo")]}</span>
-    <button class="say" style="margin-top:14px" data-t="Bonjour CEO, on fait quoi aujourd'hui ?">Bonjour CEO, on fait quoi ? <small>copier</small></button>
-  </div>`;
-
-document.getElementById("agents").innerHTML = AGENTS.map((a,i)=>`
-  <article class="agent" data-s="${st(a.id)}">
-    <div class="top"><span class="num">0${i+1}</span><span class="pill"><span class="dot"></span>${LIB[st(a.id)]}</span></div>
-    <h4>${a.nom}</h4>
-    <p class="role">${a.role}</p>
-    <p class="meta">Livre : ${a.livre} · <code>${a.dossier}</code></p>
-    ${note(a.id)?`<p class="note">${esc(note(a.id))}</p>`:""}
-    <button class="say" data-t="${esc(a.dire)}">${esc(a.dire)} <small>copier</small></button>
-  </article>`).join("");
-
-const j = E.journee||[];
-document.getElementById("journee").innerHTML = j.map(x=>`
-  <li class="${x.fait?"ok":""}"><span><span class="check">${x.fait?"✓":""}</span><span class="lbl">${esc(x.etape)}</span></span>
-  <span>${x.fait?"fait":""}</span></li>`).join("");
-document.getElementById("jour").textContent = (E.date? new Date(E.date+"T12:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"}) : "") + ` · ${j.filter(x=>x.fait).length}/${j.length}`;
-if((E.non_postees||0)>4){const w=document.getElementById("warn");w.hidden=false;w.textContent=`${E.non_postees} vidéos non postées : on arrête de produire, on poste.`;}
-else if(E.non_postees){const w=document.getElementById("warn");w.hidden=false;w.style.color="var(--muted)";w.textContent=`${E.non_postees} vidéo(s) en attente de publication.`;}
-
-const toast=document.getElementById("toast");
-document.addEventListener("click",e=>{
-  const b=e.target.closest(".say"); if(!b) return;
-  navigator.clipboard?.writeText(b.dataset.t).catch(()=>{});
-  toast.classList.add("on"); setTimeout(()=>toast.classList.remove("on"),1200);
+/* Onglets */
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  ["bureau","journee","niches","dossiers"].forEach(v=>$("#v-"+v).hidden=v!==b.dataset.v);
 });
+
+/* Chiffres */
+const J=E.journee||[];
+$("#kpis").innerHTML=[[E.total_videos||0,"vidéos créées"],[E.total_postees||0,"postées"],[E.non_postees||0,"à poster"],[(E.gains||0)+" €","gains"]]
+ .map(([v,l])=>`<div class="kpi"><b>${esc(v)}</b><small>${l}</small></div>`).join("");
+
+/* CEO */
+$("#ceo").innerHTML=`<span class="ic">🧑‍💼</span>
+ <h2>CEO · Claude <span class="tag ${st("ceo")}">${LIB[st("ceo")]}</span></h2>
+ <p class="msg">${esc(E.message_ceo)}</p>
+ <p class="cur">${E.video_en_cours?"Vidéo en cours : "+esc(E.video_en_cours)+(E.dossier?" — <code>"+esc(E.dossier)+"</code>":""):"Aucune vidéo en cours"} · Aujourd'hui ${J.filter(x=>x.fait).length}/${J.length}</p>`;
+$("#ceo").style.cursor="pointer";
+$("#ceo").onclick=()=>open({ic:"🧑‍💼",nom:"CEO",role:"Dirige l'usine, distribue le travail aux agents et fait respecter les règles du coach.",livre:"Tableau de bord, bilans",dossier:"01_ceo/",dire:"Bonjour CEO, on fait quoi aujourd'hui ?"},st("ceo"),note("ceo"));
+
+/* Chaîne + agents */
+$("#flow").innerHTML=AGENTS.map((a,i)=>`<li class="${st(a.id)==="en_cours"?"on":st(a.id)==="fait"?"ok":""}"><b>${i+1}</b> · ${a.nom}</li>`).join("");
+$("#agents").innerHTML=AGENTS.map((a,i)=>`<button class="fmt" data-i="${i}" data-s="${st(a.id)}">
+  <span class="tag ${st(a.id)}">${LIB[st(a.id)]}</span><span class="ic">${a.ic}</span>
+  <b>${a.nom}</b><small>${a.role}</small>${note(a.id)?`<span class="nt">${esc(note(a.id))}</span>`:""}</button>`).join("");
+document.querySelectorAll(".fmt").forEach(b=>b.onclick=()=>{const a=AGENTS[b.dataset.i];open(a,st(a.id),note(a.id))});
+
+/* Fiche agent */
+let phrase="";
+function open(a,s,n){
+  $("#dnom").innerHTML=`${a.ic} ${esc(a.nom)} <span class="tag ${s}" style="position:static">${LIB[s]}</span>`;
+  $("#drole").textContent=a.role;
+  $("#ddl").innerHTML=`<dt>Livre</dt><dd>${esc(a.livre)}</dd><dt>Dossier</dt><dd><code>${esc(a.dossier)}</code></dd>${n?`<dt>En ce moment</dt><dd>${esc(n)}</dd>`:""}`;
+  phrase=a.dire; $("#dsay").textContent="« "+a.dire+" »";
+  $("#dlg").showModal();
+}
+$("#dclose").onclick=()=>$("#dlg").close();
+$("#dcopy").onclick=()=>{navigator.clipboard?.writeText(phrase).catch(()=>{});$("#dlg").close();const t=$("#toast");t.classList.add("on");setTimeout(()=>t.classList.remove("on"),1400)};
+
+/* Journée */
+if(E.date)$("#jtitre").textContent=new Date(E.date+"T12:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"}).replace(/^./,c=>c.toUpperCase())+".";
+const next=J.findIndex(x=>!x.fait);
+$("#day").innerHTML=J.map((x,i)=>`<div class="step ${x.fait?"ok":i===next?"next":""}"><span class="n">${x.fait?"✓":i+1}</span>
+ <div><b>${esc(x.etape)}</b><small>${x.fait?"Fait":i===next?"C'est maintenant":"Plus tard"}</small></div></div>`).join("")
+ +(next===-1&&J.length?`<div class="step ok"><span class="n">★</span><div><b style="text-decoration:none;color:var(--ok)">Fini pour aujourd'hui</b><small>Repos.</small></div></div>`:"");
+if((E.non_postees||0)>4)$("#warn").innerHTML=`<div class="warn">${E.non_postees} vidéos non postées : on arrête de produire, on poste.</div>`;
+
+/* Niches */
+const NICHES=[["🧽","Nettoyage auto","Storytime 1re personne sur tes clips, révélation à la fin.","go","Priorité"],
+ ["😱","Tier list flippante","6-7 éléments du plus calme au plus terrifiant.","on","Prêt"],
+ ["🌍","Countryball","Histoire en boules-drapeaux, un plan toutes les 2-4 s.","on","Prêt — moteur de rendu inclus"],
+ ["🏛️","Stoïcisme","Voix grave, citation exacte, une variante par compte.","on","Prêt"],
+ ["💸","Stickman finance","Finance perso débutant, pas de conseil d'investissement.","on","Prêt"]];
+$("#niches").innerHTML=NICHES.map(([ic,n,d,o,s],i)=>`<div class="card pole"><h3><span class="dot ${o}"></span>${ic} ${n}</h3><p class="hint">${d}</p><p class="hint" style="margin:0">${i+1} · ${s}</p></div>`).join("");
+
+/* Dossiers */
+const DOS=[["01_ceo","🧑‍💼","Bureau du CEO","Tableau de bord, compteurs, décisions, bilans, état des agents."],
+ ["02_seo","🔎","SEO","Guide SEO TikTok et banque de mots-clés par niche."],
+ ["03_productions","🎞️","Productions","Une vidéo = un dossier AAAA-MM-JJ_niche_sujet."],
+ ["04_atelier","🛠️","Atelier","Moteurs de rendu, Usine en ligne, musique."],
+ ["05_references","📚","Références","Vidéos modèles analysées et exemple de test."]];
+$("#dossiers").innerHTML=DOS.map(([f,ic,n,d])=>`<div class="card pole"><h3>${ic} ${n}</h3><p class="hint">${d}</p><p class="hint" style="margin:0"><code>${f}/</code></p></div>`).join("");
 </script>
 </body>
 </html>
