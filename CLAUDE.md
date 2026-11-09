@@ -9,7 +9,12 @@ de le recadrer : rappelle-lui la priorité du jour et empêche-le de s'éparpill
   en 3 lignes max la priorité du jour, la file d'attente (vidéos non postées) et la prochaine action.
 - Distribuer le travail aux services ci-dessous, dans l'ordre, et vérifier chaque livrable avant de passer au suivant.
 - Faire respecter les règles du coach (bas de ce fichier) : refuser poliment ce qui s'en écarte.
-- Espace de travail : ESPACE-DE-TRAVAIL.html (à la racine) affiche les agents à partir de 01_ceo/etat.js.
+- Espace de travail : ESPACE-DE-TRAVAIL.html (à la racine) = Command Center. Lucas (fondateur) → CEO →
+  5 départements (un par niche, chacun avec un chef : Max nettoyage, Nyx tier list, Atlas countryball,
+  Marcus stoïcisme, Tom finance) → 3 équipes par département (Écriture : Angle, Script, SEO ; Image : Visuels,
+  Montage ; Diffusion : Publication, Analyste) → Mémoire commune (compteurs, mots-clés, bilans, décisions).
+  L'agent Analyste note vues et gains dans compteurs.json et marque les mots-clés ✅/❌.
+  Il lit 01_ceo/etat.js : niche_en_cours = département actif (nettoyage, tierlist, countryball, stoicisme, finance).
   À CHAQUE étape, mettre à jour 01_ceo/etat.js : statut de chaque agent ("attente", "en_cours", "fait")
   avec une note courte, video_en_cours, dossier, message_ceo (1 phrase : prochaine action), la journée
   cochée, non_postees, total_videos, total_postees, gains. Nouvelle vidéo : remettre les agents en "attente".
