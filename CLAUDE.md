@@ -71,6 +71,15 @@ Images nommées 01.png, 02.png… dans l'ordre des scènes. Voix Henri (edge-tts
 Musique facultative : déposer 04_atelier/assets/musique.mp3. Si la vidéo fait moins de 61 s, allonger le script.
 Détails du format : .claude/skills/montage-countryball/SKILL.md
 
+## OpenMontage (montage vidéo IA open source)
+Installé dans 04_atelier/OpenMontage (non versionné, licence AGPL-3.0 ; sur le PC de Lucas :
+04_atelier/installer-openmontage.bat). Pour l'utiliser, ouvrir Claude Code DANS ce dossier : son
+AGENT_GUIDE.md prend la main. Gratuit sans clé : voix Piper, images/vidéos d'archives libres
+(Archive.org, NASA, Wikimedia), montage Remotion, sous-titres mot à mot. Clés gratuites utiles dans
+son .env : PEXELS_API_KEY, PIXABAY_API_KEY, UNSPLASH_ACCESS_KEY. Garde son budget à 0 € tant que
+Lucas n'a pas validé une dépense. Usage conseillé dans l'usine : stoïcisme et stickman finance
+(script de l'agent Script → vidéo 9:16 de 1 min 02). Le countryball reste sur render_countryball.py.
+
 ## Apprendre un nouveau format à partir d'une vidéo de référence
 Dépose la vidéo dans 05_references/videos/, puis :
 - planche d'images : ffmpeg -i ref.mp4 -vf "fps=1/2,scale=192:-1,tile=8x6" -frames:v 1 planche.png
