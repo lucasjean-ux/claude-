@@ -231,13 +231,14 @@ const DEPTS=[
   kw:["finance personnelle débutant","comment économiser de l'argent","budget 50 30 20","épargne jeune"]}
 ];
 const D=id=>DEPTS.find(d=>d.id===id);
-const TEAMS=[{nom:"Équipe Écriture",agents:["angle","script","seo"]},{nom:"Équipe Image",agents:["visuels","montage"]},{nom:"Équipe Diffusion",agents:["publication","analyste"]}];
+const TEAMS=[{nom:"Équipe Écriture",agents:["angle","script","seo"]},{nom:"Équipe Image",agents:["visuels","montage","openmontage"]},{nom:"Équipe Diffusion",agents:["publication","analyste"]}];
 const AG={
  angle:{ic:"🎯",nom:"Angle",role:"3 hooks de 15 mots max, en recommande un."},
  script:{ic:"✍️",nom:"Script",role:"Voix off de 150 à 170 mots pour tenir 1 min 01."},
  seo:{ic:"🔎",nom:"SEO",role:"Mot-clé placé dans la voix, l'écran, le titre, les hashtags."},
  visuels:{ic:"🎨",nom:"Visuels",role:"Prompts d'images 9:16 ou plan de découpe de tes clips."},
  montage:{ic:"🎬",nom:"Montage",role:"Pack de montage (pack.json) pour le moteur de rendu."},
+ openmontage:{ic:"🎞️",nom:"OpenMontage",role:"Monteur IA gratuit sur ton PC : voix, images libres, sous-titres, vidéo 9:16."},
  publication:{ic:"📣",nom:"Publication",role:"Titre, description qui fait commenter, 5 hashtags."},
  analyste:{ic:"📈",nom:"Analyste",role:"Lit tes stats, garde les mots-clés qui marchent."}
 };
@@ -268,7 +269,7 @@ const stats=()=>{const t=today(),td=V.filter(v=>v.date===t);
   gains:V.reduce((a,v)=>a+(+v.gains||0),0),vues:V.reduce((a,v)=>a+(+v.vues||0),0)}};
 
 /* ===================== Rendu : Command Center ===================== */
-function stOf(dept,a){const v=cur();if(!v||v.niche!==dept)return"";return v.etapes[a]?.st||""}
+function stOf(dept,a){const v=cur();if(!v||v.niche!==dept)return"";if(a==="openmontage")return OM.includes(v.niche)&&v.etapes.script?.st==="done"?"done":"";return v.etapes[a]?.st||""}
 function renderCentre(){
  const s=stats(),v=cur();
  const done=Math.min(2,s.net)+Math.min(1,s.tier)+Math.min(1,s.ball);
@@ -345,7 +346,56 @@ function renderAtelier(){
    <textarea data-ed="${a}" placeholder="${st==="run"?"L'agent écrit…":"Le livrable de l'agent apparaîtra ici. Tu peux le modifier."}" ${a==="montage"?'style="font-family:JetBrains Mono,monospace;font-size:.8rem"':""}>${esc(e.txt||"")}</textarea>
    ${e.txt&&!running?`<div class="redo"><input data-ins="${a}" placeholder="Consigne pour relancer (ex. plus choc, plus court, autre hook…)"><button class="btn sm sec" data-run="${a}" data-withins="1">Relancer avec la consigne</button></div>`:""}
    ${e.err?`<p class="hint" style="color:var(--bad)">${esc(e.err)}</p>`:""}</div>`}).join("")}</div>
-  ${v.niche==="countryball"||v.niche==="tierlist"||v.niche==="stoicisme"||v.niche==="finance"?`<p class="hint" style="margin-top:14px">Montage : génère les images avec les prompts, nomme-les 01.png, 02.png… puis sur ton PC : <code>python 04_atelier/render/render_countryball.py pack.json images video.mp4</code></p>`:`<p class="hint" style="margin-top:14px">Montage : suis le plan de découpe dans CapCut sur tes clips, avec la voix off du Script.</p>`}`;
+  ${omCard(v)}
+  ${v.niche==="nettoyage"?`<p class="hint" style="margin-top:14px">Montage : suis le plan de découpe dans CapCut sur tes clips, avec la voix off du Script.</p>`:`<p class="hint" style="margin-top:14px">${OM.includes(v.niche)?"Autre option, sans OpenMontage : le moteur countryball.":"Montage avec le moteur countryball :"} génère les images avec les prompts, nomme-les 01.png, 02.png… puis sur ton PC : <code>python 04_atelier/render/render_countryball.py pack.json images video.mp4</code></p>`}`;
+}
+
+/* ===================== OpenMontage (sur le PC de Lucas) ===================== */
+const OM=["tierlist","stoicisme","finance"];
+function slug(s){return(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)}
+function omDossier(v){return`03_productions/${v.date}_${v.niche}_${slug(v.sujet)}`}
+function omBrief(v){const d=D(v.niche),g=k=>(v.etapes[k]?.txt||"").trim(),seo=g("seo");
+ const pick=re=>(seo.match(re)||[])[1]?.trim()||"";
+ const mot=pick(/MOT-CL[ÉE] PRINCIPAL\s*:\s*(.+)/i),ecran=pick(/TEXTE [ÉE]CRAN PLAN 1\s*:\s*(.+)/i),fic=pick(/NOM DU FICHIER\s*:\s*(.+)/i)||slug(mot||v.sujet)+".mp4";
+ return`Fais une vidéo TikTok verticale avec OpenMontage.
+
+FORMAT
+- Vertical 9:16, 1080x1920, 30 fps.
+- Durée : entre 1 min 01 et 1 min 05 (monétisation Creator Rewards : jamais moins de 61 s).
+- Langue : français.
+
+BUDGET : 0 €
+- Uniquement des outils gratuits : voix Piper en français, images et vidéos libres (Archive.org, Wikimedia Commons, NASA, Pexels, Pixabay, Unsplash), musique libre de droits, montage Remotion.
+- Ne lance AUCUN fournisseur payant sans me demander d'abord.
+
+VOIX OFF (à lire mot pour mot, ne pas réécrire)
+${g("script")||"(le script n'est pas encore écrit)"}
+
+STYLE VISUEL (${d.nom})
+${d.visu}
+Aucun texte incrusté dans les images elles-mêmes.
+
+VISUELS PRÉVUS (à suivre dans l'ordre, remplacer par des images libres proches si besoin)
+${g("visuels")||"(pas encore de visuels : choisis des images libres qui collent au script)"}
+
+TEXTE À L'ÉCRAN
+- Sous-titres mot à mot, gros, centrés, contour noir.
+- Plan 1 : afficher « ${ecran||mot||"le hook"} » en grand pendant les 3 premières secondes.
+
+SEO
+- Mot-clé principal : ${mot||"(voir l'agent SEO)"} — il doit être dit dans les 3 premières secondes.
+
+LIVRAISON
+- Nomme le fichier final ${fic}
+- Copie-le dans ../../${omDossier(v)}/video.mp4
+- Montre-moi le storyboard avant le rendu final.`}
+function omCard(v){if(!OM.includes(v.niche))return"";const ok=v.etapes.script?.st==="done";
+ return`<div class="step ${ok?"done":""}" id="s-openmontage" style="--c:var(--c-${v.niche});margin-top:12px"><div class="sh"><div class="who"><span class="o">🎞️</span><div><b>OpenMontage</b><small>Monteur IA gratuit sur ton PC : il fabrique la vidéo complète à partir de ce brief.</small></div></div>
+  <div class="btns" style="margin:0;align-items:center"><span class="state mono ${ok?"done":"wait"}">${ok?"Brief prêt":"Attend le script"}</span>
+   <button class="btn sm" data-omcopy="1" ${ok?"":"disabled"}>Copier le brief</button>
+   ${downloads?`<button class="btn sm sec" data-omdl="1" ${ok?"":"disabled"}>⬇ brief.md</button>`:""}</div></div>
+  <textarea readonly style="min-height:160px;font-size:.85rem">${esc(ok?omBrief(v):"Le brief s'écrit tout seul dès que l'agent Script a fini.")}</textarea>
+  <p class="hint">Sur ton PC : 1) ouvre Claude Code dans <code>04_atelier\\OpenMontage</code> (pas encore installé ? double-clique <code>04_atelier\\installer-openmontage.bat</code>) · 2) colle le brief · 3) valide le storyboard · 4) la vidéo arrive dans <code>${esc(omDossier(v))}</code>.</p></div>`;
 }
 
 /* ===================== Agents (Claude) ===================== */
@@ -454,6 +504,9 @@ document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)r
  if(t.dataset.new){if(running){toast("Une équipe travaille déjà : attends ou arrête-la");show("atelier");return}return newVideo(t.dataset.new)}
  if(t.dataset.ag){const a=t.dataset.ag,d=D(t.dataset.d);
   if(a==="analyste")return show("videos");
+  if(a==="openmontage"&&!(v&&v.niche===d.id&&OM.includes(d.id)))return info(`<h3>🎞️ OpenMontage · ${d.nom}</h3><p>${AG.openmontage.role}</p>
+   <p>${OM.includes(d.id)?"Lance une vidéo dans ce département : dès que le script est écrit, l'Atelier prépare le brief à coller dans OpenMontage.":d.id==="countryball"?"Le countryball garde son propre moteur de rendu (render_countryball.py), déjà réglé sur ton format.":"Le nettoyage auto se monte sur tes propres clips dans CapCut, avec la voix off du Script."}</p>
+   <p>Installation sur ton PC : double-clique <code>04_atelier\\installer-openmontage.bat</code>, puis ouvre Claude Code dans <code>04_atelier\\OpenMontage</code>.</p>`);
   if(v&&v.niche===d.id){show("atelier");setTimeout(()=>$("#s-"+a)?.scrollIntoView({behavior:"smooth",block:"center"}),60);return}
   return info(`<h3>${AG[a].ic} ${AG[a].nom} · ${d.nom}</h3><p>${AG[a].role}</p><p>Aucune vidéo ${d.nom} en cours. Lance-en une pour mettre cette équipe au travail.</p><div class="btns" style="margin-top:0"><button class="btn" type="button" data-new="${d.id}" onclick="document.getElementById('dlg').close()">+ Nouvelle vidéo ${d.nom}</button></div>`)}
  if(t.id==="n-ceo"){const s=stats();return info(`<h3>🧠 CEO · Claude</h3><p>Je dirige l'usine et je fais respecter tes règles.</p><p>${esc($(".msg span")?.textContent||"")}</p><p>Vidéos non postées : ${s.nonPost}. Aujourd'hui : ${s.net} nettoyage(s), ${s.tier} tier list, ${s.ball} countryball.</p>`)}
@@ -466,6 +519,8 @@ document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)r
  if(t.dataset.run&&v){const a=t.dataset.run,ins=t.dataset.withins?$(`[data-ins="${a}"]`)?.value.trim():"";if(t.dataset.withins&&!ins){toast("Écris d'abord ta consigne");return}
   running=v.id;renderAll();runAgent(v,a,ins).then(()=>{running=null;abort=null;renderAll()});return}
  if(t.dataset.copy&&v)return copy(v.etapes[t.dataset.copy]?.txt||"");
+ if(t.dataset.omcopy&&v)return copy(omBrief(v));
+ if(t.dataset.omdl&&v){downloads.save({filename:"brief-openmontage.md",data:omBrief(v)}).catch(()=>toast("Téléchargement annulé"));return}
  if(t.dataset.dl&&v){const data=v.etapes.montage?.txt||"";if(downloads){downloads.save({filename:"pack.json",data}).catch(()=>toast("Téléchargement annulé"))}else{copy(data);toast("Téléchargement indisponible : pack copié")}return}
  if(t.dataset.open){curId=t.dataset.open;lsSave();return show("atelier")}
  if(t.dataset.post){const x=V.find(y=>y.id===t.dataset.post);x.statut="postee";saveVid(x,1);renderAll();return toast("Postée ✓ Entre ses vues dans 48 h")}

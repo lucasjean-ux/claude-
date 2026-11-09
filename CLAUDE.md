@@ -12,7 +12,7 @@ de le recadrer : rappelle-lui la priorité du jour et empêche-le de s'éparpill
 - Espace de travail : ESPACE-DE-TRAVAIL.html (à la racine) = Command Center. Lucas (fondateur) → CEO →
   5 départements (un par niche, chacun avec un chef : Max nettoyage, Nyx tier list, Atlas countryball,
   Marcus stoïcisme, Tom finance) → 3 équipes par département (Écriture : Angle, Script, SEO ; Image : Visuels,
-  Montage ; Diffusion : Publication, Analyste) → Mémoire commune (compteurs, mots-clés, bilans, décisions).
+  Montage, OpenMontage ; Diffusion : Publication, Analyste) → Mémoire commune (compteurs, mots-clés, bilans, décisions).
   L'agent Analyste note vues et gains dans compteurs.json et marque les mots-clés ✅/❌.
   Version en ligne (fonctionnelle, agents réels) : https://claude.ai/artifact/HXkSBQadcFZjKttyUUse9e
   Lucas y lance les vidéos, les agents écrivent dans la page, il entre ses vues/gains et lance l'Analyste.
