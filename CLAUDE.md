@@ -81,6 +81,12 @@ Lucas n'a pas validé une dépense. Ne jamais remplir les clés HIGGSFIELD_* de 
 ni utiliser son outil higgsfield_video. Usage conseillé dans l'usine : stoïcisme et stickman finance
 (script de l'agent Script → vidéo 9:16 de 1 min 02). Le countryball reste sur render_countryball.py.
 
+## Remotion (montage en React, gratuit pour Lucas)
+Skills officiels installés dans .claude/skills/remotion-* (npx skills add remotion-dev/skills) + skill de
+l'usine .claude/skills/video-remotion-tiktok/ (format 9:16, ≥ 61 s, sous-titres mot à mot, livraison).
+Licence Remotion « Free » : particulier, usage commercial autorisé. Projet : 04_atelier/remotion-tiktok/.
+Mise à jour : skill remotion-upgrade.
+
 ## Apprendre un nouveau format à partir d'une vidéo de référence
 Dépose la vidéo dans 05_references/videos/, puis :
 - planche d'images : ffmpeg -i ref.mp4 -vf "fps=1/2,scale=192:-1,tile=8x6" -frames:v 1 planche.png
