@@ -5,7 +5,7 @@ Usage :
 
 Le pack (JSON) contient "scenes" : [{"voix_off": "...", "texte_ecran": "...", "visuel": 1}, ...]
 Les images s'appellent 01.png, 02.png... (ou .jpg / .webp) dans le dossier images.
-Voix : Henri (fr-FR-HenriNeural) via edge-tts, gratuit. Musique facultative : assets/musique.mp3.
+Voix : Henri (fr-FR-HenriNeural) via edge-tts à 1,3x, gratuit. Musique facultative : assets/musique.mp3.
 """
 import asyncio, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
@@ -15,7 +15,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 W, H, FPS = 1080, 1920, 30
 VOIX = "fr-FR-HenriNeural"
-VITESSE = "+8%"          # Henri un peu plus rapide, comme les comptes de référence
+VITESSE = "+30%"         # voix à 1,3x : réglage préféré de Lucas
 POP = 0.35               # durée de l'apparition « pop » en secondes
 CARTE = 0.86             # largeur de l'illustration par rapport à l'écran
 MIN_SCENE = 1.3          # aucune scène plus courte (référence : 1,3 à 4 s)
@@ -58,7 +58,7 @@ def voix_scene(texte, dossier, i):
         except Exception as e:
             print(f"  ! voix indisponible ({e.__class__.__name__}), silence de secours pour la scène {i}")
     mots = max(1, len(texte.split()))
-    d = max(MIN_SCENE, mots / 2.7)
+    d = max(MIN_SCENE, mots / 3.4)   # ≈ débit de Henri à 1,3x
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono",
                     "-t", f"{d:.3f}", "-q:a", "9", str(f)], check=True)
     return f, d

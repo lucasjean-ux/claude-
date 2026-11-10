@@ -16,7 +16,10 @@ pour savoir lequel ouvrir (`remotion-create`, `remotion-markup`, `remotion-capti
 
 ## Format obligatoire (toutes les compositions)
 - 1080 × 1920, 30 fps.
-- Durée calculée avec `calculateMetadata` à partir de la durée réelle de la voix off, jamais sous 61 s.
+- Voix off TOUJOURS accélérée à 1,3x (réglage de Lucas) : la préparer avant le rendu avec
+  `ffmpeg -i voix.mp3 -filter:a atempo=1.3 voix_1-3.mp3` (hauteur de voix conservée), puis caler les
+  sous-titres sur ce fichier accéléré.
+- Durée calculée avec `calculateMetadata` à partir de la durée de la voix ACCÉLÉRÉE, jamais sous 61 s.
   Si la voix fait moins de 61 s : le dire à Lucas et demander à l'agent Script d'allonger, ne pas étirer.
 - Sous-titres mot à mot (skill `remotion-captions`) : gros, centrés au tiers bas, contour noir,
   mot prononcé surligné. Transcription locale gratuite (Whisper), jamais un service payant sans accord.

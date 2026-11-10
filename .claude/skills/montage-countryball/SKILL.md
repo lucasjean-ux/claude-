@@ -11,13 +11,13 @@ Structure
   2 à 4 mots en majuscules au-dessus (« LA PIRE PUNITION », « 2 MIN 37 COUPÉES »).
 - Entrée de chaque illustration : petit « pop » (zoom de 55 % à 100 % avec léger rebond, ≈ 0,35 s), puis zoom lent.
 - La boule France sert de narrateur récurrent ; fin sur une question au spectateur pour les commentaires.
-- Voix : Henri (fr-FR-HenriNeural) à +8 %, ton complice, phrases courtes.
+- Voix : Henri (fr-FR-HenriNeural) à +30 % (1,3x, réglage de Lucas), ton complice, phrases courtes.
 
 Style des images (identique sur toute la vidéo)
 countryball = sphère parfaite aux couleurs du drapeau, gros contour noir épais, deux yeux blancs ovales
 sans pupille, couleurs plates, fond uni, style webcomic. Jamais de texte dans l'image : le texte est ajouté par le moteur.
 
 Vérifications avant rendu
-- 14 à 20 scènes, total ≥ 61 s une fois la voix générée.
+- 18 à 24 scènes (210-230 mots), total ≥ 61 s une fois la voix générée à 1,3x.
 - Faits vérifiables uniquement ; dates et chiffres exacts.
 - Une image par scène, nommée 01.png, 02.png…

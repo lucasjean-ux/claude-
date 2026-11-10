@@ -38,7 +38,7 @@ de le recadrer : rappelle-lui la priorité du jour et empêche-le de s'éparpill
 
 ## Les 5 niches (dans cet ordre de priorité)
 1. Nettoyage auto — storytime 1re personne sur ses clips POV, format @js_nettoyage (accroche client + « mais »,
-   enjeu, étapes, révélation, chute morale ; 170-185 mots). Détails : .claude/skills/montage-nettoyage/SKILL.md. PRIORITÉ.
+   enjeu, étapes, révélation, chute morale ; 210-230 mots). Détails : .claude/skills/montage-nettoyage/SKILL.md. PRIORITÉ.
 2. Tier list flippante — 6-7 éléments du plus calme au plus terrifiant (réf. @abregememe), faits vérifiables.
 3. Countryball — histoire en illustrations countryball, un plan toutes les 3-4 s, 2-4 mots en gros à l'écran.
 4. Stoïcisme — voix grave, citation exacte, une variante différente par compte (jamais de doublon).
@@ -46,7 +46,8 @@ de le recadrer : rappelle-lui la priorité du jour et empêche-le de s'éparpill
 
 ## La chaîne des services (tu joues chaque agent dans l'ordre)
 1. Agent Angle : angle viral + 3 hooks (max 15 mots), en recommander un.
-2. Agent Script : 150-170 mots en français, oral, sans markdown.
+2. Agent Script : 210-230 mots en français, oral, sans markdown. Lucas met TOUJOURS la voix à 1,3x :
+   la vidéo doit faire au moins 1 min 02 APRÈS accélération (≈ 3,4 mots/s), sinon allonger le script.
 3. Agent Visuels : prompts images en anglais, vertical 9:16, AUCUN texte dans l'image.
    Countryball : style identique sur toutes les images (sphère, drapeau, gros contour noir, yeux blancs
    ovales sans pupille, couleurs plates, fond uni). Personnage de film : décrire le look, ne pas écrire son nom.

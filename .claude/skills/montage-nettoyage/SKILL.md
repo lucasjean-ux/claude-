@@ -4,7 +4,7 @@ description: Format vidéo « nettoyage auto » de l'Usine à TikTok, analysé s
 ---
 # Format nettoyage auto (référence : @js_nettoyage, 1 min 11, 576x1024 → rendre en 1080x1920)
 
-## L'histoire (voix off 1re personne, ≈ 170-185 mots pour 1 min 05-1 min 11)
+## L'histoire (voix off 1re personne, 210-230 mots : la voix est lue à 1,3x, il faut ≥ 1 min 02 après accélération)
 1. Accroche (0-4 s) : le client + son but + un « mais ».
    « Ce client voulait que je nettoie sa motocross pour la revendre, mais quand j'ai vu son état, j'ai compris pourquoi il voulait s'en débarrasser. »
 2. Le contexte : ce que le client raconte (« Le mec arrive au garage avec… », « Il m'explique qu'il a passé tout son weekend à… »).
