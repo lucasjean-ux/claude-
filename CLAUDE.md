@@ -37,7 +37,8 @@ de le recadrer : rappelle-lui la priorité du jour et empêche-le de s'éparpill
            └─ Service Publication
 
 ## Les 5 niches (dans cet ordre de priorité)
-1. Nettoyage auto — voix off storytime 1re personne sur ses clips, révélation gardée pour la fin. PRIORITÉ.
+1. Nettoyage auto — storytime 1re personne sur ses clips POV, format @js_nettoyage (accroche client + « mais »,
+   enjeu, étapes, révélation, chute morale ; 170-185 mots). Détails : .claude/skills/montage-nettoyage/SKILL.md. PRIORITÉ.
 2. Tier list flippante — 6-7 éléments du plus calme au plus terrifiant (réf. @abregememe), faits vérifiables.
 3. Countryball — histoire en illustrations countryball, un plan toutes les 3-4 s, 2-4 mots en gros à l'écran.
 4. Stoïcisme — voix grave, citation exacte, une variante différente par compte (jamais de doublon).

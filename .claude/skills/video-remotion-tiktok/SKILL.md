@@ -30,8 +30,10 @@ pour savoir lequel ouvrir (`remotion-create`, `remotion-markup`, `remotion-capti
 - Copier les médias dans `public/` du projet Remotion avant le rendu (`staticFile()`).
 
 ## Par niche
-- Nettoyage auto : clips de Lucas plein écran, coupés selon le plan de découpe de l'agent Visuels,
-  sous-titres mot à mot, révélation gardée pour la fin.
+- Nettoyage auto : suivre .claude/skills/montage-nettoyage/SKILL.md (référence @js_nettoyage).
+  Clips POV plein écran, un plan toutes les 1,5-2,5 s selon le plan de découpe ; sous-titres 2-3 mots
+  en MAJUSCULES, police condensée grasse, blanc contour noir, 1 mot clé en bleu clair #8FD6FF,
+  centrés à 75 % de la hauteur ; voix devant, bruit du nettoyeur en dessous ; révélation à la fin.
 - Tier list flippante : tableau d'ouverture animé (lignes qui apparaissent du plus calme au plus
   terrifiant), puis un plan par élément avec son numéro.
 - Stoïcisme : images lentes (zoom doux), citation en serif au centre au moment où elle est dite.
