@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Command Center — Usine à TikTok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b10;--panel:#0c131b;--ink:#e9f1f7;--soft:#7d8b99;--line:#1b2733;--gold:#ffb21e;--ok:#3ef08a;--bad:#ff6b5a;
+ --c-nettoyage:#22e1ff;--c-tierlist:#b26bff;--c-countryball:#3ef08a;--c-stoicisme:#ffa43a;--c-finance:#ff5fae;color-scheme:dark;
+ padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+body{background:radial-gradient(1200px 600px at 50% -10%,#10314a55,transparent 60%),radial-gradient(900px 500px at 50% 110%,#ffb21e14,transparent 60%),var(--bg);min-height:100vh}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(#ffffff06 1px,transparent 1px),linear-gradient(90deg,#ffffff06 1px,transparent 1px);background-size:32px 32px}
+.mono{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
+h1,h2,h3{font-family:"Bricolage Grotesque","DM Sans",sans-serif;letter-spacing:-.01em}
+.top{position:sticky;top:0;z-index:20;background:#070b10e6;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{max-width:1500px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;margin-right:auto}
+.brand small{font-size:.66rem;color:var(--soft)}
+.brand b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.25rem;display:flex;align-items:center;gap:10px}
+.live{font-size:.62rem;padding:2px 7px;border-radius:99px;border:1px solid #3ef08a66;color:var(--ok);display:inline-flex;gap:6px;align-items:center}
+.live::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;animation:blink 1.6s infinite}
+.live.off{border-color:#7d8b9966;color:var(--soft)}
+@keyframes blink{50%{opacity:.3}}
+.tabs{display:flex;gap:4px;background:#ffffff08;border:1px solid var(--line);padding:4px;border-radius:12px;overflow-x:auto;max-width:100%}
+.tabs button{border:0;background:transparent;color:var(--soft);font:600 .88rem "DM Sans",sans-serif;padding:8px 14px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:#ffffff12;color:var(--ink);box-shadow:inset 0 0 0 1px #ffffff1a}
+.tabs .badge{display:inline-block;min-width:18px;padding:0 5px;margin-left:6px;border-radius:99px;background:var(--gold);color:#1a1000;font-size:.7rem}
+main{max-width:1500px;margin:0 auto;padding:18px 18px 60px}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.kpi{border:1px solid var(--line);background:#ffffff05;border-radius:12px;padding:8px 14px;display:flex;gap:10px;align-items:baseline}
+.kpi b{font-family:"JetBrains Mono",monospace;font-size:1.15rem}
+.kpi small{color:var(--soft);font-size:.78rem}
+.msg{flex:1 1 380px;border:1px solid #ffb21e55;background:#ffb21e0d;border-radius:12px;padding:8px 14px;font-size:.92rem;display:flex;gap:10px;align-items:center;justify-content:space-between}
+.btn{font:700 .92rem "DM Sans",sans-serif;border:0;border-radius:11px;padding:10px 15px;cursor:pointer;background:var(--gold);color:#1a1000;display:inline-flex;gap:8px;align-items:center;justify-content:center;white-space:nowrap}
+.btn.sec{background:#ffffff10;color:var(--ink);border:1px solid var(--line)}
+.btn.sm{padding:7px 11px;font-size:.82rem;border-radius:9px}
+.btn:disabled{opacity:.45;cursor:default}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* Organigramme */
+.scroll{overflow-x:auto;padding-bottom:8px}
+.board{position:relative;min-width:1380px;padding-top:6px}
+#wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.row{display:flex;justify-content:center;position:relative;z-index:1}
+.node{position:relative;display:flex;align-items:center;gap:10px;border-radius:14px;padding:10px 14px;background:linear-gradient(#ffffff0d,#ffffff04);border:1px solid #ffffff22;cursor:pointer;color:inherit;font:inherit;text-align:left}
+.node .av{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:1.2rem;background:#ffffff10}
+.node b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1rem;line-height:1.1}
+.node small{display:block;color:var(--soft);font-size:.72rem}
+.founder{margin-bottom:26px}
+.ceo{margin-bottom:46px;border-color:#ffffff40;box-shadow:0 0 30px #ffffff14}
+.st{font-size:.6rem;margin-top:3px;display:flex;align-items:center;gap:5px;color:var(--soft)}
+.st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.st.run{color:var(--gold)} .st.done{color:var(--ok)}
+.depts{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative;z-index:1}
+.dept{--c:#fff;position:relative;border:1px solid color-mix(in srgb,var(--c) 38%,transparent);border-radius:18px;padding:30px 12px 14px;background:linear-gradient(color-mix(in srgb,var(--c) 7%,transparent),color-mix(in srgb,var(--c) 2%,transparent));display:flex;flex-direction:column;align-items:center}
+.dept.on{box-shadow:0 0 0 1px var(--c),0 0 40px color-mix(in srgb,var(--c) 30%,transparent)}
+.dept .lbl{position:absolute;top:10px;left:14px;font-size:.6rem;color:var(--c)}
+.dept .prio{position:absolute;top:8px;right:10px;font-size:.58rem;padding:2px 6px;border-radius:99px;background:var(--c);color:#04121a;font-weight:700}
+.lead{border-color:color-mix(in srgb,var(--c) 70%,transparent);background:color-mix(in srgb,var(--c) 12%,#0b121a);box-shadow:0 0 22px color-mix(in srgb,var(--c) 28%,transparent);margin-bottom:26px;min-width:190px}
+.lead .av{background:color-mix(in srgb,var(--c) 25%,transparent)}
+.team{display:flex;flex-direction:column;align-items:center;margin-bottom:20px;width:100%}
+.pill{font-size:.6rem;padding:4px 10px;border-radius:99px;border:1px solid color-mix(in srgb,var(--c) 70%,transparent);color:var(--c);background:color-mix(in srgb,var(--c) 10%,#0b121a);margin-bottom:16px;box-shadow:0 0 12px color-mix(in srgb,var(--c) 22%,transparent)}
+.agents{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.ag{display:flex;flex-direction:column;align-items:center;gap:5px;width:64px;background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:0}
+.ag .o{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.15rem;position:relative;background:radial-gradient(circle at 40% 35%,color-mix(in srgb,var(--c) 35%,#0b121a),#0b121a 75%);border:2px solid color-mix(in srgb,var(--c) 85%,transparent);box-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent)}
+.ag span{font-size:.68rem;color:#c9d6e2;text-align:center;line-height:1.15}
+.ag.run .o{border-color:var(--gold);animation:ping 1.6s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 #ffb21eaa,0 0 22px #ffb21e}100%{box-shadow:0 0 0 12px #ffb21e00,0 0 22px #ffb21e}}
+.ag.done .o::after{content:"✓";position:absolute;right:-4px;bottom:-4px;width:17px;height:17px;border-radius:50%;background:var(--ok);color:#04121a;font-size:.65rem;font-weight:800;display:grid;place-items:center}
+.ag.err .o{border-color:var(--bad)}
+.ag:hover .o,.node:hover{filter:brightness(1.25)}
+.newv{margin-top:2px;font-size:.78rem;border:1px dashed color-mix(in srgb,var(--c) 60%,transparent);color:var(--c);background:transparent;border-radius:10px;padding:7px 12px;cursor:pointer;font-weight:700}
+.newv:hover{background:color-mix(in srgb,var(--c) 12%,transparent)}
+.memrow{display:flex;justify-content:center;margin-top:70px;position:relative;z-index:1}
+.mem{position:relative;width:360px;height:170px;border-radius:20px;border:1px solid #ffb21e55;background:radial-gradient(closest-side,#ffb21e18,transparent);cursor:pointer;color:inherit;font:inherit;padding:0}
+.mem canvas{position:absolute;inset:0;width:100%;height:100%}
+.mem .t{position:absolute;left:0;right:0;bottom:10px;text-align:center}
+.mem .t b{font-family:"Bricolage Grotesque",sans-serif;color:var(--gold);font-size:1rem}
+.mem .t small{display:block;color:var(--soft);font-size:.7rem}
+@keyframes flow{to{stroke-dashoffset:-40}}
+#wires .dash{stroke-dasharray:6 8;animation:flow 1.4s linear infinite}
+
+/* Atelier */
+.head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap;margin:6px 0 16px}
+.head h1{margin:0;font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.05}
+.head p{margin:4px 0 0;color:var(--soft)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.62rem;padding:3px 8px;border-radius:99px;border:1px solid color-mix(in srgb,var(--c,#fff) 60%,transparent);color:var(--c,#fff)}
+.steps{display:grid;gap:12px}
+.step{--c:#fff;border:1px solid var(--line);border-radius:16px;background:#ffffff05;padding:14px 16px}
+.step.run{border-color:var(--gold);box-shadow:0 0 22px #ffb21e22}
+.step.done{border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}
+.step.err{border-color:var(--bad)}
+.sh{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.sh .who{display:flex;gap:10px;align-items:center}
+.sh .o{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--c);box-shadow:0 0 10px color-mix(in srgb,var(--c) 40%,transparent)}
+.sh b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.05rem;display:block;line-height:1.1}
+.sh small{color:var(--soft);font-size:.78rem}
+.state{font-size:.62rem}
+.state.run{color:var(--gold)} .state.done{color:var(--ok)} .state.err{color:var(--bad)} .state.wait{color:var(--soft)}
+textarea,input,select{width:100%;font:inherit;color:var(--ink);background:#ffffff08;border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+textarea{min-height:110px;resize:vertical;line-height:1.5;margin-top:10px}
+textarea:focus,input:focus,select:focus{outline:2px solid #ffb21e88;outline-offset:1px}
+.redo{display:flex;gap:8px;margin-top:8px}
+.redo input{flex:1;padding:7px 10px;font-size:.85rem}
+.hint{color:var(--soft);font-size:.82rem;margin:6px 0 0}
+.empty{border:1px dashed var(--line);border-radius:16px;padding:40px 20px;text-align:center;color:var(--soft)}
+.empty h2{color:var(--ink);margin:0 0 6px}
+
+/* Vidéos & mémoire */
+.cols{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px}
+@media (max-width:980px){.cols{grid-template-columns:1fr}}
+.vid{--c:#fff;display:grid;grid-template-columns:1fr auto;gap:8px 14px;border:1px solid var(--line);border-left:3px solid var(--c);border-radius:14px;padding:12px 14px;background:#ffffff05;margin-bottom:10px}
+.vid b{display:block}
+.vid small{color:var(--soft)}
+.vid .acts{display:flex;gap:6px;align-items:start;flex-wrap:wrap;justify-content:flex-end}
+.vid .stats{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.vid .stats input{width:120px;padding:6px 9px;font-size:.85rem}
+.tagS{font-size:.6rem;padding:2px 7px;border-radius:99px;background:#ffffff10;color:var(--soft)}
+.tagS.ready{background:#ffb21e22;color:var(--gold)} .tagS.posted{background:#3ef08a22;color:var(--ok)}
+.box{border:1px solid var(--line);border-radius:16px;padding:16px;background:#ffffff05;margin-bottom:14px}
+.box h3{margin:0 0 8px}
+.pre{white-space:pre-wrap;font-size:.9rem;color:#d6e0ea}
+.day{display:grid;gap:8px;max-width:760px}
+.dstep{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#ffffff05}
+.dstep .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#ffffff10;font-weight:800;color:var(--soft);font-size:.85rem;flex:none}
+.dstep.ok .n{background:var(--ok);color:#04121a}
+.dstep.next{border-color:var(--gold);box-shadow:0 0 18px #ffb21e30}
+.dstep.next .n{background:var(--gold);color:#1a1000}
+.dstep b{display:block} .dstep small{color:var(--soft)}
+.dstep.ok b{text-decoration:line-through;color:var(--soft)}
+.dstep .btn{margin-left:auto}
+.warn{padding:12px 14px;border-radius:12px;border:1px solid #ff6b5a66;color:#ff8a7a;font-weight:700;font-size:.9rem;margin-bottom:12px}
+
+dialog{border:1px solid #ffffff22;border-radius:18px;background:var(--panel);color:var(--ink);padding:20px;max-width:520px;width:calc(100% - 32px);box-shadow:0 0 50px #000}
+dialog::backdrop{background:#000b}
+dialog h3{margin:0 0 4px;font-size:1.3rem}
+dialog p{margin:0 0 10px;color:var(--soft)}
+dialog label{display:block;font-weight:700;font-size:.85rem;margin:10px 0 4px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:99px;font-weight:700;font-size:.9rem;opacity:0;transition:.2s;pointer-events:none;z-index:50}
+.toast.on{opacity:1}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){#wires .dash,.ag.run .o,.live::before{animation:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar">
+  <div class="brand"><small class="mono">Système d'agents · Usine à TikTok</small><b>Command Center <span class="live mono off" id="live">Hors ligne</span></b></div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-v="centre">Command Center</button>
+    <button role="tab" aria-selected="false" data-v="atelier">Atelier<span class="badge" id="b-atelier" hidden>●</span></button>
+    <button role="tab" aria-selected="false" data-v="videos">Vidéos &amp; mémoire</button>
+    <button role="tab" aria-selected="false" data-v="jour">Aujourd'hui</button>
+  </nav>
+</div></header>
+
+<main>
+<!-- ============ COMMAND CENTER ============ -->
+<section id="v-centre">
+  <div class="kpis" id="kpis"></div>
+  <div class="scroll"><div class="board" id="board">
+    <svg id="wires"></svg>
+    <div class="row"><button class="node founder" id="n-founder"><span class="av">👑</span><div><b>Lucas</b><small class="mono">Fondateur</small></div></button></div>
+    <div class="row"><button class="node ceo" id="n-ceo"><span class="av">🧠</span><div><b>CEO · Claude</b><small>Chef d'usine · règles du coach</small><div class="st mono" id="ceo-st"></div></div></button></div>
+    <div class="depts" id="depts"></div>
+    <div class="memrow"><button class="mem" id="mem"><canvas id="cv"></canvas><span class="t"><b>Mémoire commune</b><small>compteurs · mots-clés ✅/❌ · bilans</small></span></button></div>
+  </div></div>
+</section>
+
+<!-- ============ ATELIER ============ -->
+<section id="v-atelier" hidden></section>
+
+<!-- ============ VIDÉOS & MÉMOIRE ============ -->
+<section id="v-videos" hidden>
+  <div class="head"><div><h1>Vidéos &amp; mémoire.</h1><p>Marque tes vidéos postées, entre leurs vues et leurs gains, puis lance l'Analyste.</p></div></div>
+  <div class="cols">
+    <div id="vlist"></div>
+    <div>
+      <div class="box"><h3>📈 Analyste</h3><p class="hint" style="margin:0 0 10px">Il lit les stats de toutes tes vidéos postées et te dit ce qui marche, quels mots-clés garder, et une seule décision pour la suite.</p>
+        <button class="btn" id="analyse">Lancer l'Analyste</button><div class="pre" id="bilan" style="margin-top:12px"></div></div>
+      <div class="box"><h3>🔎 Mots-clés</h3><div id="kw" class="pre"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUJOURD'HUI ============ -->
+<section id="v-jour" hidden>
+  <div class="head"><div><h1 id="jtitre">Aujourd'hui.</h1><p>Règles du coach : 2 nettoyages auto d'abord, puis 1 tier list et 1 countryball. Ensuite c'est fini.</p></div></div>
+  <div id="jwarn"></div>
+  <div class="day" id="day"></div>
+</section>
+</main>
+
+<dialog id="dlg"><form method="dialog" id="dform"></form></dialog>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================== Données ===================== */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const today=()=>new Date().toLocaleDateString("sv-SE");
+
+const DEPTS=[
+ {id:"nettoyage",nom:"Nettoyage auto",chef:"Max",role:"Storytime 1re personne",ic:"🧽",prio:true,
+  ph:"Ex. intérieur de Clio couvert de poils de chien, le client revient 2 ans après…",
+  rules:"Storytime à la 1re personne d'un détaileur (format @js_nettoyage), 210 à 230 mots (voix lue à 1,3x). Structure : 1) accroche en une phrase : le client, son but et un « mais » (« Ce client voulait que je nettoie sa … pour …, mais quand j'ai vu son état, j'ai compris pourquoi… ») ; 2) ce que le client raconte ; 3) l'enjeu et l'urgence (acheteur, rendez-vous, cadeau…) ; 4) le défi (« franchement, vu la quantité de …, je sais déjà que… ») ; 5) les étapes du nettoyage dans l'ordre (rinçage, premiers passages, jantes, recoins, repasser où c'est incrusté) ; 6) la bascule (« plus j'avance, plus… » + le client retrouve le sourire) ; 7) la révélation ; 8) une chute morale qui retourne l'histoire et fait commenter. Ton complice, phrases courtes (« le mec », « monsieur », « franchement »).",
+  visu:"Pas d'images à générer : les visuels sont les clips POV de Lucas. Donne un plan de découpe : pour chaque phrase du script, le plan à prendre (véhicule sale en entier, mousse, boue qui tombe en gros plan, jantes, recoins, séchage microfibre, plan large final propre) et sa durée (1,5 à 2,5 s, jamais plus de 4 s). Rappelle à la fin le style des sous-titres : 2-3 mots en MAJUSCULES, blanc contour noir, 1 mot clé en bleu clair, à 75 % de la hauteur.",
+  kw:["nettoyage voiture","nettoyage voiture très sale","detailing voiture","nettoyage intérieur voiture","avant après voiture"]},
+ {id:"tierlist",nom:"Tier list flippante",chef:"Nyx",role:"Du calme au terrifiant",ic:"😱",count:"Nombre d'éléments",cdef:6,
+  ph:"Ex. les lieux les plus hantés, les expériences interdites, les paradoxes dérangeants…",
+  rules:"Tier list descendante. Ouverture : « Ces N … sont classés du plus … au plus …, et le dernier … ». Chaque élément numéroté, 1 à 3 phrases, du plus léger au plus glauque. Uniquement des faits vérifiables ; si c'est une légende, le dire (« on raconte que »). Finir sur le pire élément avec une phrase qui donne froid.",
+  visu:"1) Le tableau d'ouverture : une ligne par élément avec une icône de visage stylisé noir et blanc de plus en plus inquiétant (du visage calme au crâne rouge glitché) ; décris chaque icône. 2) Pour chaque élément, 2 prompts d'images verticales 9:16, style photo d'archive ou illustration sombre, sans aucun texte dans l'image.",
+  kw:["tier list flippante","choses les plus effrayantes","faits flippants","mystères non résolus"]},
+ {id:"countryball",nom:"Countryball",chef:"Atlas",role:"Histoires en countryball",ic:"🌍",count:"Nombre de plans",cdef:16,
+  ph:"Ex. pourquoi Singapour a interdit le chewing-gum, 9 tueurs de films d'horreur en countryball…",
+  rules:"Countryballs. Une seule histoire racontée plan par plan, un plan toutes les 2 à 4 secondes. Chaque phrase du script = un plan, précédée du texte à l'écran entre crochets en MAJUSCULES (2 à 4 mots). La boule France sert de narrateur. Fin sur une question au spectateur. Faits vérifiables uniquement, dates et chiffres exacts.",
+  visu:"Un prompt d'image par plan, en anglais, vertical 9:16. Style IDENTIQUE partout : countryball = sphère parfaite aux couleurs du drapeau, gros contour noir épais, deux yeux blancs ovales sans pupille, couleurs plates, fond uni coloré, style webcomic. Jamais de texte dans l'image. Pour un personnage de film, décrire son look sans écrire son nom.",
+  kw:["countryball","histoire en countryball","histoire vraie incroyable","le saviez-vous histoire"]},
+ {id:"stoicisme",nom:"Stoïcisme",chef:"Marcus",role:"Citations exactes, voix grave",ic:"🏛️",count:"Variantes (une par compte)",cdef:1,
+  ph:"Ex. pourquoi Marc Aurèle se levait avant tout le monde, contrôler sa colère…",
+  rules:"Voix off grave et lente, 2e personne (« tu »). Hook dur, une idée stoïcienne (Marc Aurèle, Sénèque, Épictète) avec une citation courte et EXACTE de l'auteur, application concrète à la vie d'aujourd'hui, chute forte. Si plusieurs variantes, chacune a un hook, un angle et une citation différents.",
+  visu:"Prompts d'images verticales 9:16 en anglais, cinématiques : statues antiques en marbre, ruines romaines au lever du soleil, silhouette solitaire sous la pluie, tons sombres et dorés, sans texte. Un prompt toutes les 4 à 5 secondes.",
+  kw:["stoïcisme","citation Marc Aurèle","citation Sénèque","discipline mentale"]},
+ {id:"finance",nom:"Stickman finance",chef:"Tom",role:"Finance perso débutant",ic:"💸",
+  ph:"Ex. la règle 50/30/20, pourquoi les riches ne paient pas de loyer…",
+  rules:"Finance perso pour débutants avec un personnage stickman qu'on suit (« voici Tom »). Hook avec un chiffre ou une question, explication en étapes, exemple chiffré simple, chute utile. Pas de promesse de gain, pas de conseil d'investissement personnalisé.",
+  visu:"Prompts d'images verticales 9:16 en anglais : stickman noir minimaliste sur fond blanc, traits épais, accents de couleur (vert pour l'argent, rouge pour les pertes), sans texte. Un prompt par idée du script.",
+  kw:["finance personnelle débutant","comment économiser de l'argent","budget 50 30 20","épargne jeune"]}
+];
+const D=id=>DEPTS.find(d=>d.id===id);
+const TEAMS=[{nom:"Équipe Écriture",agents:["angle","script","seo"]},{nom:"Équipe Image",agents:["visuels","montage","openmontage"]},{nom:"Équipe Diffusion",agents:["publication","analyste"]}];
+const AG={
+ angle:{ic:"🎯",nom:"Angle",role:"3 hooks de 15 mots max, en recommande un."},
+ script:{ic:"✍️",nom:"Script",role:"Voix off de 210 à 230 mots : 1 min 02 même lue à 1,3x."},
+ seo:{ic:"🔎",nom:"SEO",role:"Mot-clé placé dans la voix, l'écran, le titre, les hashtags."},
+ visuels:{ic:"🎨",nom:"Visuels",role:"Prompts d'images 9:16 ou plan de découpe de tes clips."},
+ montage:{ic:"🎬",nom:"Montage",role:"Pack de montage (pack.json) pour le moteur de rendu."},
+ openmontage:{ic:"🎞️",nom:"Monty",role:"OpenMontage — monteur IA gratuit sur ton PC : voix, images libres, sous-titres, vidéo 9:16."},
+ publication:{ic:"📣",nom:"Publication",role:"Titre, description qui fait commenter, 5 hashtags."},
+ analyste:{ic:"📈",nom:"Analyste",role:"Lit tes stats, garde les mots-clés qui marchent."}
+};
+const CHAIN=["angle","script","seo","visuels","montage","publication"];
+
+/* ===================== Stockage (db Claude ou navigateur) ===================== */
+let sample=null, db=null, downloads=null, uid=null;
+let V=[];           // vidéos
+let MEM={bilan:"",kw:{}};
+let curId=null, running=null, abort=null;
+const LS="usine-tt-cc";
+function lsSave(){try{localStorage.setItem(LS,JSON.stringify({V,MEM,curId}))}catch(_){}}
+function lsLoad(){try{const o=JSON.parse(localStorage.getItem(LS)||"null");if(o){V=o.V||[];MEM=o.MEM||MEM;curId=o.curId||null}}catch(_){}}
+const timers={};
+function saveVid(v,now){lsSave();if(!db||!uid)return;clearTimeout(timers[v.id]);
+ const go=()=>db.collection("data/users/"+uid+"/videos").doc(v.id).set(JSON.parse(JSON.stringify(v))).catch(()=>toast("Sauvegarde en ligne impossible, gardée dans ce navigateur"));
+ now?go():timers[v.id]=setTimeout(go,700)}
+function delVid(id){lsSave();if(db&&uid)db.collection("data/users/"+uid+"/videos").doc(id).delete().catch(()=>{})}
+function saveMem(){lsSave();if(db&&uid)db.doc("data/users/"+uid+"/meta/memoire").set(JSON.parse(JSON.stringify(MEM))).catch(()=>{})}
+
+/* ===================== Utilitaires ===================== */
+const cur=()=>V.find(v=>v.id===curId);
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1800)}
+async function copy(t){try{await navigator.clipboard.writeText(t);toast("Copié")}catch(_){toast("Copie refusée : sélectionne le texte et copie-le")}}
+const stats=()=>{const t=today(),td=V.filter(v=>v.date===t);
+ return{t,td,net:td.filter(v=>v.niche==="nettoyage").length,tier:td.filter(v=>v.niche==="tierlist").length,ball:td.filter(v=>v.niche==="countryball").length,
+  nonPost:V.filter(v=>v.statut!=="postee").length,post:V.filter(v=>v.statut==="postee").length,
+  gains:V.reduce((a,v)=>a+(+v.gains||0),0),vues:V.reduce((a,v)=>a+(+v.vues||0),0)}};
+
+/* ===================== Rendu : Command Center ===================== */
+function stOf(dept,a){const v=cur();if(!v||v.niche!==dept)return"";if(a==="openmontage")return OM.includes(v.niche)&&v.etapes.script?.st==="done"?"done":"";return v.etapes[a]?.st||""}
+function renderCentre(){
+ const s=stats(),v=cur();
+ const done=Math.min(2,s.net)+Math.min(1,s.tier)+Math.min(1,s.ball);
+ let msg;
+ if(s.nonPost>4)msg=`Tu as ${s.nonPost} vidéos non postées. Stop production : va poster.`;
+ else if(running)msg=`L'équipe ${D(cur().niche).nom} travaille sur « ${cur().sujet} ».`;
+ else if(s.net<2)msg=`Priorité : nettoyage auto n°${s.net+1}. Clique sur Max pour lancer.`;
+ else if(s.tier<1)msg="Nettoyages faits. Maintenant 1 tier list : clique sur Nyx.";
+ else if(s.ball<1)msg="Plus qu'1 countryball : clique sur Atlas.";
+ else msg="Journée terminée. Poste tes vidéos et repose-toi.";
+ $("#kpis").innerHTML=[[V.length,"vidéos"],[s.post,"postées"],[s.nonPost,"à poster"],[s.vues.toLocaleString("fr-FR"),"vues"],[s.gains.toFixed(2)+" €","gains"],[done+"/4","aujourd'hui"]]
+  .map(([a,b])=>`<div class="kpi"><b>${a}</b><small>${b}</small></div>`).join("")
+  +`<div class="msg"><span>🧠 ${esc(msg)}</span>${v?`<button class="btn sm sec" data-go="atelier">Ouvrir l'atelier</button>`:""}</div>`;
+ $("#ceo-st").className="st mono "+(running?"run":"");$("#ceo-st").textContent=running?"Actif":"Prêt";
+ $("#depts").innerHTML=DEPTS.map(d=>{const on=v&&v.niche===d.id;return`
+ <div class="dept ${on?"on":""}" style="--c:var(--c-${d.id})" id="d-${d.id}">
+  <span class="lbl mono">${d.nom}</span>${d.prio?`<span class="prio mono">Priorité</span>`:""}
+  <button class="node lead" id="l-${d.id}" data-new="${d.id}"><span class="av">${d.ic}</span><div><b>${d.chef}</b><small>Chef · ${d.role}</small>
+   <div class="st mono ${on&&running?"run":""}">${on&&running?"Actif":"Idle"}</div></div></button>
+  ${TEAMS.map((t,ti)=>`<div class="team"><span class="pill mono" id="p-${d.id}-${ti}">${t.nom}</span><div class="agents">${t.agents.map(a=>`<button class="ag ${stOf(d.id,a)}" id="a-${d.id}-${a}" data-ag="${a}" data-d="${d.id}"><span class="o">${AG[a].ic}</span><span>${AG[a].nom}</span></button>`).join("")}</div></div>`).join("")}
+  <button class="newv" data-new="${d.id}">+ Nouvelle vidéo</button>
+ </div>`}).join("");
+ requestAnimationFrame(draw);
+}
+const NS="http://www.w3.org/2000/svg";
+function pt(el,side){const b=$("#board").getBoundingClientRect(),r=el.getBoundingClientRect();return{x:r.left-b.left+r.width/2,y:side==="t"?r.top-b.top:r.bottom-b.top}}
+function wire(a,b,color,o={}){if(!a||!b)return;const p=pt(a,"b"),q=pt(b,"t"),m=(p.y+q.y)/2,c=o.curve;
+ const e=document.createElementNS(NS,"path");
+ e.setAttribute("d",c?`M${p.x},${p.y} C${p.x},${p.y+c} ${q.x},${q.y-c} ${q.x},${q.y}`:`M${p.x},${p.y} C${p.x},${m} ${q.x},${m} ${q.x},${q.y}`);
+ e.setAttribute("fill","none");e.setAttribute("stroke",color);e.setAttribute("stroke-width",o.w||1.6);e.setAttribute("opacity",o.o??.9);
+ if(o.dash)e.setAttribute("class","dash");if(o.glow)e.setAttribute("filter","url(#glow)");$("#wires").appendChild(e)}
+function draw(){if($("#v-centre").hidden)return;const s=$("#wires");
+ s.innerHTML=`<defs><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+ const css=getComputedStyle(document.documentElement);
+ wire($("#n-founder"),$("#n-ceo"),"#ffffffaa",{glow:1});
+ DEPTS.forEach(d=>{const c=css.getPropertyValue("--c-"+d.id).trim();
+  wire($("#n-ceo"),$("#l-"+d.id),c,{glow:1,w:2});
+  TEAMS.forEach((t,ti)=>{const p=$(`#p-${d.id}-${ti}`);wire(ti?$(`#p-${d.id}-${ti-1}`):$("#l-"+d.id),p,c,{o:.55,w:1.3});
+   t.agents.forEach(a=>wire(p,$(`#a-${d.id}-${a}`),c,{o:.8,w:1.4,curve:10}))});
+  wire($("#d-"+d.id),$("#mem"),"#ffb21e",{dash:1,o:.75,w:1.6,curve:40})})}
+addEventListener("resize",draw);
+
+/* particules de la mémoire */
+(function(){const cv=$("#cv"),x=cv.getContext("2d");let W=0,H=0;const P=[];
+ const cols=["#ffb21e","#ffb21e","#ffd27a","#22e1ff","#b26bff","#3ef08a","#ffa43a","#ff5fae"];
+ function size(){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;x.setTransform(d,0,0,d,0,0)}
+ addEventListener("resize",size);
+ for(let i=0;i<340;i++){const core=i<240;P.push({a:Math.random()*6.28,r:core?Math.pow(Math.random(),.6)*34:40+Math.random()*120,s:(core?.004:.0015)*(Math.random()+.5),z:core?1.2:1.6*Math.random()+.6,c:core?cols[Math.random()*3|0]:cols[Math.random()*cols.length|0],core})}
+ const still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+ (function f(){if(!W)size();x.clearRect(0,0,W,H);const cx=W/2,cy=H/2-14;
+  const g=x.createRadialGradient(cx,cy,0,cx,cy,60);g.addColorStop(0,"#ffb21e55");g.addColorStop(1,"#ffb21e00");x.fillStyle=g;x.fillRect(0,0,W,H);
+  for(const p of P){if(!still){p.a+=p.s;if(!p.core){p.r-=.08;if(p.r<36)p.r=150}}x.fillStyle=p.c;x.globalAlpha=p.core?.9:.7;x.beginPath();x.arc(cx+Math.cos(p.a)*p.r,cy+Math.sin(p.a)*p.r*.55,p.z,0,6.28);x.fill()}
+  x.globalAlpha=1;if(!still)requestAnimationFrame(f)})()})();
+
+/* ===================== Rendu : Atelier ===================== */
+const LIBST={"":"En attente",run:"Travaille…",done:"Terminé",err:"Erreur"};
+function renderAtelier(){
+ const v=cur(),el=$("#v-atelier");$("#b-atelier").hidden=!running;
+ if(!v){el.innerHTML=`<div class="empty"><h2>Aucune vidéo en cours</h2><p>Clique sur un chef de département dans le Command Center, ou lance directement :</p>
+  <div class="btns" style="justify-content:center">${DEPTS.map(d=>`<button class="btn sec" data-new="${d.id}">${d.ic} ${d.nom}</button>`).join("")}</div></div>`;return}
+ const d=D(v.niche);
+ el.innerHTML=`<div class="head" style="--c:var(--c-${d.id})"><div><span class="chip mono">${d.ic} ${d.nom} · ${d.chef}</span><h1>${esc(v.sujet)}</h1>
+  <p>Créée le ${new Date(v.date+"T12:00").toLocaleDateString("fr-FR")} · <span class="tagS ${v.statut==="postee"?"posted":v.statut==="prete"?"ready":""}">${v.statut==="postee"?"Postée":v.statut==="prete"?"Prête à poster":"En production"}</span></p></div>
+  <div class="btns" style="margin:0">${running?`<button class="btn sec" id="stop">■ Arrêter</button>`:`<button class="btn" id="runall">${CHAIN.every(a=>v.etapes[a]?.st==="done")?"↻ Tout refaire":"▶ Lancer l'équipe"}</button>`}
+   <button class="btn sec" id="copyall">Copier tout</button>
+   ${v.statut!=="postee"?`<button class="btn sec" id="mark">${v.statut==="prete"?"✓ Marquer postée":"✓ Marquer prête"}</button>`:""}</div></div>
+  ${!sample?`<div class="warn">Les agents ne peuvent pas écrire ici (page ouverte hors de claude.ai). Chaque bouton « Lancer » copie la commande à coller à Claude Code.</div>`:""}
+  <div class="steps">${CHAIN.map(a=>{const e=v.etapes[a]||{},st=e.st||"";return`
+  <div class="step ${st}" id="s-${a}" style="--c:var(--c-${d.id})"><div class="sh"><div class="who"><span class="o">${AG[a].ic}</span><div><b>${AG[a].nom}</b><small>${AG[a].role}</small></div></div>
+   <div class="btns" style="margin:0;align-items:center"><span class="state mono ${st||"wait"}">${LIBST[st]}</span>
+    <button class="btn sm sec" data-run="${a}" ${running?"disabled":""}>${e.txt?"↻ Relancer":"▶ Lancer"}</button>
+    <button class="btn sm sec" data-copy="${a}" ${e.txt?"":"disabled"}>Copier</button>
+    ${a==="montage"?`<button class="btn sm sec" data-dl="${a}" ${e.txt?"":"disabled"}>⬇ pack.json</button>`:""}</div></div>
+   <textarea data-ed="${a}" placeholder="${st==="run"?"L'agent écrit…":"Le livrable de l'agent apparaîtra ici. Tu peux le modifier."}" ${a==="montage"?'style="font-family:JetBrains Mono,monospace;font-size:.8rem"':""}>${esc(e.txt||"")}</textarea>
+   ${e.txt&&!running?`<div class="redo"><input data-ins="${a}" placeholder="Consigne pour relancer (ex. plus choc, plus court, autre hook…)"><button class="btn sm sec" data-run="${a}" data-withins="1">Relancer avec la consigne</button></div>`:""}
+   ${e.err?`<p class="hint" style="color:var(--bad)">${esc(e.err)}</p>`:""}</div>`}).join("")}</div>
+  ${omCard(v)}
+  ${v.niche==="nettoyage"?`<p class="hint" style="margin-top:14px">Montage : suis le plan de découpe dans CapCut sur tes clips, avec la voix off du Script.</p>`:`<p class="hint" style="margin-top:14px">${OM.includes(v.niche)?"Autre option, sans OpenMontage : le moteur countryball.":"Montage avec le moteur countryball :"} génère les images avec les prompts, nomme-les 01.png, 02.png… puis sur ton PC : <code>python 04_atelier/render/render_countryball.py pack.json images video.mp4</code></p>`}`;
+}
+
+/* ===================== OpenMontage (sur le PC de Lucas) ===================== */
+const OM=["tierlist","stoicisme","finance"];
+function slug(s){return(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)}
+function omDossier(v){return`03_productions/${v.date}_${v.niche}_${slug(v.sujet)}`}
+function omBrief(v){const d=D(v.niche),g=k=>(v.etapes[k]?.txt||"").trim(),seo=g("seo");
+ const pick=re=>(seo.match(re)||[])[1]?.trim()||"";
+ const mot=pick(/MOT-CL[ÉE] PRINCIPAL\s*:\s*(.+)/i),ecran=pick(/TEXTE [ÉE]CRAN PLAN 1\s*:\s*(.+)/i),fic=pick(/NOM DU FICHIER\s*:\s*(.+)/i)||slug(mot||v.sujet)+".mp4";
+ return`Fais une vidéo TikTok verticale avec OpenMontage.
+
+FORMAT
+- Vertical 9:16, 1080x1920, 30 fps.
+- Voix off accélérée à 1,3x (réglage de Lucas). Durée finale, APRÈS accélération : entre 1 min 01 et 1 min 10 (monétisation Creator Rewards : jamais moins de 61 s).
+- Langue : français.
+
+BUDGET : 0 €
+- Uniquement des outils gratuits : voix Piper en français, images et vidéos libres (Archive.org, Wikimedia Commons, NASA, Pexels, Pixabay, Unsplash), musique libre de droits, montage Remotion.
+- Ne lance AUCUN fournisseur payant sans me demander d'abord.
+- N'utilise JAMAIS Higgsfield (outil higgsfield_video), même si une clé existe.
+
+VOIX OFF (à lire mot pour mot, ne pas réécrire)
+${g("script")||"(le script n'est pas encore écrit)"}
+
+STYLE VISUEL (${d.nom})
+${d.visu}
+Aucun texte incrusté dans les images elles-mêmes.
+
+VISUELS PRÉVUS (à suivre dans l'ordre, remplacer par des images libres proches si besoin)
+${g("visuels")||"(pas encore de visuels : choisis des images libres qui collent au script)"}
+
+TEXTE À L'ÉCRAN
+- Sous-titres mot à mot, gros, centrés, contour noir.
+- Plan 1 : afficher « ${ecran||mot||"le hook"} » en grand pendant les 3 premières secondes.
+
+SEO
+- Mot-clé principal : ${mot||"(voir l'agent SEO)"} — il doit être dit dans les 3 premières secondes.
+
+LIVRAISON
+- Nomme le fichier final ${fic}
+- Copie-le dans ../../${omDossier(v)}/video.mp4
+- Montre-moi le storyboard avant le rendu final.`}
+function omCard(v){if(!OM.includes(v.niche))return"";const ok=v.etapes.script?.st==="done";
+ return`<div class="step ${ok?"done":""}" id="s-openmontage" style="--c:var(--c-${v.niche});margin-top:12px"><div class="sh"><div class="who"><span class="o">🎞️</span><div><b>Monty</b><small>OpenMontage — monteur IA gratuit sur ton PC : il fabrique la vidéo complète à partir de ce brief.</small></div></div>
+  <div class="btns" style="margin:0;align-items:center"><span class="state mono ${ok?"done":"wait"}">${ok?"Brief prêt":"Attend le script"}</span>
+   <button class="btn sm" data-omcopy="1" ${ok?"":"disabled"}>Copier le brief</button>
+   ${downloads?`<button class="btn sm sec" data-omdl="1" ${ok?"":"disabled"}>⬇ brief.md</button>`:""}</div></div>
+  <textarea readonly style="min-height:160px;font-size:.85rem">${esc(ok?omBrief(v):"Le brief s'écrit tout seul dès que l'agent Script a fini.")}</textarea>
+  <p class="hint">Sur ton PC : 1) ouvre Claude Code dans <code>04_atelier\\OpenMontage</code> (pas encore installé ? double-clique <code>04_atelier\\installer-openmontage.bat</code>) · 2) colle le brief · 3) valide le storyboard · 4) la vidéo arrive dans <code>${esc(omDossier(v))}</code>.</p></div>`;
+}
+
+/* ===================== Agents (Claude) ===================== */
+function base(v,agent){const d=D(v.niche);
+ return`Tu es l'agent ${AG[agent].nom} de l'Usine à TikTok de Lucas : vidéos TikTok sans visage en français, monétisées par le Creator Rewards (la vidéo doit durer au moins 1 min 01).
+Niche : ${d.nom}. Règles de la niche : ${d.rules}
+Sujet : ${v.sujet}${v.count?`\n${d.count} : ${v.count}`:""}
+Réponds en français, en texte brut sans markdown (pas de **, pas de #), directement le livrable, sans phrase d'introduction.`}
+function prev(v,a){return(v.etapes[a]?.txt||"").trim()}
+function promptFor(v,a,ins){const d=D(v.niche);let p;
+ if(a==="angle")p=`${base(v,a)}\n\nTâche : propose 3 hooks (15 mots max chacun), chacun avec un angle viral différent. Format :\n1. hook — angle en 5 mots\n2. …\n3. …\nRecommandé : n — raison en une phrase.`;
+ if(a==="script")p=`${base(v,a)}\n\nAngle et hooks :\n${prev(v,"angle")}\n\nTâche : écris la voix off complète, 210 à 230 mots (la voix sera accélérée à 1,3x : il faut au moins 1 min 02 APRÈS accélération), français oral, phrases courtes. Commence par le hook recommandé, mot pour mot. Rien d'autre que le texte à dire${v.niche==="countryball"?" (avec le texte écran entre crochets avant chaque phrase, comme dans les règles)":""}.`;
+ if(a==="seo")p=`${base(v,a)}\n\nScript :\n${prev(v,"script")}\n\nMots-clés de départ pour cette niche : ${d.kw.join(", ")}.${Object.keys(MEM.kw||{}).length?`\nVerdicts de l'Analyste sur les mots-clés : ${JSON.stringify(MEM.kw)}`:""}\n\nTâche : SEO TikTok. Choisis 1 mot-clé principal (2-4 mots, comme une personne le taperait dans la recherche) et 2 secondaires. Le mot-clé principal doit être dit dans les 3 premières secondes, écrit à l'écran au plan 1, au début du titre, dans la description et dans les hashtags. Livre exactement :\nMOT-CLÉ PRINCIPAL : …\nSECONDAIRES : …, …\nPHRASE VOIX OFF (0-3 s) : … (réécris la 1re phrase du script si elle ne contient pas le mot-clé)\nTEXTE ÉCRAN PLAN 1 : …\nTITRE : … (70 caractères max)\nHASHTAGS : 5 hashtags français (1 large, 2 précis, 1 format, 1 communauté), pas de #fyp\nNOM DU FICHIER : mot-cle-principal.mp4`;
+ if(a==="visuels")p=`${base(v,a)}\n\nScript :\n${prev(v,"script")}\n\nConsignes visuels : ${d.visu}\n\nTâche : liste numérotée dans l'ordre du script. Pour chaque ligne : le passage du script entre guillemets, puis le prompt (en anglais) ou le plan.`;
+ if(a==="montage")p=`${base(v,a)}\n\nScript :\n${prev(v,"script")}\n\nSEO :\n${prev(v,"seo")}\n\nVisuels :\n${prev(v,"visuels")}\n\nTâche : produis le pack de montage en JSON valide, et RIEN d'autre (pas de texte autour, pas de \`\`\`). Format exact :\n{"niche":"${v.niche}","titre":"…","duree":62,"voix":"Henri","scenes":[{"visuel":1,"texte_ecran":"2 À 4 MOTS","voix_off":"phrase du script","prompt_image":"prompt anglais ou plan du clip"}]}\nRègles : 14 à 20 scènes, toute la voix off du script répartie dans l'ordre (une ou deux phrases par scène), texte_ecran en MAJUSCULES sans crochets, le texte écran de la scène 1 contient le mot-clé principal, prompt_image repris des Visuels (avec "no text" à la fin pour les images).`;
+ if(a==="publication")p=`${base(v,a)}\n\nScript :\n${prev(v,"script")}\n\nSEO :\n${prev(v,"seo")}\n\nTâche : texte de publication TikTok. Livre exactement :\nTITRE : … (70 caractères max, commence par le mot-clé principal)\nDESCRIPTION : 2 phrases naturelles avec le mot-clé principal et 1 secondaire, puis une question qui pousse à commenter.\nHASHTAGS : les 5 du SEO\nÉPINGLER EN COMMENTAIRE : une phrase qui relance la discussion.`;
+ if(ins)p+=`\n\nVersion précédente :\n${prev(v,a)}\n\nConsigne de Lucas pour cette nouvelle version : ${ins}`;
+ return p}
+function cmdFor(v,a){return`CEO, vidéo ${D(v.niche).nom} sur « ${v.sujet} » : lance l'agent ${AG[a].nom}.`}
+
+function setStep(v,a,patch){v.etapes[a]={...(v.etapes[a]||{}),...patch};const box=$("#s-"+a);
+ if(box&&patch.txt!==undefined&&patch.st==="run"){const ta=box.querySelector("textarea");if(ta){ta.value=patch.txt;ta.scrollTop=ta.scrollHeight}}
+ else if(!$("#v-atelier").hidden)renderAtelier();
+ if(!$("#v-centre").hidden&&(patch.st&&patch.txt===undefined||patch.st==="done"||patch.st==="err"))renderCentre()}
+async function runAgent(v,a,ins){
+ if(!sample){copy(cmdFor(v,a));toast("Commande copiée : colle-la à Claude Code");return false}
+ abort=new AbortController();setStep(v,a,{st:"run",err:""});
+ if(!$("#v-atelier").hidden)renderAtelier();
+ try{const r=await sample(promptFor(v,a,ins),{signal:abort.signal,cache:false,onText:({text})=>setStep(v,a,{st:"run",txt:text})});
+  let txt=(r.text||"").trim();
+  if(a==="montage"){txt=txt.replace(/^```(?:json)?\s*|\s*```$/g,"");try{txt=JSON.stringify(JSON.parse(txt),null,2)}catch(_){setStep(v,a,{st:"err",txt,err:"Le pack n'est pas un JSON valide : relance l'agent Montage."});saveVid(v,1);return false}}
+  setStep(v,a,{st:"done",txt});saveVid(v,1);return true}
+ catch(e){const m=e?.name==="AbortError"||e?.code==="aborted"?"Arrêté.":e?.code==="rate_limited"?"Trop de demandes d'un coup : attends une minute puis relance.":e?.code==="not_granted"?"Autorisation refusée : accepte la demande de Claude pour lancer les agents.":(e?.message||"Erreur");
+  setStep(v,a,{st:"err",txt:e?.text||v.etapes[a]?.txt||"",err:m});saveVid(v,1);return false}}
+async function runChain(v,from=0){if(running)return;
+ if(!sample){copy(`CEO, fais une vidéo ${D(v.niche).nom} sur : ${v.sujet}`);toast("Commande copiée : colle-la à Claude Code");return}
+ running=v.id;renderAll();
+ for(const a of CHAIN.slice(from)){if(running!==v.id)break;const ok=await runAgent(v,a);if(!ok)break}
+ running=null;abort=null;renderAll();
+ if(CHAIN.every(a=>v.etapes[a]?.st==="done"))toast("Vidéo prête : génère les images puis monte-la")}
+
+/* ===================== Vidéos & mémoire ===================== */
+function renderVideos(){
+ const L=[...V].sort((a,b)=>(b.cree||0)-(a.cree||0));
+ $("#vlist").innerHTML=L.length?L.map(v=>{const d=D(v.niche);return`<div class="vid" style="--c:var(--c-${v.niche})">
+  <div><b>${d.ic} ${esc(v.titre||v.sujet)}</b><small>${d.nom} · ${new Date(v.date+"T12:00").toLocaleDateString("fr-FR")} · <span class="tagS ${v.statut==="postee"?"posted":v.statut==="prete"?"ready":""}">${v.statut==="postee"?"Postée":v.statut==="prete"?"Prête":"En production"}</span>${v.motcle?` · 🔎 ${esc(v.motcle)}`:""}</small></div>
+  <div class="acts"><button class="btn sm sec" data-open="${v.id}">Ouvrir</button>${v.statut!=="postee"?`<button class="btn sm sec" data-post="${v.id}">Postée ✓</button>`:""}<button class="btn sm sec" data-del="${v.id}" title="Supprimer">✕</button></div>
+  ${v.statut==="postee"?`<div class="stats"><input type="number" min="0" placeholder="Vues" value="${esc(v.vues??"")}" data-vues="${v.id}"><input type="number" min="0" step="0.01" placeholder="Gains €" value="${esc(v.gains??"")}" data-gains="${v.id}"><small>Mets à jour après 48 h et après 7 jours.</small></div>`:""}
+ </div>`}).join(""):`<div class="empty"><h2>Pas encore de vidéo</h2><p>Lance ta première depuis le Command Center.</p></div>`;
+ $("#bilan").textContent=MEM.bilan||"Pas encore de bilan.";
+ const k=Object.entries(MEM.kw||{});
+ $("#kw").textContent=k.length?k.map(([a,b])=>`${b==="ok"?"✅":"❌"} ${a}`).join("\n"):"L'Analyste remplira cette liste après tes premières stats.";
+ $("#analyse").disabled=!!running;
+}
+async function analyse(){
+ const P=V.filter(v=>v.statut==="postee");
+ if(!P.length){toast("Marque d'abord une vidéo comme postée et entre ses vues");return}
+ if(!sample){copy("CEO, lance l'Analyste : fais le bilan de mes vidéos et marque les mots-clés ✅/❌.");toast("Commande copiée pour Claude Code");return}
+ const btn=$("#analyse");btn.disabled=true;btn.textContent="L'Analyste lit tes stats…";
+ const rows=P.map(v=>({niche:D(v.niche).nom,titre:v.titre||v.sujet,mot_cle:v.motcle||"",date:v.date,vues:+v.vues||0,gains:+v.gains||0}));
+ try{const r=await sample.json(`Tu es l'Analyste de l'Usine à TikTok de Lucas (TikTok sans visage, Creator Rewards). Voici ses vidéos postées (JSON) :\n${JSON.stringify(rows)}\n\nRéponds en JSON valide uniquement : {"bilan":"texte en français, 6 lignes max, sans markdown : ce qui marche le mieux (niche, type de sujet), ce qui ne marche pas, puis une ligne DÉCISION : une seule action pour la semaine.","mots_cles":{"mot-clé":"ok" ou "ko"}}. Un mot-clé est ok si sa vidéo fait nettement mieux que la moyenne. Ne note que les mots-clés présents dans les données.`,{cache:false});
+  const o=typeof r==="string"?JSON.parse(r):r;MEM.bilan=o.bilan||"";MEM.kw={...(MEM.kw||{}),...(o.mots_cles||{})};MEM.date=today();saveMem();toast("Bilan mis à jour")}
+ catch(e){toast(e?.code==="rate_limited"?"Trop de demandes : réessaie dans une minute":"L'Analyste n'a pas pu répondre, réessaie")}
+ btn.disabled=false;btn.textContent="Lancer l'Analyste";renderVideos()}
+
+/* ===================== Aujourd'hui ===================== */
+function renderJour(){const s=stats();
+ $("#jtitre").textContent=new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"}).replace(/^./,c=>c.toUpperCase())+".";
+ const L=[["Nettoyage auto n°1",s.net>=1,"nettoyage"],["Nettoyage auto n°2",s.net>=2,"nettoyage"],["Tier list flippante",s.tier>=1,"tierlist"],["Countryball",s.ball>=1,"countryball"]];
+ const nx=L.findIndex(x=>!x[1]);
+ $("#jwarn").innerHTML=s.nonPost>4?`<div class="warn">${s.nonPost} vidéos non postées : on arrête de produire, on poste.</div>`:"";
+ $("#day").innerHTML=L.map(([n,ok,id],i)=>`<div class="dstep ${ok?"ok":i===nx?"next":""}"><span class="n">${ok?"✓":i+1}</span><div><b>${n}</b><small>${ok?"Faite":i===nx?"C'est maintenant":"Plus tard"}</small></div>${!ok&&i===nx?`<button class="btn sm" data-new="${id}">Lancer</button>`:""}</div>`).join("")
+  +(nx===-1?`<div class="dstep ok"><span class="n">★</span><div><b style="text-decoration:none;color:var(--ok)">Fini pour aujourd'hui</b><small>Poste tes vidéos, puis repos.</small></div></div>`:"")}
+
+function renderAll(){renderCentre();if(!$("#v-atelier").hidden)renderAtelier();if(!$("#v-videos").hidden)renderVideos();if(!$("#v-jour").hidden)renderJour();$("#b-atelier").hidden=!running}
+function show(v){$$(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v));["centre","atelier","videos","jour"].forEach(x=>$("#v-"+x).hidden=x!==v);
+ ({centre:renderCentre,atelier:renderAtelier,videos:renderVideos,jour:renderJour})[v]();scrollTo({top:0})}
+
+/* ===================== Dialogues ===================== */
+function dialog(html,onSubmit){const f=$("#dform");f.innerHTML=html;const d=$("#dlg");d.showModal();
+ f.onsubmit=e=>{if(e.submitter?.value==="cancel")return;e.preventDefault();if(onSubmit(new FormData(f))!==false)d.close()};
+ setTimeout(()=>f.querySelector("textarea,input")?.focus(),30)}
+function coach(id){const s=stats();
+ if(s.nonPost>4)return`Tu as ${s.nonPost} vidéos créées non postées. La règle : on arrête de produire, on poste.`;
+ if(id!=="nettoyage"&&s.net<2)return`Il manque ${2-s.net} vidéo(s) de nettoyage auto aujourd'hui. La règle : pas d'autre niche avant.`;
+ if(id==="stoicisme"||id==="finance"){if(s.tier<1||s.ball<1)return"Aujourd'hui le plan c'est 1 tier list + 1 countryball après les nettoyages.";}
+ if(s.net>=2&&s.tier>=1&&s.ball>=1)return"La journée est finie selon tes règles. Tu veux vraiment en faire une de plus ?";
+ return""}
+function newVideo(id,force){const d=D(id),w=coach(id);
+ if(w&&!force){dialog(`<h3>🧠 Le CEO t'arrête</h3><p>${esc(w)}</p><div class="btns"><button class="btn" value="ok">${id!=="nettoyage"&&stats().net<2&&stats().nonPost<=4?"Faire un nettoyage auto":"OK, je reviens au plan"}</button><button class="btn sec" value="force" id="force">Y aller quand même</button></div>`,
+  ()=>{if(stats().nonPost>4){show("videos")}else if(id!=="nettoyage"&&stats().net<2)setTimeout(()=>newVideo("nettoyage"),50)});
+  $("#force").onclick=e=>{e.preventDefault();$("#dlg").close();setTimeout(()=>newVideo(id,true),50)};return}
+ dialog(`<h3>${d.ic} Nouvelle vidéo · ${d.nom}</h3><p>${d.chef} et son équipe écrivent tout : angle, script, SEO, visuels, pack de montage, publication.</p>
+  <label for="f-sujet">${id==="nettoyage"?"Décris ton clip (la voiture, la saleté, la surprise)":"Ton sujet"}</label><textarea id="f-sujet" name="sujet" required placeholder="${esc(d.ph)}"></textarea>
+  ${d.count?`<label for="f-count">${d.count}</label><input id="f-count" name="count" type="number" min="1" max="30" value="${d.cdef}">`:""}
+  <div class="btns"><button class="btn" value="ok">▶ Lancer l'équipe</button><button class="btn sec" value="cancel" formnovalidate>Annuler</button></div>`,
+  fd=>{const sujet=(fd.get("sujet")||"").trim();if(!sujet)return false;
+   const v={id:"v"+Date.now().toString(36),niche:id,sujet,count:fd.get("count")||"",date:today(),cree:Date.now(),statut:"prod",etapes:{}};
+   V.push(v);curId=v.id;saveVid(v,1);show("atelier");runChain(v)})}
+function info(html){dialog(html+`<div class="btns"><button class="btn sec" value="cancel">Fermer</button></div>`,()=>{})}
+
+/* ===================== Clics ===================== */
+document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;const v=cur();
+ if(t.closest(".tabs")&&t.dataset.v)return show(t.dataset.v);
+ if(t.dataset.go)return show(t.dataset.go);
+ if(t.dataset.new){if(running){toast("Une équipe travaille déjà : attends ou arrête-la");show("atelier");return}return newVideo(t.dataset.new)}
+ if(t.dataset.ag){const a=t.dataset.ag,d=D(t.dataset.d);
+  if(a==="analyste")return show("videos");
+  if(a==="openmontage"&&!(v&&v.niche===d.id&&OM.includes(d.id)))return info(`<h3>🎞️ Monty · ${d.nom}</h3><p>${AG.openmontage.role}</p>
+   <p>${OM.includes(d.id)?"Lance une vidéo dans ce département : dès que le script est écrit, l'Atelier prépare le brief à coller dans OpenMontage.":d.id==="countryball"?"Le countryball garde son propre moteur de rendu (render_countryball.py), déjà réglé sur ton format.":"Le nettoyage auto se monte sur tes propres clips dans CapCut, avec la voix off du Script."}</p>
+   <p>Installation sur ton PC : double-clique <code>04_atelier\\installer-openmontage.bat</code>, puis ouvre Claude Code dans <code>04_atelier\\OpenMontage</code>.</p>`);
+  if(v&&v.niche===d.id){show("atelier");setTimeout(()=>$("#s-"+a)?.scrollIntoView({behavior:"smooth",block:"center"}),60);return}
+  return info(`<h3>${AG[a].ic} ${AG[a].nom} · ${d.nom}</h3><p>${AG[a].role}</p><p>Aucune vidéo ${d.nom} en cours. Lance-en une pour mettre cette équipe au travail.</p><div class="btns" style="margin-top:0"><button class="btn" type="button" data-new="${d.id}" onclick="document.getElementById('dlg').close()">+ Nouvelle vidéo ${d.nom}</button></div>`)}
+ if(t.id==="n-ceo"){const s=stats();return info(`<h3>🧠 CEO · Claude</h3><p>Je dirige l'usine et je fais respecter tes règles.</p><p>${esc($(".msg span")?.textContent||"")}</p><p>Vidéos non postées : ${s.nonPost}. Aujourd'hui : ${s.net} nettoyage(s), ${s.tier} tier list, ${s.ball} countryball.</p>`)}
+ if(t.id==="n-founder")return info(`<h3>👑 Lucas · Fondateur</h3><p>Tu décides. Le CEO dirige, les agents écrivent. Ton job : fournir les clips et les images, poster, et entrer tes stats dans « Vidéos &amp; mémoire ».</p>`);
+ if(t.id==="mem")return show("videos");
+ if(t.id==="runall"&&v){const from=CHAIN.every(a=>v.etapes[a]?.st==="done")?0:Math.max(0,CHAIN.findIndex(a=>v.etapes[a]?.st!=="done"));return runChain(v,from)}
+ if(t.id==="stop"){running=null;abort?.abort();toast("Équipe arrêtée");return renderAll()}
+ if(t.id==="copyall"&&v)return copy(CHAIN.filter(a=>v.etapes[a]?.txt).map(a=>`=== ${AG[a].nom.toUpperCase()} ===\n${v.etapes[a].txt}`).join("\n\n"));
+ if(t.id==="mark"&&v){v.statut=v.statut==="prete"?"postee":"prete";saveVid(v,1);renderAll();return toast(v.statut==="postee"?"Postée ! Entre ses stats dans Vidéos & mémoire":"Prête à poster")}
+ if(t.dataset.run&&v){const a=t.dataset.run,ins=t.dataset.withins?$(`[data-ins="${a}"]`)?.value.trim():"";if(t.dataset.withins&&!ins){toast("Écris d'abord ta consigne");return}
+  running=v.id;renderAll();runAgent(v,a,ins).then(()=>{running=null;abort=null;renderAll()});return}
+ if(t.dataset.copy&&v)return copy(v.etapes[t.dataset.copy]?.txt||"");
+ if(t.dataset.omcopy&&v)return copy(omBrief(v));
+ if(t.dataset.omdl&&v){downloads.save({filename:"brief-openmontage.md",data:omBrief(v)}).catch(()=>toast("Téléchargement annulé"));return}
+ if(t.dataset.dl&&v){const data=v.etapes.montage?.txt||"";if(downloads){downloads.save({filename:"pack.json",data}).catch(()=>toast("Téléchargement annulé"))}else{copy(data);toast("Téléchargement indisponible : pack copié")}return}
+ if(t.dataset.open){curId=t.dataset.open;lsSave();return show("atelier")}
+ if(t.dataset.post){const x=V.find(y=>y.id===t.dataset.post);x.statut="postee";saveVid(x,1);renderAll();return toast("Postée ✓ Entre ses vues dans 48 h")}
+ if(t.dataset.del){const x=V.find(y=>y.id===t.dataset.del);
+  dialog(`<h3>Supprimer cette vidéo ?</h3><p>${esc(x.sujet)}</p><div class="btns"><button class="btn" value="ok" style="background:var(--bad)">Supprimer</button><button class="btn sec" value="cancel">Annuler</button></div>`,
+   ()=>{V=V.filter(y=>y.id!==x.id);if(curId===x.id)curId=null;delVid(x.id);renderAll()});return}
+ if(t.id==="analyse")return analyse();
+});
+document.addEventListener("input",e=>{const t=e.target,v=cur();
+ if(t.dataset.ed&&v){v.etapes[t.dataset.ed]={...(v.etapes[t.dataset.ed]||{}),txt:t.value,st:v.etapes[t.dataset.ed]?.st||"done"};extract(v);saveVid(v)}
+ if(t.dataset.vues||t.dataset.gains){const x=V.find(y=>y.id===(t.dataset.vues||t.dataset.gains));if(t.dataset.vues)x.vues=t.value;else x.gains=t.value;saveVid(x);renderCentre()}});
+function extract(v){const s=v.etapes.seo?.txt||"",p=v.etapes.publication?.txt||"";
+ const m=s.match(/MOT-CL[ÉE] PRINCIPAL\s*:\s*(.+)/i);if(m)v.motcle=m[1].trim();
+ const ti=p.match(/TITRE\s*:\s*(.+)/i)||s.match(/TITRE\s*:\s*(.+)/i);if(ti)v.titre=ti[1].trim()}
+const _setStep=setStep;setStep=function(v,a,p){_setStep(v,a,p);if(p.st==="done")extract(v)};
+
+/* ===================== Démarrage ===================== */
+lsLoad();renderCentre();(document.fonts?.ready||Promise.resolve()).then(draw);
+(async()=>{if(!window.claude?.use)return;
+ const [s,d,u,dl]=await Promise.all(["sample","db","user","downloads"].map(n=>claude.use(n).catch(()=>null)));
+ sample=s;downloads=dl;
+ if(sample){$("#live").classList.remove("off");$("#live").textContent="Live"}
+ if(d&&u){try{uid=await u.id()}catch(_){}
+  if(uid){db=d;const to=setTimeout(()=>toast("Chargement en ligne lent, données du navigateur affichées"),10000);
+   try{const snap=await db.collection("data/users/"+uid+"/videos").get();clearTimeout(to);
+    const rows=(snap.docs||snap||[]).map(x=>typeof x.data==="function"?x.data():x).filter(x=>x&&x.id);
+    if(rows.length){const ids=new Set(rows.map(r=>r.id));V=[...rows,...V.filter(x=>!ids.has(x.id))]}else V.forEach(x=>saveVid(x,1));
+    const m=await db.doc("data/users/"+uid+"/meta/memoire").get();const md=m&&(typeof m.data==="function"?m.data():m);if(md&&md.bilan!==undefined)MEM=md;
+    if(curId&&!V.find(x=>x.id===curId))curId=null;
+   }catch(_){clearTimeout(to)}}}
+ V.forEach(v=>CHAIN.forEach(a=>{if(v.etapes[a]?.st==="run")v.etapes[a].st=v.etapes[a].txt?"err":"";}));
+ renderAll()})();
+</script>
+</body>
+</html>
