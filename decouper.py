@@ -14,6 +14,7 @@ rotation pour varier les images) et ambiance lumineuse.
 Sorties :
   scenes.json  id, texte, mouvement, format, prompt + negative_prompt (prêts à coller dans Higgsfield)…
   prompts.txt  tous les prompts d'images de l'épisode + les 9 tuiles de l'intro
+  prompts_chatgpt.txt  les mêmes, en messages prêts à coller un par un dans ChatGPT
 
 Usage : python decouper.py --episode 01_mesopotamie
 """
@@ -128,8 +129,9 @@ class Composeur:
         if variante and variante not in c_costume["variantes"]:
             sys.exit(f"ERREUR : {sc['id']} : variante « {variante} » absente de la bible pour "
                      f"{c_costume['id']} (disponibles : {', '.join(c_costume['variantes']) or 'aucune'})")
-        costume = c_costume["variantes"][variante] if variante else c_costume["costume"]
-        objet = sc.get("objet")
+        var = c_costume["variantes"][variante] if variante else {}
+        costume = var.get("costume") or c_costume["costume"]
+        objet = sc.get("objet") or var.get("objet")
         if not objet:
             objet = c_costume["objets"][self.rot_objet % len(c_costume["objets"])]
             self.rot_objet += 1
@@ -224,6 +226,52 @@ def ecrire_prompts(dossier, episode, scenes, civ_id, log) -> None:
     log.info("Écrit : %s", dossier / "prompts.txt")
 
 
+def ecrire_prompts_chatgpt(dossier, episode, scenes, civ_id, log) -> None:
+    """Version « ChatGPT » : un message d'installation du style, puis un message à coller par image."""
+    civ = CIVS[civ_id]
+    images = [s for s in scenes if s["prompt"]]
+    fmt = {"9:16": "vertical portrait format (9:16, tall image)",
+           "16:9": "wide horizontal landscape format (16:9, wide image)"}
+    L = [f"PROMPTS POUR CHATGPT — épisode {episode}", "=" * 70, "",
+         "MODE D'EMPLOI",
+         "1. Ouvre une NOUVELLE conversation ChatGPT (une par épisode, pour garder le même style).",
+         "2. Colle le MESSAGE 0, puis chaque MESSAGE dans l'ordre, un par un. Attends l'image avant le suivant.",
+         f"3. Télécharge chaque image et enregistre-la sous episodes/{episode}/images/<nom indiqué>.",
+         "   (ChatGPT sort du 2:3 ou du 3:2 : c'est normal, render.py recadre tout seul.)",
+         "4. Si ChatGPT ajoute du texte dans l'image ou change le style : réponds",
+         "   « Regenerate: no text at all, same style as the first images ».",
+         "5. Les 9 tuiles de l'intro : dans une AUTRE conversation (section en bas du fichier).", "",
+         "=" * 70, "", "MESSAGE 0 (à coller en premier)", "-" * 70,
+         "I'm going to ask you for a series of illustrations for a short vertical video about the "
+         f"{civ['nom_en']} civilization. Generate one image per message, without asking me "
+         "questions. Keep exactly the same art style in every image: highly detailed 2D cartoon illustration, "
+         "premium children's book style, characters are countryballs (perfectly round balls with a thick black "
+         "outline, big expressive white cartoon eyes, no mouth, white cartoon gloves as hands) wearing full, "
+         "richly detailed historical costumes with fabric, metal, leather and jewelry textures. Rich historical "
+         "backgrounds with three layers of depth, strong atmospheric lighting, soft depth of field, vibrant warm "
+         "colors. The main character is always the same: a countryball dressed in a "
+         f"{civ['costume']}. Keep the lower third of each image darker and less busy. Never put any readable "
+         "text, letters, numbers or watermark in the images (inscriptions must be decorative and illegible). "
+         "Reply \"OK\" and wait for my first image request.", "", "=" * 70, ""]
+    for n, s in enumerate(images, 1):
+        L += [f"MESSAGE {n}/{len(images)}  —  enregistrer sous : {s['id']}.png  —  ({s['mouvement']})",
+              f"Voix off : {s['texte']}", "-" * 70,
+              f"Image {n}/{len(images)}, {fmt[s['format']]}. {s['prompt']} Avoid: {s['negative_prompt']}.",
+              "", "=" * 70, ""]
+    L += ["", "TUILES DE L'INTRO — dans une autre conversation, format carré", "=" * 70, "",
+          "MESSAGE 0 (tuiles)", "-" * 70,
+          "I'm going to ask you for 9 square tiles for a poster, one per message, without asking me questions. "
+          "Same style for all: highly detailed 2D cartoon illustration, premium children's book style, a "
+          "countryball (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) "
+          "shown as a bust in full detailed historical costume, its signature monument small and faded behind "
+          "it, solid flat colored background. No text at all. Reply \"OK\" and wait.", "", "=" * 70, ""]
+    for n, c in enumerate(CIVILISATIONS, 1):
+        L += [f"TUILE {n}/9  —  enregistrer sous : assets/tuiles/{c['id']}.png", "-" * 70,
+              f"Tile {n}/9, square format (1:1). {prompt_tuile(c)} Avoid: {NEGATIF_TUILE}.", "", "=" * 70, ""]
+    (dossier / "prompts_chatgpt.txt").write_text("\n".join(L), encoding="utf-8")
+    log.info("Écrit : %s (%d messages image + 9 tuiles)", dossier / "prompts_chatgpt.txt", len(images))
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--episode", required=True, help="nom du dossier dans episodes/, ex. 01_mesopotamie")
@@ -279,6 +327,7 @@ def main() -> None:
     sortie.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     log.info("Écrit : %s", sortie)
     ecrire_prompts(dossier, args.episode, scenes, civ, log)
+    ecrire_prompts_chatgpt(dossier, args.episode, scenes, civ, log)
 
 
 if __name__ == "__main__":

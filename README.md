@@ -21,7 +21,8 @@ D'un épisode à l'autre, seuls changent le script, les illustrations et la tuil
         ├── script.txt   # texte de la voix off
         ├── plan.json    # plan de scènes (ancres, mouvements, action/objet/décor de chaque image)
         ├── scenes.json  # généré par decouper.py
-        ├── prompts.txt  # généré : prompts d'images à coller dans Higgsfield
+        ├── prompts.txt  # généré : prompts d'images (+ negative prompts)
+        ├── prompts_chatgpt.txt  # généré : les mêmes, en messages à coller un par un dans ChatGPT
         ├── voix.mp3     # optionnel (sinon ElevenLabs)
         ├── images/      # scene_01.png … scene_13.png (pas d'image pour les white_screen)
         └── cache/       # voix normalisée, transcription, placeholders (régénérable)
@@ -162,7 +163,15 @@ des scènes illustrées. L'épisode 1 l'a dans 10 scènes sur 12 (83 %). Les deu
   simple background, gradient background, minimalist, empty scene, blurry character ». Les icônes et les
   tuiles ont leur propre negative prompt, adapté au fond uni.
 
-### Produire les images
+### Produire les images avec ChatGPT (gratuit)
+
+`decouper.py` écrit aussi `prompts_chatgpt.txt`. Ouvre une nouvelle conversation ChatGPT par épisode et
+colle d'abord le MESSAGE 0, qui fixe le style et le personnage principal. Colle ensuite chaque MESSAGE dans
+l'ordre, un par un, puis enregistre chaque image sous le nom indiqué. Les tuiles se font dans une autre
+conversation (section en bas du fichier). ChatGPT produit du 2:3 ou du 3:2 au lieu du 9:16 ou du 16:9 :
+c'est sans conséquence, car `render.py` recadre automatiquement et les pans fonctionnent aussi en 3:2.
+
+### Produire les images (autre générateur)
 
 1. Ouvre `episodes/<épisode>/prompts.txt`. Pour chaque image, il donne le PROMPT, le NEGATIVE PROMPT, le
    format (9:16, ou 16:9 pour les `pan_*`) et le nom du fichier à enregistrer.
