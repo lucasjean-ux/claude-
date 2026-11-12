@@ -1,0 +1,229 @@
+{
+  "_doc": "Bible des civilisations. Les champs *_fr sont la référence en français ; les champs en anglais sont injectés dans les prompts par decouper.py. 'decor' : éléments piochés en rotation (2 à 3 par scène). 'variantes' : costumes alternatifs (plan.json -> \"variante\": \"roi\"). 'silhouette' : forme du placeholder.",
+  "ordre": ["mesopotamienne", "egyptienne", "grecque", "romaine", "viking", "chinoise", "maya", "azteque", "inca"],
+  "civilisations": {
+    "mesopotamienne": {
+      "libelle": "MÉSOPOTAMIENNE",
+      "couleur_tuile": "#D8B47A",
+      "couleur_tuile_en": "sandy ochre",
+      "couleur_boule": "#B8683D",
+      "silhouette": "ziggourat",
+      "costume_fr": "jupe en laine à mèches (kaunakès), longue barbe noire bouclée et tressée, cheveux longs bouclés, bracelets en bronze, tablette d'argile ou stylet en roseau",
+      "costume": "Sumerian costume: a woolly tufted kaunakes skirt wrapped around the body, a long curly braided black beard hanging from the lower half of the ball, long curly black hair on top of the ball, shiny bronze bracelets",
+      "objets": ["a small clay tablet covered with decorative cuneiform marks", "a sharpened reed stylus"],
+      "variantes": {
+        "roi": "Sumerian king costume: a royal turban-crown with gold bands on top of the ball, an embroidered woolly kaunakes robe, an embroidered cape flowing behind, a long curly braided black beard, gold and bronze bracelets, holding a golden scepter",
+        "scribe": "Sumerian scribe costume: a simple woolly kaunakes skirt, a shaved head on top of the ball, a short braided black beard, bronze bracelets"
+      },
+      "monument_fr": "la grande ziggourat d'Ur à étages",
+      "monument": "great stepped Ziggurat of Ur with its monumental staircases",
+      "decor_fr": "murailles en briques crues d'Uruk, portes en briques bleues émaillées, palmiers dattiers, Tigre et Euphrate, bateaux en roseau, canaux d'irrigation, champs de blé dorés, marché avec jarres et tablettes",
+      "decor": [
+        "the mud-brick walls of Uruk",
+        "a monumental city gate decorated with glazed blue bricks",
+        "date palm trees",
+        "the winding Tigris and Euphrates rivers",
+        "reed boats on the river",
+        "irrigation canals full of water",
+        "golden wheat fields",
+        "a busy market with clay jars and stacks of clay tablets"
+      ]
+    },
+    "egyptienne": {
+      "libelle": "ÉGYPTIENNE",
+      "couleur_tuile": "#F1BE2C",
+      "couleur_tuile_en": "golden yellow",
+      "couleur_boule": "#C9935A",
+      "silhouette": "pyramides",
+      "costume_fr": "coiffe némès rayée bleu et or, collier ousekh en or et lapis-lazuli, pagne de lin blanc, yeux soulignés de khôl, crosse et fléau, sandales",
+      "costume": "Egyptian pharaoh costume: a blue and gold striped nemes headdress on top of the ball, a wide gold and lapis-lazuli usekh collar around the body, a pleated white linen kilt, eyes lined with black kohl, leather sandals",
+      "objets": ["a golden crook and flail"],
+      "variantes": {
+        "pretre": "Egyptian priest costume: a shaved head on top of the ball, a leopard skin draped over a white linen kilt, a gold collar, eyes lined with black kohl"
+      },
+      "monument_fr": "les trois pyramides de Gizeh avec le Sphinx",
+      "monument": "three Pyramids of Giza with the Great Sphinx",
+      "decor_fr": "le Nil et ses felouques, papyrus et palmiers, obélisques, temple de Karnak, statues de pharaons assis, sable doré, ouvriers tirant des blocs sur des traîneaux",
+      "decor": [
+        "the Nile river with feluccas and white sails",
+        "papyrus reeds and palm trees",
+        "tall obelisks covered with decorative illegible hieroglyphs",
+        "the giant carved columns of the Karnak temple",
+        "colossal seated pharaoh statues",
+        "golden sand dunes",
+        "countryball workers pulling stone blocks on wooden sledges"
+      ]
+    },
+    "grecque": {
+      "libelle": "GRECQUE",
+      "couleur_tuile": "#3C7DD4",
+      "couleur_tuile_en": "bright blue",
+      "couleur_boule": "#F1E3C8",
+      "silhouette": "temple",
+      "costume_fr": "chiton blanc drapé avec himation, couronne de laurier dorée, sandales",
+      "costume": "Ancient Greek costume: a draped white chiton with a blue-bordered himation wrapped around the body, a golden laurel wreath on top of the ball, leather sandals",
+      "objets": ["a painted amphora", "an olive branch"],
+      "variantes": {
+        "hoplite": "Greek hoplite costume: a bronze Corinthian helmet with a tall horsehair crest on top of the ball, a bronze breastplate wrapped around the body, a red cape flowing behind, holding a large round bronze shield and a long spear",
+        "philosophe": "Greek philosopher costume: a white toga-like himation draped around the body, a long grey beard, holding a papyrus scroll"
+      },
+      "monument_fr": "le Parthénon sur l'Acropole",
+      "monument": "Parthenon on top of the Acropolis",
+      "decor_fr": "temples à colonnes blanches, statues de marbre, théâtre en gradins, oliviers, mer Égée turquoise, trirèmes, amphores peintes, agora animée",
+      "decor": [
+        "white-columned temples",
+        "marble statues",
+        "an ancient stepped theater",
+        "olive trees",
+        "the turquoise Aegean Sea",
+        "triremes with oars",
+        "painted amphorae",
+        "a lively agora"
+      ]
+    },
+    "romaine": {
+      "libelle": "ROMAINE",
+      "couleur_tuile": "#C7302E",
+      "couleur_tuile_en": "crimson red",
+      "couleur_boule": "#F1D9A6",
+      "silhouette": "arches",
+      "costume_fr": "casque galea à crête rouge, lorica segmentata, tunique et cape rouges, scutum rouge et or, glaive, sandales cloutées",
+      "costume": "Roman legionary costume: a shiny steel galea helmet with a red horsehair crest on top of the ball, segmented lorica armor wrapped around the body, a red tunic, a red cape flowing behind, hobnailed sandals",
+      "objets": ["a red and gold curved scutum shield and a gladius sword"],
+      "variantes": {
+        "empereur": "Roman emperor costume: a white toga with a purple stripe draped around the body, a golden laurel wreath on top of the ball"
+      },
+      "monument_fr": "le Colisée",
+      "monument": "Colosseum",
+      "decor_fr": "aqueducs, forum à colonnes, arc de triomphe, aigle dorée, voies pavées, pins parasols, légion en tortue, chars",
+      "decor": [
+        "a stone aqueduct in the distance",
+        "a columned forum",
+        "a triumphal arch",
+        "a golden eagle standard",
+        "a cobblestone road",
+        "umbrella pines",
+        "a legion of countryballs in tortoise formation",
+        "racing chariots"
+      ]
+    },
+    "viking": {
+      "libelle": "VIKING",
+      "couleur_tuile": "#6B8197",
+      "couleur_tuile_en": "slate grey-blue",
+      "couleur_boule": "#E2C79C",
+      "silhouette": "drakkar",
+      "costume_fr": "casque rond en fer sans cornes, cotte de mailles, tunique en laine, cape en fourrure, ceinture en cuir, hache danoise, bouclier rond peint, barbe et tresses blondes ou rousses",
+      "costume": "Viking costume: a round iron helmet with a nose guard and no horns on top of the ball, a chainmail shirt over a wool tunic, a thick fur cape flowing behind, a worn leather belt, a braided blond or red beard and long braids",
+      "objets": ["a Dane axe and a round painted wooden shield"],
+      "variantes": {},
+      "monument_fr": "un drakkar à tête de dragon dans un fjord",
+      "monument": "dragon-headed longship sailing in a fjord",
+      "decor_fr": "montagnes enneigées, maisons longues au toit d'herbe, pierres runiques (illisibles), feux de camp, forêt de sapins, aurore boréale",
+      "decor": [
+        "snowy mountains",
+        "longhouses with grass roofs",
+        "carved runestones with decorative illegible runes",
+        "campfires",
+        "a dark fir forest",
+        "a green aurora borealis in the night sky"
+      ]
+    },
+    "chinoise": {
+      "libelle": "CHINOISE",
+      "couleur_tuile": "#7A1D2B",
+      "couleur_tuile_en": "deep burgundy",
+      "couleur_boule": "#E8C38F",
+      "silhouette": "pagode",
+      "costume_fr": "robe impériale hanfu jaune brodée de dragons, chapeau impérial à rideau de perles (mianguan), ceinture de jade",
+      "costume": "Chinese imperial costume: a yellow hanfu robe embroidered with golden dragons wrapped around the body, a mianguan imperial hat with bead curtains on top of the ball, a jade belt",
+      "objets": ["a jade tablet", "a red paper lantern"],
+      "variantes": {
+        "guerrier": "Chinese warrior costume like the terracotta army: lamellar armor wrapped around the body, a topknot on top of the ball, holding a bronze halberd"
+      },
+      "monument_fr": "la Grande Muraille serpentant sur les montagnes",
+      "monument": "Great Wall of China winding over the mountains",
+      "decor_fr": "Cité interdite aux toits dorés, pagodes, lanternes rouges, dragons dorés sculptés, montagnes dans la brume, bambous, pont en pierre, armée de terre cuite",
+      "decor": [
+        "the Forbidden City with golden curved roofs",
+        "multi-tiered pagodas",
+        "red lanterns",
+        "carved golden dragons",
+        "misty mountains",
+        "bamboo groves",
+        "an arched stone bridge",
+        "rows of the terracotta army"
+      ]
+    },
+    "maya": {
+      "libelle": "MAYA",
+      "couleur_tuile": "#2E9C72",
+      "couleur_tuile_en": "jade green",
+      "couleur_boule": "#C27A45",
+      "silhouette": "pyramide_etagee",
+      "costume_fr": "coiffe de plumes de quetzal vertes, bouchons d'oreilles et collier en jade, pagne brodé, cape en peau de jaguar, peintures corporelles",
+      "costume": "Maya noble costume: a huge headdress of green quetzal feathers on top of the ball, jade ear spools and a jade necklace, an embroidered loincloth, a jaguar-skin cape flowing behind, colorful body paint",
+      "objets": ["a carved jade scepter", "a rubber ball"],
+      "variantes": {},
+      "monument_fr": "la pyramide El Castillo de Chichén Itzá",
+      "monument": "El Castillo pyramid of Chichen Itza",
+      "decor_fr": "pyramides de Tikal dans la jungle, stèles sculptées, terrain de jeu de balle, lianes, cascades, brume tropicale, toucans et aras",
+      "decor": [
+        "the pyramids of Tikal rising above the jungle",
+        "carved stone stelae",
+        "a ball court with stone rings",
+        "hanging lianas",
+        "waterfalls",
+        "tropical mist",
+        "toucans and macaws"
+      ]
+    },
+    "azteque": {
+      "libelle": "AZTÈQUE",
+      "couleur_tuile": "#27B2AE",
+      "couleur_tuile_en": "turquoise",
+      "couleur_boule": "#B5663A",
+      "silhouette": "double_temple",
+      "costume_fr": "guerrier aigle ou jaguar, coiffe de plumes vertes et dorées, bouclier à plumes (chimalli), macuahuitl, bijoux en or et turquoise",
+      "costume": "Aztec eagle warrior costume: an eagle-head helmet with green and golden feathers on top of the ball, a feathered suit wrapped around the body, gold and turquoise jewelry",
+      "objets": ["a round feathered chimalli shield and an obsidian-bladed macuahuitl"],
+      "variantes": {
+        "jaguar": "Aztec jaguar warrior costume: a jaguar-head helmet on top of the ball, a spotted jaguar-skin suit wrapped around the body, green and golden feathers, gold and turquoise jewelry"
+      },
+      "monument_fr": "le Templo Mayor à double sanctuaire, au cœur de Tenochtitlan",
+      "monument": "Templo Mayor with its twin shrines at the heart of Tenochtitlan",
+      "decor_fr": "cité sur le lac, chaussées, canoës sur les canaux, chinampas, marchés colorés, volcans enneigés",
+      "decor": [
+        "the city built on the lake",
+        "long stone causeways",
+        "canoes on the canals",
+        "floating chinampa gardens",
+        "a colorful market",
+        "snow-capped volcanoes in the distance"
+      ]
+    },
+    "inca": {
+      "libelle": "INCA",
+      "couleur_tuile": "#EF8A22",
+      "couleur_tuile_en": "warm orange",
+      "couleur_boule": "#C98A4B",
+      "silhouette": "terrasses",
+      "costume_fr": "llautu avec frange rouge (mascapaicha), bouchons d'oreilles en or, tunique unku géométrique, cape en vigogne, sceptre en or",
+      "costume": "Inca emperor costume: a royal llautu headband with a red mascapaicha fringe on top of the ball, large golden ear spools, an unku tunic with geometric patterns wrapped around the body, a vicuna wool cape flowing behind",
+      "objets": ["a golden scepter"],
+      "variantes": {},
+      "monument_fr": "le Machu Picchu et ses terrasses",
+      "monument": "Machu Picchu with its stone terraces",
+      "decor_fr": "sommets des Andes enneigés, murs de pierres ajustées, ponts de corde, lamas, condor, temple du Soleil doré, champs en terrasses",
+      "decor": [
+        "snowy Andes peaks",
+        "perfectly fitted stone walls",
+        "a rope bridge over a gorge",
+        "llamas",
+        "a condor soaring in the sky",
+        "the golden Temple of the Sun",
+        "terraced fields"
+      ]
+    }
+  }
+}

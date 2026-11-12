@@ -23,6 +23,62 @@ TITRE = ["TOUTES LES CIVILISATIONS", "EXPLIQUÉES"]
 SOUS_TITRE = "Et leurs plus grandes inventions."
 
 
+def silhouette_monument(taille: int, forme: str) -> Image.Image:
+    """Silhouette simplifiée du monument signature (masque L, 255 = plein) pour les placeholders."""
+    m = Image.new("L", (taille, taille), 0)
+    d = ImageDraw.Draw(m)
+    t = taille
+    sol = t * 0.72
+    if forme in ("ziggourat", "pyramide_etagee", "double_temple"):
+        for k in range(4):
+            demi, h = t * (0.36 - 0.07 * k), t * 0.09
+            y = sol - h * (k + 1)
+            d.rectangle((t / 2 - demi, y, t / 2 + demi, y + h), fill=255)
+        haut = sol - t * 0.36
+        if forme == "pyramide_etagee":
+            d.rectangle((t * 0.43, haut - t * 0.08, t * 0.57, haut), fill=255)
+        elif forme == "double_temple":
+            d.rectangle((t * 0.33, haut - t * 0.08, t * 0.47, haut), fill=255)
+            d.rectangle((t * 0.53, haut - t * 0.08, t * 0.67, haut), fill=255)
+        else:
+            d.rectangle((t * 0.47, sol - t * 0.36, t * 0.53, sol), fill=0)  # escalier central
+    elif forme == "pyramides":
+        for cx, demi in ((0.3, 0.2), (0.62, 0.26), (0.85, 0.13)):
+            d.polygon([(t * (cx - demi), sol), (t * cx, sol - t * demi * 1.3), (t * (cx + demi), sol)], fill=255)
+    elif forme == "temple":
+        d.rectangle((t * 0.15, sol - t * 0.05, t * 0.85, sol), fill=255)
+        for k in range(6):
+            x = t * (0.19 + 0.12 * k)
+            d.rectangle((x, sol - t * 0.33, x + t * 0.05, sol - t * 0.05), fill=255)
+        d.rectangle((t * 0.15, sol - t * 0.38, t * 0.85, sol - t * 0.33), fill=255)
+        d.polygon([(t * 0.15, sol - t * 0.38), (t * 0.5, sol - t * 0.52), (t * 0.85, sol - t * 0.38)], fill=255)
+    elif forme == "arches":
+        d.rectangle((t * 0.1, sol - t * 0.42, t * 0.9, sol), fill=255)
+        for lig in range(3):
+            for k in range(7):
+                x, y = t * (0.14 + 0.108 * k), sol - t * (0.38 - 0.13 * lig)
+                d.rounded_rectangle((x, y, x + t * 0.06, y + t * 0.1), radius=int(t * 0.03), fill=0)
+    elif forme == "drakkar":
+        d.chord((t * 0.1, sol - t * 0.25, t * 0.9, sol + t * 0.05), 0, 180, fill=255)
+        d.rectangle((t * 0.49, sol - t * 0.55, t * 0.52, sol - t * 0.1), fill=255)
+        d.polygon([(t * 0.32, sol - t * 0.5), (t * 0.68, sol - t * 0.5), (t * 0.64, sol - t * 0.18),
+                   (t * 0.36, sol - t * 0.18)], fill=255)
+        d.polygon([(t * 0.86, sol - t * 0.1), (t * 0.9, sol - t * 0.32), (t * 0.97, sol - t * 0.3)], fill=255)
+    elif forme == "pagode":
+        for k in range(4):
+            demi, y = t * (0.3 - 0.05 * k), sol - t * 0.12 * (k + 1)
+            d.polygon([(t / 2 - demi - t * 0.04, y + t * 0.03), (t / 2, y - t * 0.05),
+                       (t / 2 + demi + t * 0.04, y + t * 0.03)], fill=255)
+            d.rectangle((t / 2 - demi * 0.7, y + t * 0.03, t / 2 + demi * 0.7, y + t * 0.12), fill=255)
+    elif forme == "terrasses":
+        d.polygon([(t * 0.05, sol), (t * 0.45, sol - t * 0.5), (t * 0.62, sol - t * 0.3),
+                   (t * 0.75, sol - t * 0.42), (t * 0.95, sol)], fill=255)
+        for k in range(4):
+            y = sol - t * 0.07 * (k + 1)
+            d.line((t * (0.12 + 0.06 * k), y, t * (0.88 - 0.04 * k), y), fill=0, width=max(1, t // 80))
+    return m
+
+
 def _tuile(civ: dict, taille: int, log) -> Image.Image:
     """Image carrée de la tuile (sans coins arrondis)."""
     chemin = trouver_image(DOSSIER_TUILES, civ["id"])
@@ -31,12 +87,16 @@ def _tuile(civ: dict, taille: int, log) -> Image.Image:
         return ImageOps.fit(img, (taille, taille), Image.LANCZOS)
     log.warning("Tuile manquante : %s -> placeholder", civ["id"])
     img = Image.new("RGB", (taille, taille), hex_rgb(civ["fond"]))
+    # monument signature en petit, en transparence légère
+    masque = silhouette_monument(taille, civ.get("silhouette", "ziggourat")).point(lambda v: v * 70 // 255)
+    img.paste((255, 255, 255), (0, int(-taille * 0.12)), masque)
     # léger glow derrière la boule
     glow = Image.new("L", (taille, taille), 0)
-    ImageDraw.Draw(glow).ellipse((taille * 0.15, taille * 0.1, taille * 0.85, taille * 0.8), fill=90)
+    ImageDraw.Draw(glow).ellipse((taille * 0.12, taille * 0.4, taille * 0.88, taille * 1.1), fill=80)
     glow = glow.filter(ImageFilter.GaussianBlur(taille * 0.08))
     img.paste((255, 250, 230), (0, 0), glow)
-    dessiner_boule(img, taille / 2, taille * 0.46, taille * 0.3, civ["boule"])
+    # countryball en buste : coupée par le bas de la tuile
+    dessiner_boule(img, taille / 2, taille * 0.86, taille * 0.36, civ["boule"])
     return img
 
 
@@ -64,7 +124,6 @@ def dessiner_affiche(echelle: float = 1.0) -> Image.Image:
     d.text((W / 2, y - interligne + 70 * echelle), SOUS_TITRE, font=f_sous, fill=(135, 135, 135), anchor="ms")
 
     # --- grille 3x3
-    f_lib = police("Poppins-ExtraBold.ttf", int(30 * echelle))
     for civ in CIVILISATIONS:
         x, yt, t = layout_tuiles(echelle)[civ["id"]]
         x, yt, t = round(x), round(yt), round(t)

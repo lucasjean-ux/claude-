@@ -6,6 +6,7 @@ mise en page de l'affiche d'intro, blocs de style pour les prompts d'images, dé
 from __future__ import annotations
 
 import hashlib
+import json
 import logging
 import os
 import re
@@ -139,44 +140,22 @@ def police(fichier: str, taille: int) -> ImageFont.FreeTypeFont:
 
 
 # --------------------------------------------------------------------------- civilisations
-# Ordre de lecture de la grille 3x3 de l'affiche.
-CIVILISATIONS = [
-    {"id": "mesopotamienne", "libelle": "MÉSOPOTAMIENNE", "fond": "#D8B47A", "boule": "#B8683D",
-     "fond_en": "sandy ochre",
-     "perso": "a clay-colored (terracotta) countryball with a long neatly braided black beard, "
-              "holding a small cuneiform clay tablet with a white cartoon glove"},
-    {"id": "egyptienne", "libelle": "ÉGYPTIENNE", "fond": "#F1BE2C", "boule": "#2C5BB8",
-     "fond_en": "golden yellow",
-     "perso": "a countryball wearing a blue and gold striped nemes headdress, with an Eye of Horus "
-              "painted on its skin"},
-    {"id": "grecque", "libelle": "GRECQUE", "fond": "#3C7DD4", "boule": "#F4F4F4",
-     "fond_en": "bright blue",
-     "perso": "a white and blue countryball wearing a golden laurel wreath, standing next to a small "
-              "white marble Greek column"},
-    {"id": "romaine", "libelle": "ROMAINE", "fond": "#C7302E", "boule": "#F1D9A6",
-     "fond_en": "crimson red",
-     "perso": "a countryball wearing a shiny Roman legionary helmet with a tall red crest"},
-    {"id": "viking", "libelle": "VIKING", "fond": "#6B8197", "boule": "#E2C79C",
-     "fond_en": "slate grey-blue",
-     "perso": "a countryball wearing a round iron Viking helmet with a nose guard, long blond braids, "
-              "holding a Viking axe with a white cartoon glove"},
-    {"id": "chinoise", "libelle": "CHINOISE", "fond": "#7A1D2B", "boule": "#D9412E",
-     "fond_en": "deep burgundy",
-     "perso": "a red countryball whose skin is covered in golden dragon scales, wearing a black "
-              "imperial Chinese hat"},
-    {"id": "maya", "libelle": "MAYA", "fond": "#2E9C72", "boule": "#C27A45",
-     "fond_en": "jade green",
-     "perso": "a countryball wearing a tall colorful feathered headdress, next to a round carved stone "
-              "Maya calendar"},
-    {"id": "azteque", "libelle": "AZTÈQUE", "fond": "#27B2AE", "boule": "#B5663A",
-     "fond_en": "turquoise",
-     "perso": "a countryball wearing a headdress of long green quetzal feathers, with a small green "
-              "feathered serpent coiled around it"},
-    {"id": "inca", "libelle": "INCA", "fond": "#EF8A22", "boule": "#C98A4B",
-     "fond_en": "warm orange",
-     "perso": "a countryball wearing a golden sun crown, standing next to a small cute white llama"},
-]
-CIVS = {c["id"]: c for c in CIVILISATIONS}
+FICHIER_BIBLE = ASSETS / "civilisations.json"
+
+
+def charger_bible() -> dict:
+    """Bible des civilisations (assets/civilisations.json) : costume, monument, décor, couleurs."""
+    data = json.loads(FICHIER_BIBLE.read_text(encoding="utf-8"))
+    civs = {}
+    for cid in data["ordre"]:
+        c = dict(data["civilisations"][cid])
+        c.update(id=cid, fond=c["couleur_tuile"], boule=c["couleur_boule"])
+        civs[cid] = c
+    return civs
+
+
+CIVS = charger_bible()
+CIVILISATIONS = list(CIVS.values())  # ordre de lecture de la grille 3x3
 
 # --------------------------------------------------------------------------- mise en page de l'affiche
 MARGE_X_GRILLE = 72
@@ -198,64 +177,86 @@ def layout_tuiles(echelle: float = 1.0) -> dict:
     return res
 
 
-# --------------------------------------------------------------------------- style des prompts (anglais)
-STYLE_BASE = (
-    "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a "
-    "thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows "
-    "or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, "
-    "accessories are symbolic, hands (when present) are white cartoon gloves. "
-)
-STYLE_FOND_CHAUD = (
-    "Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft "
-    "drop shadow under the characters, subtle glow and small floating light particles. "
-)
-STYLE_FOND_NUIT = (
-    "Deep navy-blue starry night background, simple flat-color ground, soft drop shadow under the "
-    "characters, subtle glow and small floating light particles. "
-)
-CADRAGE_VERTICAL = (
-    "Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept "
-    "clear and uncluttered (reserved for subtitles). "
-)
-CADRAGE_PAN = {
-    "pan_right": "Wide horizontal 16:9 panorama. The character stands in the far LEFT third of the "
-                 "image; the center and right part show only scenery, so a camera pan to the right "
-                 "leaves the character out of frame. Keep the bottom quarter simple. ",
-    "pan_left": "Wide horizontal 16:9 panorama. The character stands in the far RIGHT third of the "
-                "image; the center and left part show only scenery, so a camera pan to the left "
-                "leaves the character out of frame. Keep the bottom quarter simple. ",
-}
-SANS_TEXTE = "Absolutely no text, no letters, no numbers, no watermark, no signature."
-SANS_TEXTE_SAUF_CHIFFRES = "No words, no letters, no watermark (only the digits explicitly described)."
+# --------------------------------------------------------------------------- modèles de prompts (anglais)
+ENTETE = "Highly detailed 2D cartoon illustration, premium children's book style"
+BOULE = ("perfectly round ball, thick black outline, big expressive white cartoon eyes{expr}, no mouth")
+AMBIANCE = ("atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, "
+            "metal and stone")
+FIN = "No text, no letters, no watermark."
+LUMIERES = [
+    "golden hour sunlight with volumetric light rays and dust floating in the air",
+    "misty dawn light with soft volumetric rays and a richly painted cloudy sky",
+    "warm sunset glow with dramatic clouds and drifting smoke",
+    "flickering torchlight with a warm glow and floating embers",
+    "starry night with silver moonlight and warm torchlight",
+]
+NEGATIF_SCENE = ("text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple "
+                 "background, gradient background, minimalist, empty scene, blurry character")
+NEGATIF_ICONE = ("text, letters, words, numbers, watermark, character, countryball, human, landscape, "
+                 "scenery, busy background, gradient background, flat minimalist icon")
+NEGATIF_TUILE = ("text, letters, words, watermark, realistic human, human body, legs, mouth, busy "
+                 "background, blurry character")
 
 
-CADRAGE_OUTRO = (
-    "Vertical 9:16 framing. The symbols float in the upper half of the image; the main character is "
-    "small, at the bottom center of the image, with a calm uncluttered area around it. "
-)
+def _liste(elements: list[str]) -> str:
+    elements = [e for e in elements if e]
+    if len(elements) <= 1:
+        return "".join(elements)
+    return ", ".join(elements[:-1]) + " and " + elements[-1]
 
 
-def prompt_scene(sujet: str, mouvement: str, nuit: bool = False, chiffres: bool = False,
-                 outro: bool = False) -> str:
-    fin = SANS_TEXTE_SAUF_CHIFFRES if chiffres else SANS_TEXTE
-    if mouvement == "icon_dark":
-        return (
-            f"Single isolated icon: {sujet}. Flat 2D cartoon vector style with a thick black outline and "
-            "simple cel shading, centered in the frame, on a plain solid dark charcoal background "
-            "(#22272E) with a soft warm luminous halo glowing behind the icon. Nothing else in the "
-            f"image. Vertical 9:16, icon centered slightly above the middle. {fin}"
-        )
-    fond = STYLE_FOND_NUIT if nuit else STYLE_FOND_CHAUD
-    cadrage = CADRAGE_OUTRO if outro else CADRAGE_PAN.get(mouvement, CADRAGE_VERTICAL)
-    return f"{STYLE_BASE}Scene: {sujet}. {fond}{cadrage}{fin}"
+def prompt_personnage(*, mouvement: str, costume: str, action: str, objet: str, monument: str,
+                      decor: list[str], lumiere: str, expression: str = "", habitants: str = "",
+                      position_monument: str = "", premier_plan: str = "") -> str:
+    """Modèle principal : countryball en costume complet dans un décor historique à trois profondeurs."""
+    expr = f" {expression}" if expression else ""
+    habitants = habitants or "other small countryball inhabitants in period costumes"
+    if mouvement == "pan_right":
+        fmt = "wide horizontal 16:9 panorama"
+        pos = position_monument or "clearly visible in the background on the RIGHT side of the panorama"
+        cadrage = ("The character stands in the far LEFT third of the panorama; the center and right part "
+                   "reveal the scenery and the monument, so a slow camera pan to the right lets the "
+                   "character leave the frame and ends on the monument. Lower third darker and less busy.")
+    elif mouvement == "pan_left":
+        fmt = "wide horizontal 16:9 panorama"
+        pos = position_monument or "clearly visible in the background on the LEFT side of the panorama"
+        cadrage = ("The character stands in the far RIGHT third of the panorama; the center and left part "
+                   "reveal the scenery and the monument, so a slow camera pan to the left lets the "
+                   "character leave the frame and ends on the monument. Lower third darker and less busy.")
+    else:
+        fmt = "vertical 9:16"
+        pos = position_monument or "clearly visible behind the character"
+        cadrage = "Character centered in upper half, lower third darker and less busy."
+    pp = f" ({premier_plan})" if premier_plan else ""
+    return (f"{ENTETE}, {fmt}. A countryball character ({BOULE.format(expr=expr)}) dressed in a full "
+            f"detailed {costume}, {action}, white cartoon gloves holding {objet}. Rich detailed historical "
+            f"background with the {monument} {pos}, plus {_liste(decor)}, {habitants} in the midground, "
+            f"layered depth with foreground props{pp}, {lumiere}, {AMBIANCE}. {cadrage} {FIN}")
+
+
+def prompt_icone(objet: str) -> str:
+    return (f"{ENTETE}, vertical 9:16. A single isolated, richly detailed object: {objet}. Detailed "
+            "textures (wood grain, worn metal, clay, carved details), thick black cartoon outline, soft "
+            "shading, centered slightly above the middle of the frame, on a plain solid dark charcoal "
+            "background (#22272E) with a soft warm luminous halo glowing behind the object. Nothing else "
+            f"in the image. {FIN}")
+
+
+def prompt_recap(*, symboles: list[str], monument: str, costume: str, lumiere: str) -> str:
+    return (f"{ENTETE}, vertical 9:16. Recap composition: {_liste(symboles)} float and glow in a golden "
+            f"sky in the upper half of the image, with the {monument} rising majestic into the golden sky in the background. At the "
+            f"bottom center, a small countryball character ({BOULE.format(expr=' with a proud half-moon smile')}) "
+            f"dressed in a full detailed {costume}, looking up at them. {lumiere[:1].upper() + lumiere[1:]}, {AMBIANCE}. "
+            f"Symbols in the upper half, lower third slightly darker and calm. {FIN}")
 
 
 def prompt_tuile(civ: dict) -> str:
-    return (
-        f"{STYLE_BASE}Square 1:1 tile, solid flat {civ['fond_en']} background ({civ['fond']}). "
-        f"A single character perfectly centered: {civ['perso']}. Soft drop shadow under the ball, "
-        f"subtle glow. Clean, iconic, readable at small size. {SANS_TEXTE}"
-    )
+    return (f"{ENTETE}, square 1:1 tile. Bust portrait of a countryball character "
+            f"({BOULE.format(expr='')}) dressed in a full detailed {civ['costume']}, holding "
+            f"{civ['objets'][0]} with white cartoon gloves, centered, the ball cut at chest level by the "
+            f"bottom edge. Behind it, the {civ['monument']} drawn small, semi-transparent and faded like a "
+            f"soft low-contrast silhouette, on a solid flat {civ['couleur_tuile_en']} background "
+            f"({civ['couleur_tuile']}). Soft rim light, clean and readable at small size. {FIN}")
 
 
 # --------------------------------------------------------------------------- texte -> mots

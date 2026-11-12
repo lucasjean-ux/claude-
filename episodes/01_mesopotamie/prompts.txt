@@ -8,84 +8,132 @@ Enregistrer chaque image sous episodes/01_mesopotamie/images/<id>.png
 ### scene_01  —  impact_zoom  —  format 9:16  —  fichier : images/scene_01.png
 Texte : Et si la toute première civilisation de l'histoire n'était pas l'Égypte ?
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: the Egyptian countryball (golden skin, blue and gold striped nemes headdress) looking very surprised with wide-open eyes and raised eyebrows, pyramids in the background, while the large shadow of the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) looms over it from the side. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, vertical 9:16. A countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes wide open in surprise with raised eyebrows, no mouth) dressed in a full detailed Egyptian pharaoh costume: a blue and gold striped nemes headdress on top of the ball, a wide gold and lapis-lazuli usekh collar around the body, a pleated white linen kilt, eyes lined with black kohl, leather sandals, turning around in shock as the huge shadow of a bearded Sumerian countryball falls over it, white cartoon gloves holding a golden crook and flail. Rich detailed historical background with the three Pyramids of Giza with the Great Sphinx clearly visible behind the character, plus the Nile river with feluccas and white sails, papyrus reeds and palm trees and tall obelisks covered with decorative illegible hieroglyphs, other small countryball inhabitants in period costumes in the midground, layered depth with foreground props, warm sunset glow with dramatic clouds and drifting sand, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. Character centered in upper half, lower third darker and less busy. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
 ### scene_02  —  push_in  —  format 9:16  —  fichier : images/scene_02.png
 Texte : Il y a plus de cinq mille ans, entre deux fleuves, le Tigre et l'Euphrate, naît un peuple qui va changer le monde : les Sumériens.
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) standing proudly on fertile land between two winding bright blue rivers, at sunrise, the sun rising behind it, palm trees and reeds along the rivers. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, vertical 9:16. A countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes with a proud half-moon smile, no mouth) dressed in a full detailed Sumerian costume: a woolly tufted kaunakes skirt wrapped around the body, a long curly braided black beard hanging from the lower half of the ball, long curly black hair on top of the ball, shiny bronze bracelets, standing on a grassy hill at sunrise, the Tigris and the Euphrates winding behind it, white cartoon gloves holding a sharpened reed stylus. Rich detailed historical background with the great stepped Ziggurat of Ur with its monumental staircases small in the far distance between the two rivers, plus the winding Tigris and Euphrates rivers, date palm trees and reed boats on the river, other small countryball inhabitants in period costumes in the midground, layered depth with foreground props, misty dawn light with the rising sun, soft volumetric rays and a richly painted cloudy sky, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. Character centered in upper half, lower third darker and less busy. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
-### scene_03  —  pan_right  —  format 16:9  —  fichier : images/scene_03.png
+### scene_03  —  pan_left  —  format 16:9  —  fichier : images/scene_03.png
 Texte : Les Grecs appelleront cette terre la Mésopotamie, le pays entre les fleuves.
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: a vast fertile valley seen from a low hill: two winding blue rivers (the Tigris and the Euphrates) run side by side across a golden plain; a white and blue Greek countryball with a golden laurel wreath stands on the hill and points at the land with a white cartoon glove. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Wide horizontal 16:9 panorama. The character stands in the far LEFT third of the image; the center and right part show only scenery, so a camera pan to the right leaves the character out of frame. Keep the bottom quarter simple. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, wide horizontal 16:9 panorama. A countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes half-closed with a wise look, no mouth) dressed in a full detailed Greek philosopher costume: a white toga-like himation draped around the body, a long grey beard, holding a papyrus scroll, standing on a rocky hill and pointing at the fertile land between two rivers, white cartoon gloves holding a papyrus scroll. Rich detailed historical background with the great stepped Ziggurat of Ur with its monumental staircases clearly visible in the background on the LEFT side of the panorama, plus the winding Tigris and Euphrates rivers, golden wheat fields and date palm trees, other small countryball inhabitants in period costumes in the midground, layered depth with foreground props, golden hour sunlight with volumetric light rays and dust floating in the air, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. The character stands in the far RIGHT third of the panorama; the center and left part reveal the scenery and the monument, so a slow camera pan to the left lets the character leave the frame and ends on the monument. Lower third darker and less busy. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
 ### scene_04  —  pan_right  —  format 16:9  —  fichier : images/scene_04.png
 Texte : Au départ, ce n'est qu'une plaine aride. Mais les Sumériens creusent des canaux, irriguent la terre, et les récoltes explosent.
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: a landscape that transforms from one side to the other: a dry cracked arid plain where the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) digs a canal with a wooden hoe, then straight irrigation canals full of blue water and lush golden wheat fields swaying under the sun. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Wide horizontal 16:9 panorama. The character stands in the far LEFT third of the image; the center and right part show only scenery, so a camera pan to the right leaves the character out of frame. Keep the bottom quarter simple. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, wide horizontal 16:9 panorama. A countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes with a determined frown, no mouth) dressed in a full detailed Sumerian costume: a woolly tufted kaunakes skirt wrapped around the body, a long curly braided black beard hanging from the lower half of the ball, long curly black hair on top of the ball, shiny bronze bracelets, standing on a dry cracked arid plain on the left, while on the right other countryballs dig irrigation canals, white cartoon gloves holding a wooden hoe. Rich detailed historical background with the great stepped Ziggurat of Ur with its monumental staircases small on the far RIGHT horizon, plus irrigation canals full of water, golden wheat fields and date palm trees, countryball farmers in kaunakes skirts digging canals and carrying baskets in the midground, layered depth with foreground props, misty dawn light with soft volumetric rays and a richly painted cloudy sky, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. The character stands in the far LEFT third of the panorama; the center and right part reveal the scenery and the monument, so a slow camera pan to the right lets the character leave the frame and ends on the monument. Lower third darker and less busy. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
 ### scene_05  —  push_in  —  format 9:16  —  fichier : images/scene_05.png
 Texte : Les villages deviennent des villes. Uruk compte bientôt des dizaines de milliers d'habitants : c'est l'une des premières grandes cités du monde.
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: the city of Uruk seen from a distance: thick mud-brick walls with gates, flat-roofed houses, a temple on a terrace, and many tiny clay-colored countryball inhabitants walking around, warm afternoon light. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, vertical 9:16. A countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Sumerian costume: a woolly tufted kaunakes skirt wrapped around the body, a long curly braided black beard hanging from the lower half of the ball, long curly black hair on top of the ball, shiny bronze bracelets, standing on a hill overlooking the city of Uruk, white cartoon gloves holding a small clay tablet covered with decorative cuneiform marks. Rich detailed historical background with the great stepped Ziggurat of Ur with its monumental staircases rising at the center of the city behind the character, plus the mud-brick walls of Uruk, a monumental city gate decorated with glazed blue bricks and narrow streets full of countryball inhabitants, crowds of small countryball inhabitants in kaunakes skirts walking, trading and carrying jars in the midground, layered depth with foreground props, warm sunset glow with dramatic clouds and drifting smoke, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. Character centered in upper half, lower third darker and less busy. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
 ### scene_07  —  impact_zoom  —  format 9:16  —  fichier : images/scene_07.png
 Texte : Alors, vers 3300 avant notre ère, ils gravent des signes dans l'argile avec un roseau. C'est l'écriture cunéiforme, l'une des plus anciennes de l'humanité.
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: extreme close-up of a white cartoon glove holding a sharpened reed stylus and pressing wedge-shaped cuneiform marks into a soft wet clay tablet, small clay crumbs, warm golden light. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, vertical 9:16. A countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes half-closed in deep concentration, no mouth) dressed in a full detailed Sumerian scribe costume: a simple woolly kaunakes skirt, a shaved head on top of the ball, a short braided black beard, bronze bracelets, sitting cross-legged in a scribe workshop lit by oil lamps, white cartoon gloves holding a sharpened reed stylus pressing wedge-shaped decorative cuneiform marks into a wet clay tablet. Rich detailed historical background with the great stepped Ziggurat of Ur with its monumental staircases visible through a wide open doorway behind the character, plus shelves stacked with clay tablets and large clay jars, apprentice scribe countryballs copying tablets in the midground, layered depth with foreground props, flickering oil-lamp light with a warm glow, dust floating in the light beams, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. Character centered in upper half, lower third darker and less busy. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
 ### scene_08  —  icon_dark  —  format 9:16  —  fichier : images/scene_08.png
 Texte : Ils sont aussi parmi les premiers à utiliser la roue, ils rédigent les plus anciennes lois écrites connues,
 
-Single isolated icon: an ancient solid wooden wheel made of three planks held together with wooden crossbars, with a small axle hole in the center. Flat 2D cartoon vector style with a thick black outline and simple cel shading, centered in the frame, on a plain solid dark charcoal background (#22272E) with a soft warm luminous halo glowing behind the icon. Nothing else in the image. Vertical 9:16, icon centered slightly above the middle. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, vertical 9:16. A single isolated, richly detailed object: an ancient solid wooden Sumerian chariot wheel made of three carved planks held together by wooden crossbars, with copper nails and a central axle hole. Detailed textures (wood grain, worn metal, clay, carved details), thick black cartoon outline, soft shading, centered slightly above the middle of the frame, on a plain solid dark charcoal background (#22272E) with a soft warm luminous halo glowing behind the object. Nothing else in the image. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, numbers, watermark, character, countryball, human, landscape, scenery, busy background, gradient background, flat minimalist icon
 
 ----------------------------------------------------------------------
 
 ### scene_09  —  icon_dark  —  format 9:16  —  fichier : images/scene_09.png
 Texte : et ils comptent en base soixante. C'est pour ça qu'aujourd'hui encore une heure fait soixante minutes, et un cercle trois cent soixante degrés.
 
-Single isolated icon: a round golden clock whose dial shows only the number 60 at the top, surrounded by a thin graduated circle with 360 small tick marks like a protractor. Flat 2D cartoon vector style with a thick black outline and simple cel shading, centered in the frame, on a plain solid dark charcoal background (#22272E) with a soft warm luminous halo glowing behind the icon. Nothing else in the image. Vertical 9:16, icon centered slightly above the middle. No words, no letters, no watermark (only the digits explicitly described).
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, vertical 9:16. A single isolated, richly detailed object: a round clock dial made of golden baked clay, marked with 60 carved graduations, surrounded by a thin engraved graduated circle, no digits. Detailed textures (wood grain, worn metal, clay, carved details), thick black cartoon outline, soft shading, centered slightly above the middle of the frame, on a plain solid dark charcoal background (#22272E) with a soft warm luminous halo glowing behind the object. Nothing else in the image. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, numbers, watermark, character, countryball, human, landscape, scenery, busy background, gradient background, flat minimalist icon
 
 ----------------------------------------------------------------------
 
 ### scene_10  —  pan_left  —  format 16:9  —  fichier : images/scene_10.png
 Texte : Au cœur de chaque ville se dresse une ziggourat, une immense tour à étages dédiée aux dieux.
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: a huge stepped ziggurat with several terraced levels and a long central staircase, a small temple at the top, at sunset with an orange and red sky; the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) stands at the foot of the ziggurat, looking up at it. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Wide horizontal 16:9 panorama. The character stands in the far RIGHT third of the image; the center and left part show only scenery, so a camera pan to the left leaves the character out of frame. Keep the bottom quarter simple. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, wide horizontal 16:9 panorama. A countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes looking up in awe, no mouth) dressed in a full detailed Sumerian costume: a woolly tufted kaunakes skirt wrapped around the body, a long curly braided black beard hanging from the lower half of the ball, long curly black hair on top of the ball, shiny bronze bracelets, standing at the foot of the great ziggurat, white cartoon gloves holding a sharpened reed stylus. Rich detailed historical background with the great stepped Ziggurat of Ur with its monumental staircases towering on the LEFT side of the panorama, plus a sacred procession on the monumental staircase, date palm trees and torches burning on the terraces, countryball priests in white robes climbing the steps in the midground, layered depth with foreground props, warm sunset glow with dramatic orange and red clouds and drifting incense smoke, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. The character stands in the far RIGHT third of the panorama; the center and left part reveal the scenery and the monument, so a slow camera pan to the left lets the character leave the frame and ends on the monument. Lower third darker and less busy. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
 ### scene_11  —  push_in  —  format 9:16  —  fichier : images/scene_11.png
 Texte : Et c'est sur leurs tablettes qu'apparaît Gilgamesh, le héros du plus vieux grand récit de l'humanité.
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: Gilgamesh as a heroic countryball: clay-colored skin, a golden royal crown, a long curly braided black beard, determined frowning eyes, facing a big roaring cartoon lion, epic warm lighting. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, vertical 9:16. A countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes with heroic frowning eyebrows, no mouth) dressed in a full detailed Sumerian king costume: a royal turban-crown with gold bands on top of the ball, an embroidered woolly kaunakes robe, an embroidered cape flowing behind, a long curly braided black beard, gold and bronze bracelets, holding a golden scepter, playing the hero Gilgamesh with a golden crown and a flowing cape, bravely facing a huge roaring cartoon lion in a dense cedar forest, white cartoon gloves holding a bronze sword. Rich detailed historical background with the great stepped Ziggurat of Ur with its monumental staircases far in the distance beyond the cedar forest, plus giant cedar trees and rays of light through the branches, small countryball warriors watching from behind the trees in the midground, layered depth with foreground props, volumetric light rays through the forest canopy with floating dust, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. Character centered in upper half, lower third darker and less busy. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
 ### scene_12  —  impact_zoom  —  format 9:16  —  fichier : images/scene_12.png
 Texte : Pourtant, vers 2300 avant notre ère, le roi Sargon d'Akkad conquiert leurs cités. Sumer s'efface peu à peu…
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: an army of Akkadian countryballs with bronze helmets and spears, led by King Sargon (a bigger countryball with a tall golden crown and a braided beard), marching toward a Sumerian mud-brick city, dramatic red sky. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, vertical 9:16. A countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes with a fierce conqueror frown, no mouth) dressed in a full detailed Sumerian king costume: a royal turban-crown with gold bands on top of the ball, an embroidered woolly kaunakes robe, an embroidered cape flowing behind, a long curly braided black beard, gold and bronze bracelets, holding a golden scepter, playing King Sargon of Akkad, leading a charging army in front of the walls of a burning Sumerian city, white cartoon gloves holding a golden scepter raised high. Rich detailed historical background with the great stepped Ziggurat of Ur with its monumental staircases behind the burning city walls, partly hidden by smoke, plus the mud-brick walls of Uruk and flames and black smoke rising, an army of Akkadian countryball soldiers with bronze helmets, spears and shields in the midground, layered depth with foreground props, dramatic red sky with fire glow, embers and smoke, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. Character centered in upper half, lower third darker and less busy. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
 ### scene_13  —  push_in  —  format 9:16  —  fichier : images/scene_13.png
 Texte : mais ses inventions, elles, ont survécu jusqu'à vous. Quelle civilisation voulez-vous découvrir ensuite ?
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: a recap composition: a cuneiform clay tablet, a wooden wheel, a stepped ziggurat and a round clock float in the upper half of the image in a soft golden gradient, glowing; the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) appears small at the bottom center, looking up at them with a half-moon smile. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing. The symbols float in the upper half of the image; the main character is small, at the bottom center of the image, with a calm uncluttered area around it. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, vertical 9:16. Recap composition: a cuneiform clay tablet, a solid wooden chariot wheel and a golden clay clock dial with 60 graduations float and glow in a golden sky in the upper half of the image, with the great stepped Ziggurat of Ur with its monumental staircases rising majestic into the golden sky in the background. At the bottom center, a small countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes with a proud half-moon smile, no mouth) dressed in a full detailed Sumerian costume: a woolly tufted kaunakes skirt wrapped around the body, a long curly braided black beard hanging from the lower half of the ball, long curly black hair on top of the ball, shiny bronze bracelets, looking up at them. Golden hour glow with volumetric rays and sparkling particles, atmospheric haze, soft depth of field, vibrant warm colors, detailed textures on fabric, metal and stone. Symbols in the upper half, lower third slightly darker and calm. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, flat simple background, gradient background, minimalist, empty scene, blurry character
 
 ----------------------------------------------------------------------
 
@@ -95,54 +143,90 @@ Enregistrer sous assets/tuiles/<id>.png puis relancer : python generer_intro.py
 
 ### tuile mesopotamienne  —  fichier : assets/tuiles/mesopotamienne.png  <== tuile de cet épisode
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Square 1:1 tile, solid flat sandy ochre background (#D8B47A). A single character perfectly centered: a clay-colored (terracotta) countryball with a long neatly braided black beard, holding a small cuneiform clay tablet with a white cartoon glove. Soft drop shadow under the ball, subtle glow. Clean, iconic, readable at small size. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, square 1:1 tile. Bust portrait of a countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Sumerian costume: a woolly tufted kaunakes skirt wrapped around the body, a long curly braided black beard hanging from the lower half of the ball, long curly black hair on top of the ball, shiny bronze bracelets, holding a small clay tablet covered with decorative cuneiform marks with white cartoon gloves, centered, the ball cut at chest level by the bottom edge. Behind it, the great stepped Ziggurat of Ur with its monumental staircases drawn small, semi-transparent and faded like a soft low-contrast silhouette, on a solid flat sandy ochre background (#D8B47A). Soft rim light, clean and readable at small size. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, busy background, blurry character
 
 ----------------------------------------------------------------------
 
 ### tuile egyptienne  —  fichier : assets/tuiles/egyptienne.png
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Square 1:1 tile, solid flat golden yellow background (#F1BE2C). A single character perfectly centered: a countryball wearing a blue and gold striped nemes headdress, with an Eye of Horus painted on its skin. Soft drop shadow under the ball, subtle glow. Clean, iconic, readable at small size. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, square 1:1 tile. Bust portrait of a countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Egyptian pharaoh costume: a blue and gold striped nemes headdress on top of the ball, a wide gold and lapis-lazuli usekh collar around the body, a pleated white linen kilt, eyes lined with black kohl, leather sandals, holding a golden crook and flail with white cartoon gloves, centered, the ball cut at chest level by the bottom edge. Behind it, the three Pyramids of Giza with the Great Sphinx drawn small, semi-transparent and faded like a soft low-contrast silhouette, on a solid flat golden yellow background (#F1BE2C). Soft rim light, clean and readable at small size. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, busy background, blurry character
 
 ----------------------------------------------------------------------
 
 ### tuile grecque  —  fichier : assets/tuiles/grecque.png
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Square 1:1 tile, solid flat bright blue background (#3C7DD4). A single character perfectly centered: a white and blue countryball wearing a golden laurel wreath, standing next to a small white marble Greek column. Soft drop shadow under the ball, subtle glow. Clean, iconic, readable at small size. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, square 1:1 tile. Bust portrait of a countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Ancient Greek costume: a draped white chiton with a blue-bordered himation wrapped around the body, a golden laurel wreath on top of the ball, leather sandals, holding a painted amphora with white cartoon gloves, centered, the ball cut at chest level by the bottom edge. Behind it, the Parthenon on top of the Acropolis drawn small, semi-transparent and faded like a soft low-contrast silhouette, on a solid flat bright blue background (#3C7DD4). Soft rim light, clean and readable at small size. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, busy background, blurry character
 
 ----------------------------------------------------------------------
 
 ### tuile romaine  —  fichier : assets/tuiles/romaine.png
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Square 1:1 tile, solid flat crimson red background (#C7302E). A single character perfectly centered: a countryball wearing a shiny Roman legionary helmet with a tall red crest. Soft drop shadow under the ball, subtle glow. Clean, iconic, readable at small size. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, square 1:1 tile. Bust portrait of a countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Roman legionary costume: a shiny steel galea helmet with a red horsehair crest on top of the ball, segmented lorica armor wrapped around the body, a red tunic, a red cape flowing behind, hobnailed sandals, holding a red and gold curved scutum shield and a gladius sword with white cartoon gloves, centered, the ball cut at chest level by the bottom edge. Behind it, the Colosseum drawn small, semi-transparent and faded like a soft low-contrast silhouette, on a solid flat crimson red background (#C7302E). Soft rim light, clean and readable at small size. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, busy background, blurry character
 
 ----------------------------------------------------------------------
 
 ### tuile viking  —  fichier : assets/tuiles/viking.png
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Square 1:1 tile, solid flat slate grey-blue background (#6B8197). A single character perfectly centered: a countryball wearing a round iron Viking helmet with a nose guard, long blond braids, holding a Viking axe with a white cartoon glove. Soft drop shadow under the ball, subtle glow. Clean, iconic, readable at small size. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, square 1:1 tile. Bust portrait of a countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Viking costume: a round iron helmet with a nose guard and no horns on top of the ball, a chainmail shirt over a wool tunic, a thick fur cape flowing behind, a worn leather belt, a braided blond or red beard and long braids, holding a Dane axe and a round painted wooden shield with white cartoon gloves, centered, the ball cut at chest level by the bottom edge. Behind it, the dragon-headed longship sailing in a fjord drawn small, semi-transparent and faded like a soft low-contrast silhouette, on a solid flat slate grey-blue background (#6B8197). Soft rim light, clean and readable at small size. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, busy background, blurry character
 
 ----------------------------------------------------------------------
 
 ### tuile chinoise  —  fichier : assets/tuiles/chinoise.png
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Square 1:1 tile, solid flat deep burgundy background (#7A1D2B). A single character perfectly centered: a red countryball whose skin is covered in golden dragon scales, wearing a black imperial Chinese hat. Soft drop shadow under the ball, subtle glow. Clean, iconic, readable at small size. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, square 1:1 tile. Bust portrait of a countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Chinese imperial costume: a yellow hanfu robe embroidered with golden dragons wrapped around the body, a mianguan imperial hat with bead curtains on top of the ball, a jade belt, holding a jade tablet with white cartoon gloves, centered, the ball cut at chest level by the bottom edge. Behind it, the Great Wall of China winding over the mountains drawn small, semi-transparent and faded like a soft low-contrast silhouette, on a solid flat deep burgundy background (#7A1D2B). Soft rim light, clean and readable at small size. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, busy background, blurry character
 
 ----------------------------------------------------------------------
 
 ### tuile maya  —  fichier : assets/tuiles/maya.png
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Square 1:1 tile, solid flat jade green background (#2E9C72). A single character perfectly centered: a countryball wearing a tall colorful feathered headdress, next to a round carved stone Maya calendar. Soft drop shadow under the ball, subtle glow. Clean, iconic, readable at small size. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, square 1:1 tile. Bust portrait of a countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Maya noble costume: a huge headdress of green quetzal feathers on top of the ball, jade ear spools and a jade necklace, an embroidered loincloth, a jaguar-skin cape flowing behind, colorful body paint, holding a carved jade scepter with white cartoon gloves, centered, the ball cut at chest level by the bottom edge. Behind it, the El Castillo pyramid of Chichen Itza drawn small, semi-transparent and faded like a soft low-contrast silhouette, on a solid flat jade green background (#2E9C72). Soft rim light, clean and readable at small size. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, busy background, blurry character
 
 ----------------------------------------------------------------------
 
 ### tuile azteque  —  fichier : assets/tuiles/azteque.png
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Square 1:1 tile, solid flat turquoise background (#27B2AE). A single character perfectly centered: a countryball wearing a headdress of long green quetzal feathers, with a small green feathered serpent coiled around it. Soft drop shadow under the ball, subtle glow. Clean, iconic, readable at small size. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, square 1:1 tile. Bust portrait of a countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Aztec eagle warrior costume: an eagle-head helmet with green and golden feathers on top of the ball, a feathered suit wrapped around the body, gold and turquoise jewelry, holding a round feathered chimalli shield and an obsidian-bladed macuahuitl with white cartoon gloves, centered, the ball cut at chest level by the bottom edge. Behind it, the Templo Mayor with its twin shrines at the heart of Tenochtitlan drawn small, semi-transparent and faded like a soft low-contrast silhouette, on a solid flat turquoise background (#27B2AE). Soft rim light, clean and readable at small size. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, busy background, blurry character
 
 ----------------------------------------------------------------------
 
 ### tuile inca  —  fichier : assets/tuiles/inca.png
 
-2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Square 1:1 tile, solid flat warm orange background (#EF8A22). A single character perfectly centered: a countryball wearing a golden sun crown, standing next to a small cute white llama. Soft drop shadow under the ball, subtle glow. Clean, iconic, readable at small size. Absolutely no text, no letters, no numbers, no watermark, no signature.
+PROMPT :
+Highly detailed 2D cartoon illustration, premium children's book style, square 1:1 tile. Bust portrait of a countryball character (perfectly round ball, thick black outline, big expressive white cartoon eyes, no mouth) dressed in a full detailed Inca emperor costume: a royal llautu headband with a red mascapaicha fringe on top of the ball, large golden ear spools, an unku tunic with geometric patterns wrapped around the body, a vicuna wool cape flowing behind, holding a golden scepter with white cartoon gloves, centered, the ball cut at chest level by the bottom edge. Behind it, the Machu Picchu with its stone terraces drawn small, semi-transparent and faded like a soft low-contrast silhouette, on a solid flat warm orange background (#EF8A22). Soft rim light, clean and readable at small size. No text, no letters, no watermark.
+
+NEGATIVE PROMPT :
+text, letters, words, watermark, realistic human, human body, legs, mouth, busy background, blurry character
 
 ----------------------------------------------------------------------

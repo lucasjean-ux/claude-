@@ -30,7 +30,7 @@ from PIL import Image, ImageDraw, ImageFilter
 
 import commun
 from commun import (ASSETS, CIVS, EPISODES, FPS, HAUTEUR, LARGEUR, charger_env, dessiner_boule, etape,
-                    hash_fichiers, hex_rgb, layout_tuiles, logger, normaliser, police,
+                    hash_fichiers, hex_rgb, layout_tuiles, logger, police,
                     telecharger_polices, tokeniser, trouver_image)
 
 log = logger()
@@ -247,7 +247,7 @@ def _degrade(w, h, haut, bas) -> Image.Image:
     return col.resize((w, h))
 
 
-def placeholder(scene: dict, idx: int, couleur_boule: str) -> Image.Image:
+def placeholder(scene: dict, idx: int, civ: dict) -> Image.Image:
     """Image de test : cercles de couleur sur un dégradé (avec une boule pour visualiser le cadrage)."""
     mvt = scene["mouvement"]
     if mvt == "icon_dark":  # icône détourée (RGBA) : une roue stylisée
@@ -275,14 +275,20 @@ def placeholder(scene: dict, idx: int, couleur_boule: str) -> Image.Image:
         y = h * (0.18 + 0.12 * ((k * 7 + idx) % 3))
         r = 60 + 25 * ((k + idx) % 3)
         d.ellipse((x - r, y - r, x + r, y + r), fill=(255, 255, 255, 70))
+    # monument signature (silhouette) : derrière le personnage, ou à l'extrémité révélée par le pan
+    from generer_intro import silhouette_monument
+    couleur_boule = civ["boule"]
+    tm = 1100 if pan else 900
+    masque = silhouette_monument(tm, civ.get("silhouette", "ziggourat")).point(lambda v: v * 150 // 255)
+    if pan:
+        xm = w - tm - 60 if mvt == "pan_right" else 60
+    else:
+        xm = (w - tm) // 2
+    img.paste((120, 70, 40), (int(xm), int(sol - tm * 0.72)), masque)
     # sujet
     if pan:
         cx = w * (0.17 if mvt == "pan_right" else 0.83)
         dessiner_boule(img, cx, sol - 170, 180, couleur_boule, idx)
-        for k in range(4):  # décor de l'autre côté : pyramides
-            x = w * (0.45 + 0.13 * k) if mvt == "pan_right" else w * (0.55 - 0.13 * k)
-            d.polygon([(x - 200, sol), (x, sol - 330 - 40 * (k % 2)), (x + 200, sol)], fill=(150, 90, 50, 220),
-                      outline=(0, 0, 0, 255), width=8)
     elif scene.get("outro"):
         for k, c in enumerate(["#C98B4A", "#E7B66E", "#B8683D", "#F4D35E"]):
             x, y = w * (0.3 + 0.4 * (k % 2)), h * (0.18 + 0.18 * (k // 2))
@@ -624,7 +630,6 @@ def main() -> None:
     n_reelles = sum(1 for s in scenes if s["mouvement"] != "white_screen" and trouver_image(dossier_img, s["id"]))
     if n_reelles == 0:
         log.warning("Dossier images/ vide -> placeholders générés automatiquement (mode validation).")
-    coul = CIVS[tuile]["boule"]
     plans: list[Plan] = [PlanIntro(tuile, W, H)]
     for i, (s, d, f) in enumerate(zip(scenes, debuts, fins)):
         mvt = s["mouvement"]
@@ -639,7 +644,7 @@ def main() -> None:
             if mvt.startswith("pan_") and img.width < img.height:
                 log.warning("%s est un pan mais l'image n'est pas en 16:9 : le pan sera court.", s["id"])
         else:
-            img = placeholder(s, i, coul)
+            img = placeholder(s, i, CIVS[tuile])
             ph = cache / "placeholders"
             ph.mkdir(exist_ok=True)
             img.save(ph / f"{s['id']}.png")

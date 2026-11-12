@@ -2,93 +2,138 @@
   "civilisation": "mesopotamienne",
   "titre": "La Mésopotamie",
   "lexique": ["Sumériens", "Sumer", "Mésopotamie", "Tigre", "Euphrate", "Uruk", "ziggourat", "cunéiforme", "Gilgamesh", "Sargon d'Akkad"],
-  "personnage": "the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard)",
+  "_doc": "Champs d'une scène : id, debut (premiers mots du passage), mouvement, et pour l'image : action, expression, variante (costume alternatif de la bible), costume_de / monument_de (autre civilisation), objet, decor (éléments imposés, complétés par la rotation de la bible), habitants, lumiere, position_monument, premier_plan. icon_dark : objet. outro : symboles. Les éléments de décor non imposés sont piochés en rotation dans assets/civilisations.json.",
   "scenes": [
     {
       "id": "scene_01",
       "debut": "Et si la toute première",
       "mouvement": "impact_zoom",
-      "sujet": "the Egyptian countryball (golden skin, blue and gold striped nemes headdress) looking very surprised with wide-open eyes and raised eyebrows, pyramids in the background, while the large shadow of {perso} looms over it from the side"
+      "costume_de": "egyptienne",
+      "monument_de": "egyptienne",
+      "expression": "wide open in surprise with raised eyebrows",
+      "action": "turning around in shock as the huge shadow of a bearded Sumerian countryball falls over it",
+      "lumiere": "warm sunset glow with dramatic clouds and drifting sand"
     },
     {
       "id": "scene_02",
       "debut": "Il y a plus de cinq mille ans",
       "mouvement": "push_in",
-      "sujet": "{perso} standing proudly on fertile land between two winding bright blue rivers, at sunrise, the sun rising behind it, palm trees and reeds along the rivers"
+      "expression": "with a proud half-moon smile",
+      "action": "standing on a grassy hill at sunrise, the Tigris and the Euphrates winding behind it",
+      "position_monument": "small in the far distance between the two rivers",
+      "decor": ["the winding Tigris and Euphrates rivers", "date palm trees", "reed boats on the river"],
+      "lumiere": "misty dawn light with the rising sun, soft volumetric rays and a richly painted cloudy sky"
     },
     {
       "id": "scene_03",
       "debut": "Les Grecs appelleront",
-      "mouvement": "pan_right",
-      "sujet": "a vast fertile valley seen from a low hill: two winding blue rivers (the Tigris and the Euphrates) run side by side across a golden plain; a white and blue Greek countryball with a golden laurel wreath stands on the hill and points at the land with a white cartoon glove"
+      "mouvement": "pan_left",
+      "costume_de": "grecque",
+      "variante": "philosophe",
+      "objet": "a papyrus scroll",
+      "expression": "half-closed with a wise look",
+      "action": "standing on a rocky hill and pointing at the fertile land between two rivers",
+      "decor": ["the winding Tigris and Euphrates rivers", "golden wheat fields", "date palm trees"]
     },
     {
       "id": "scene_04",
       "debut": "Au départ",
       "mouvement": "pan_right",
-      "sujet": "a landscape that transforms from one side to the other: a dry cracked arid plain where {perso} digs a canal with a wooden hoe, then straight irrigation canals full of blue water and lush golden wheat fields swaying under the sun"
+      "objet": "a wooden hoe",
+      "expression": "with a determined frown",
+      "action": "standing on a dry cracked arid plain on the left, while on the right other countryballs dig irrigation canals",
+      "decor": ["irrigation canals full of water", "golden wheat fields", "date palm trees"],
+      "habitants": "countryball farmers in kaunakes skirts digging canals and carrying baskets",
+      "position_monument": "small on the far RIGHT horizon"
     },
     {
       "id": "scene_05",
       "debut": "Les villages deviennent",
       "mouvement": "push_in",
-      "sujet": "the city of Uruk seen from a distance: thick mud-brick walls with gates, flat-roofed houses, a temple on a terrace, and many tiny clay-colored countryball inhabitants walking around, warm afternoon light"
+      "action": "standing on a hill overlooking the city of Uruk",
+      "position_monument": "rising at the center of the city behind the character",
+      "decor": ["the mud-brick walls of Uruk", "a monumental city gate decorated with glazed blue bricks", "narrow streets full of countryball inhabitants"],
+      "habitants": "crowds of small countryball inhabitants in kaunakes skirts walking, trading and carrying jars"
     },
     {
       "id": "scene_06",
       "debut": "Pour gérer tout ce blé",
-      "mouvement": "white_screen",
-      "sujet": ""
+      "mouvement": "white_screen"
     },
     {
       "id": "scene_07",
       "debut": "Alors, vers 3300",
       "mouvement": "impact_zoom",
-      "sujet": "extreme close-up of a white cartoon glove holding a sharpened reed stylus and pressing wedge-shaped cuneiform marks into a soft wet clay tablet, small clay crumbs, warm golden light"
+      "variante": "scribe",
+      "objet": "a sharpened reed stylus pressing wedge-shaped decorative cuneiform marks into a wet clay tablet",
+      "expression": "half-closed in deep concentration",
+      "action": "sitting cross-legged in a scribe workshop lit by oil lamps",
+      "position_monument": "visible through a wide open doorway behind the character",
+      "decor": ["shelves stacked with clay tablets", "large clay jars"],
+      "habitants": "apprentice scribe countryballs copying tablets",
+      "lumiere": "flickering oil-lamp light with a warm glow, dust floating in the light beams"
     },
     {
       "id": "scene_08",
       "debut": "Ils sont aussi parmi les premiers",
       "mouvement": "icon_dark",
-      "sujet": "an ancient solid wooden wheel made of three planks held together with wooden crossbars, with a small axle hole in the center"
+      "objet": "an ancient solid wooden Sumerian chariot wheel made of three carved planks held together by wooden crossbars, with copper nails and a central axle hole"
     },
     {
       "id": "scene_09",
       "debut": "et ils comptent en base soixante",
       "mouvement": "icon_dark",
-      "chiffres": true,
-      "sujet": "a round golden clock whose dial shows only the number 60 at the top, surrounded by a thin graduated circle with 360 small tick marks like a protractor"
+      "objet": "a round clock dial made of golden baked clay, marked with 60 carved graduations, surrounded by a thin engraved graduated circle, no digits"
     },
     {
       "id": "scene_10",
       "debut": "Au cœur de chaque ville",
       "mouvement": "pan_left",
-      "sujet": "a huge stepped ziggurat with several terraced levels and a long central staircase, a small temple at the top, at sunset with an orange and red sky; {perso} stands at the foot of the ziggurat, looking up at it"
+      "expression": "looking up in awe",
+      "action": "standing at the foot of the great ziggurat",
+      "position_monument": "towering on the LEFT side of the panorama",
+      "decor": ["a sacred procession on the monumental staircase", "date palm trees", "torches burning on the terraces"],
+      "habitants": "countryball priests in white robes climbing the steps",
+      "lumiere": "warm sunset glow with dramatic orange and red clouds and drifting incense smoke"
     },
     {
       "id": "scene_11",
       "debut": "Et c'est sur leurs tablettes",
       "mouvement": "push_in",
-      "sujet": "Gilgamesh as a heroic countryball: clay-colored skin, a golden royal crown, a long curly braided black beard, determined frowning eyes, facing a big roaring cartoon lion, epic warm lighting"
+      "variante": "roi",
+      "objet": "a bronze sword",
+      "expression": "with heroic frowning eyebrows",
+      "action": "playing the hero Gilgamesh with a golden crown and a flowing cape, bravely facing a huge roaring cartoon lion in a dense cedar forest",
+      "position_monument": "far in the distance beyond the cedar forest",
+      "decor": ["giant cedar trees", "rays of light through the branches"],
+      "habitants": "small countryball warriors watching from behind the trees",
+      "lumiere": "volumetric light rays through the forest canopy with floating dust"
     },
     {
       "id": "scene_12",
       "debut": "Pourtant, vers 2300",
       "mouvement": "impact_zoom",
-      "sujet": "an army of Akkadian countryballs with bronze helmets and spears, led by King Sargon (a bigger countryball with a tall golden crown and a braided beard), marching toward a Sumerian mud-brick city, dramatic red sky"
+      "variante": "roi",
+      "objet": "a golden scepter raised high",
+      "expression": "with a fierce conqueror frown",
+      "action": "playing King Sargon of Akkad, leading a charging army in front of the walls of a burning Sumerian city",
+      "position_monument": "behind the burning city walls, partly hidden by smoke",
+      "decor": ["the mud-brick walls of Uruk", "flames and black smoke rising"],
+      "habitants": "an army of Akkadian countryball soldiers with bronze helmets, spears and shields",
+      "lumiere": "dramatic red sky with fire glow, embers and smoke"
     },
     {
       "id": "scene_13",
       "debut": "mais ses inventions",
       "mouvement": "push_in",
       "outro": true,
-      "sujet": "a recap composition: a cuneiform clay tablet, a wooden wheel, a stepped ziggurat and a round clock float in the upper half of the image in a soft golden gradient, glowing; {perso} appears small at the bottom center, looking up at them with a half-moon smile"
+      "symboles": ["a cuneiform clay tablet", "a solid wooden chariot wheel", "a golden clay clock dial with 60 graduations"],
+      "lumiere": "golden hour glow with volumetric rays and sparkling particles"
     },
     {
       "id": "scene_14",
       "debut": "Dites-le-nous",
-      "mouvement": "white_screen",
-      "sujet": ""
+      "mouvement": "white_screen"
     }
   ]
 }

@@ -11,6 +11,7 @@ D'un épisode à l'autre, seuls changent le script, les illustrations et la tuil
 ├── decouper.py          # script.txt (+ plan.json) -> scenes.json + prompts.txt
 ├── render.py            # voix -> transcription -> calage -> rendu -> final.mp4
 ├── assets/
+│   ├── civilisations.json  # BIBLE : costume, variantes, monument signature, décor, couleur de tuile
 │   ├── intro.png        # affiche 1080x1920 (générée)
 │   ├── intro_hd.png     # même affiche x3, pour un zoom net vers la tuile
 │   ├── fonts/           # Poppins / Montserrat (téléchargées depuis Google Fonts)
@@ -18,11 +19,11 @@ D'un épisode à l'autre, seuls changent le script, les illustrations et la tuil
 └── episodes/
     └── 01_mesopotamie/
         ├── script.txt   # texte de la voix off
-        ├── plan.json    # plan de scènes (ancres, mouvements, sujets des images)
+        ├── plan.json    # plan de scènes (ancres, mouvements, action/objet/décor de chaque image)
         ├── scenes.json  # généré par decouper.py
         ├── prompts.txt  # généré : prompts d'images à coller dans Higgsfield
         ├── voix.mp3     # optionnel (sinon ElevenLabs)
-        ├── images/      # scene_01.png … scene_13.png
+        ├── images/      # scene_01.png … scene_13.png (pas d'image pour les white_screen)
         └── cache/       # voix normalisée, transcription, placeholders (régénérable)
 ```
 
@@ -105,9 +106,9 @@ ni bruitage.
 
 | Partie | Rendu |
 |---|---|
-| 0 – 2,2 s | affiche fixe (titre, sous-titre gris, grille 3x3), sans sous-titres |
+| 0 – 2,2 s | affiche fixe (titre, sous-titre gris, grille 3x3 de countryballs en buste devant leur monument), sans sous-titres |
 | 2,2 – 3,8 s | zoom accéléré (ease-in) vers la tuile `--tuile` jusqu'au plein écran, puis coupe sèche |
-| corps | une illustration fixe par scène. `push_in` zoome de 100 à 112 %. `pan_left` et `pan_right` traversent une image 16:9 à vitesse constante, et le personnage sort du cadre. `impact_zoom` passe de 90 à 115 % en 0,8 s, puis dérive lentement. |
+| corps | une illustration fixe par scène. `push_in` zoome de 100 à 112 %. `pan_left` et `pan_right` traversent une image 16:9 à vitesse constante : le personnage sort du cadre et le plan finit sur le décor et le monument. `impact_zoom` passe de 90 à 115 % en 0,8 s, puis dérive lentement. |
 | `icon_dark` | icône centrée sur fond #22272E avec un halo doux. Si l'image est détourée (PNG transparent), le fond et le halo sont composés automatiquement. |
 | `white_screen` | écran blanc, sous-titres seuls |
 | outro | illustration récapitulative pendant la question finale, puis écran blanc (au moins 2 s) sur « Dites-le-nous dans les commentaires », puis 1 image noire |
@@ -121,30 +122,82 @@ dépasse 0,4 s.
 
 Les réglages (durées, zooms, taille des sous-titres…) sont regroupés en haut de `render.py`.
 
-## Illustrations
+## Illustrations et prompts
 
-1. Ouvre `episodes/<épisode>/prompts.txt`. Chaque scène y a son prompt en anglais, avec le style countryball
-   déjà intégré, et le format à générer : 9:16 en général, 16:9 pour les `pan_*`.
+### Bible des civilisations : `assets/civilisations.json`
+
+La bible contient, pour chaque civilisation :
+- **le costume complet**, en anglais pour les prompts, avec sa référence en français ;
+- **des variantes** de costume (roi, scribe, prêtre, hoplite, empereur, guerrier…) ;
+- **les objets** que la boule tient dans ses gants ;
+- **le monument signature** ;
+- **une liste d'éléments de décor** ;
+- **les couleurs de la tuile et de la boule**, et la silhouette utilisée pour les placeholders.
+
+`decouper.py` injecte automatiquement ces données dans chaque prompt, selon la civilisation de l'épisode :
+- **Costume** : celui de la civilisation de l'épisode, ou la variante demandée par la scène.
+- **Monument** : il est placé derrière le personnage. Dans un pan, il est placé du côté que le mouvement
+  révèle à la fin.
+- **Décor** : chaque image reçoit 2 à 3 éléments. Ce sont ceux que la scène impose. S'il y en a moins de 2,
+  ils sont complétés par une rotation dans la bible, pour que les images varient.
+- **Lumière** : heure dorée, aube brumeuse ou coucher de soleil, en rotation, sauf si la scène impose la sienne.
+
+`decouper.py` vérifie aussi la règle des 70 % : le monument signature doit être visible dans au moins 70 %
+des scènes illustrées. L'épisode 1 l'a dans 10 scènes sur 12 (83 %). Les deux exceptions sont les icônes.
+
+### Les modèles de prompts (anglais)
+
+- **Scène avec personnage** (`push_in`, `impact_zoom`, `pan_*`) : « Highly detailed 2D cartoon illustration,
+  premium children's book style, vertical 9:16. A countryball character (…) dressed in a full detailed
+  [COSTUME], [ACTION], white cartoon gloves holding [OBJET]. Rich detailed historical background with the
+  [MONUMENT] clearly visible behind the character, plus [DÉCOR], other small countryball inhabitants… »
+  Pour les pans, le format devient un panorama 16:9. Le personnage est placé d'un côté et le monument de
+  l'autre.
+- **`icon_dark`** : un objet seul et détaillé, sur fond uni #22272E, avec un halo doux derrière.
+- **Outro** : les symboles de l'épisode flottent dans un ciel doré devant le monument, avec la countryball en
+  costume, en petit, en bas.
+- **Tuiles** (1:1) : la countryball en buste et en costume complet, le monument en petit et en transparence
+  derrière, sur un fond de la couleur de la tuile.
+- **Negative prompt** : « text, letters, words, watermark, realistic human, human body, legs, mouth, flat
+  simple background, gradient background, minimalist, empty scene, blurry character ». Les icônes et les
+  tuiles ont leur propre negative prompt, adapté au fond uni.
+
+### Produire les images
+
+1. Ouvre `episodes/<épisode>/prompts.txt`. Pour chaque image, il donne le PROMPT, le NEGATIVE PROMPT, le
+   format (9:16, ou 16:9 pour les `pan_*`) et le nom du fichier à enregistrer.
 2. Enregistre chaque image sous `images/<id>.png` (`.jpg` et `.webp` sont aussi acceptés).
-3. Les 9 tuiles d'intro (format 1:1) vont dans `assets/tuiles/<id>.png`. Relance ensuite
-   `python generer_intro.py`.
+3. Les 9 tuiles d'intro vont dans `assets/tuiles/<id>.png`. Relance ensuite `python generer_intro.py`.
 
-Si `images/` est vide, `render.py` génère des placeholders (cercles de couleur sur un dégradé, avec une
-boule) pour valider le montage. Une image manquante isolée est elle aussi remplacée par un placeholder, avec
-un avertissement dans les logs.
+Si `images/` est vide, `render.py` génère des placeholders : des cercles de couleur sur un dégradé, une boule
+et la silhouette du monument. Ils suffisent à valider le montage, les cadrages et les pans (le pan doit finir
+sur le monument). Une image manquante isolée est elle aussi remplacée par un placeholder, avec un
+avertissement dans les logs. Les tuiles manquantes sont remplacées par une boule en buste devant la
+silhouette transparente du monument.
 
 ## Nouvel épisode
 
-1. Crée `episodes/02_egypte/` avec `script.txt` et `plan.json`. Copie celui de l'épisode 1 et adapte-le :
-   - `civilisation` : l'id de la tuile ;
-   - `personnage` : la description utilisée à la place de `{perso}` dans les sujets ;
-   - `lexique` : les noms propres de l'épisode ;
-   - `scenes` : pour chaque scène, son `id`, son `debut` (premiers mots du passage dans le script), son
-     `mouvement`, son `sujet` en anglais, et selon le cas `outro: true`, `nuit: true` (fond bleu nuit
-     étoilé) ou `chiffres: true` (chiffres autorisés dans l'image).
-   Sans `plan.json`, `decouper.py` découpe le script tout seul et marque les sujets à rédiger avec `TODO`.
-2. Lance `python decouper.py --episode 02_egypte`. Il affiche la durée estimée de chaque scène et signale
-   celles qui sortent de 3 à 10 s.
+1. Crée `episodes/02_egypte/` avec `script.txt` et `plan.json`. Copie le plan de l'épisode 1 et adapte-le.
+   - Champs généraux :
+     - `civilisation` : l'id de la tuile et de la bible ;
+     - `lexique` : les noms propres, pour aider whisper.
+   - Champs de chaque scène (seuls `id`, `debut` et `mouvement` sont obligatoires) :
+
+| Champ | Rôle |
+|---|---|
+| `id`, `debut`, `mouvement` | identifiant, premiers mots du passage dans le script, mouvement de caméra |
+| `action`, `expression`, `objet` | ce que fait la boule, son regard, ce qu'elle tient (par défaut, un objet de la bible) |
+| `variante` | costume alternatif de la bible (`roi`, `pretre`, `hoplite`, `empereur`, `guerrier`, `jaguar`…) |
+| `costume_de`, `monument_de` | prendre le costume ou le monument d'une autre civilisation (ex. la boule grecque dans l'épisode 1) |
+| `decor`, `habitants`, `premier_plan` | éléments de décor imposés, habitants du plan moyen, objets du premier plan |
+| `lumiere`, `position_monument` | ambiance lumineuse imposée, position du monument (« through a doorway », « far in the distance »…) |
+| `sans_monument` | `true` pour exclure le monument (attention à la règle des 70 %) |
+| `objet` (icon_dark) / `symboles` + `outro: true` (outro) | contenu des plans spéciaux |
+
+   Sans `plan.json` (ou sans `scenes`), `decouper.py --tuile <id>` découpe le script tout seul et marque les
+   actions à rédiger avec `TODO`. Les prompts sont tout de même remplis avec la bible.
+2. Lance `python decouper.py --episode 02_egypte`. Il affiche la durée estimée de chaque scène et le taux de
+   monuments, et signale ce qui sort des règles.
 3. Génère les images, puis lance `python render.py --episode 02_egypte --tuile egyptienne`.
 
 ## Logs
