@@ -1,0 +1,158 @@
+{
+  "episode": "01_mesopotamie",
+  "civilisation": "mesopotamienne",
+  "lexique": [
+    "Sumériens",
+    "Sumer",
+    "Mésopotamie",
+    "Tigre",
+    "Euphrate",
+    "Uruk",
+    "ziggourat",
+    "cunéiforme",
+    "Gilgamesh",
+    "Sargon d'Akkad"
+  ],
+  "scenes": [
+    {
+      "id": "scene_01",
+      "texte": "Et si la toute première civilisation de l'histoire n'était pas l'Égypte ?",
+      "mouvement": "impact_zoom",
+      "format": "9:16",
+      "image": "images/scene_01.png",
+      "outro": false,
+      "sujet": "the Egyptian countryball (golden skin, blue and gold striped nemes headdress) looking very surprised with wide-open eyes and raised eyebrows, pyramids in the background, while the large shadow of the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) looms over it from the side",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: the Egyptian countryball (golden skin, blue and gold striped nemes headdress) looking very surprised with wide-open eyes and raised eyebrows, pyramids in the background, while the large shadow of the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) looms over it from the side. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_02",
+      "texte": "Il y a plus de cinq mille ans, entre deux fleuves, le Tigre et l'Euphrate, naît un peuple qui va changer le monde : les Sumériens.",
+      "mouvement": "push_in",
+      "format": "9:16",
+      "image": "images/scene_02.png",
+      "outro": false,
+      "sujet": "the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) standing proudly on fertile land between two winding bright blue rivers, at sunrise, the sun rising behind it, palm trees and reeds along the rivers",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) standing proudly on fertile land between two winding bright blue rivers, at sunrise, the sun rising behind it, palm trees and reeds along the rivers. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_03",
+      "texte": "Les Grecs appelleront cette terre la Mésopotamie, le pays entre les fleuves.",
+      "mouvement": "pan_right",
+      "format": "16:9",
+      "image": "images/scene_03.png",
+      "outro": false,
+      "sujet": "a vast fertile valley seen from a low hill: two winding blue rivers (the Tigris and the Euphrates) run side by side across a golden plain; a white and blue Greek countryball with a golden laurel wreath stands on the hill and points at the land with a white cartoon glove",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: a vast fertile valley seen from a low hill: two winding blue rivers (the Tigris and the Euphrates) run side by side across a golden plain; a white and blue Greek countryball with a golden laurel wreath stands on the hill and points at the land with a white cartoon glove. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Wide horizontal 16:9 panorama. The character stands in the far LEFT third of the image; the center and right part show only scenery, so a camera pan to the right leaves the character out of frame. Keep the bottom quarter simple. Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_04",
+      "texte": "Au départ, ce n'est qu'une plaine aride. Mais les Sumériens creusent des canaux, irriguent la terre, et les récoltes explosent.",
+      "mouvement": "pan_right",
+      "format": "16:9",
+      "image": "images/scene_04.png",
+      "outro": false,
+      "sujet": "a landscape that transforms from one side to the other: a dry cracked arid plain where the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) digs a canal with a wooden hoe, then straight irrigation canals full of blue water and lush golden wheat fields swaying under the sun",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: a landscape that transforms from one side to the other: a dry cracked arid plain where the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) digs a canal with a wooden hoe, then straight irrigation canals full of blue water and lush golden wheat fields swaying under the sun. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Wide horizontal 16:9 panorama. The character stands in the far LEFT third of the image; the center and right part show only scenery, so a camera pan to the right leaves the character out of frame. Keep the bottom quarter simple. Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_05",
+      "texte": "Les villages deviennent des villes. Uruk compte bientôt des dizaines de milliers d'habitants : c'est l'une des premières grandes cités du monde.",
+      "mouvement": "push_in",
+      "format": "9:16",
+      "image": "images/scene_05.png",
+      "outro": false,
+      "sujet": "the city of Uruk seen from a distance: thick mud-brick walls with gates, flat-roofed houses, a temple on a terrace, and many tiny clay-colored countryball inhabitants walking around, warm afternoon light",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: the city of Uruk seen from a distance: thick mud-brick walls with gates, flat-roofed houses, a temple on a terrace, and many tiny clay-colored countryball inhabitants walking around, warm afternoon light. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_06",
+      "texte": "Pour gérer tout ce blé, il faut compter.",
+      "mouvement": "white_screen",
+      "format": "9:16",
+      "image": null,
+      "outro": false,
+      "sujet": "",
+      "prompt": null
+    },
+    {
+      "id": "scene_07",
+      "texte": "Alors, vers 3300 avant notre ère, ils gravent des signes dans l'argile avec un roseau. C'est l'écriture cunéiforme, l'une des plus anciennes de l'humanité.",
+      "mouvement": "impact_zoom",
+      "format": "9:16",
+      "image": "images/scene_07.png",
+      "outro": false,
+      "sujet": "extreme close-up of a white cartoon glove holding a sharpened reed stylus and pressing wedge-shaped cuneiform marks into a soft wet clay tablet, small clay crumbs, warm golden light",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: extreme close-up of a white cartoon glove holding a sharpened reed stylus and pressing wedge-shaped cuneiform marks into a soft wet clay tablet, small clay crumbs, warm golden light. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_08",
+      "texte": "Ils sont aussi parmi les premiers à utiliser la roue, ils rédigent les plus anciennes lois écrites connues,",
+      "mouvement": "icon_dark",
+      "format": "9:16",
+      "image": "images/scene_08.png",
+      "outro": false,
+      "sujet": "an ancient solid wooden wheel made of three planks held together with wooden crossbars, with a small axle hole in the center",
+      "prompt": "Single isolated icon: an ancient solid wooden wheel made of three planks held together with wooden crossbars, with a small axle hole in the center. Flat 2D cartoon vector style with a thick black outline and simple cel shading, centered in the frame, on a plain solid dark charcoal background (#22272E) with a soft warm luminous halo glowing behind the icon. Nothing else in the image. Vertical 9:16, icon centered slightly above the middle. Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_09",
+      "texte": "et ils comptent en base soixante. C'est pour ça qu'aujourd'hui encore une heure fait soixante minutes, et un cercle trois cent soixante degrés.",
+      "mouvement": "icon_dark",
+      "format": "9:16",
+      "image": "images/scene_09.png",
+      "outro": false,
+      "sujet": "a round golden clock whose dial shows only the number 60 at the top, surrounded by a thin graduated circle with 360 small tick marks like a protractor",
+      "prompt": "Single isolated icon: a round golden clock whose dial shows only the number 60 at the top, surrounded by a thin graduated circle with 360 small tick marks like a protractor. Flat 2D cartoon vector style with a thick black outline and simple cel shading, centered in the frame, on a plain solid dark charcoal background (#22272E) with a soft warm luminous halo glowing behind the icon. Nothing else in the image. Vertical 9:16, icon centered slightly above the middle. No words, no letters, no watermark (only the digits explicitly described)."
+    },
+    {
+      "id": "scene_10",
+      "texte": "Au cœur de chaque ville se dresse une ziggourat, une immense tour à étages dédiée aux dieux.",
+      "mouvement": "pan_left",
+      "format": "16:9",
+      "image": "images/scene_10.png",
+      "outro": false,
+      "sujet": "a huge stepped ziggurat with several terraced levels and a long central staircase, a small temple at the top, at sunset with an orange and red sky; the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) stands at the foot of the ziggurat, looking up at it",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: a huge stepped ziggurat with several terraced levels and a long central staircase, a small temple at the top, at sunset with an orange and red sky; the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) stands at the foot of the ziggurat, looking up at it. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Wide horizontal 16:9 panorama. The character stands in the far RIGHT third of the image; the center and left part show only scenery, so a camera pan to the left leaves the character out of frame. Keep the bottom quarter simple. Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_11",
+      "texte": "Et c'est sur leurs tablettes qu'apparaît Gilgamesh, le héros du plus vieux grand récit de l'humanité.",
+      "mouvement": "push_in",
+      "format": "9:16",
+      "image": "images/scene_11.png",
+      "outro": false,
+      "sujet": "Gilgamesh as a heroic countryball: clay-colored skin, a golden royal crown, a long curly braided black beard, determined frowning eyes, facing a big roaring cartoon lion, epic warm lighting",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: Gilgamesh as a heroic countryball: clay-colored skin, a golden royal crown, a long curly braided black beard, determined frowning eyes, facing a big roaring cartoon lion, epic warm lighting. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_12",
+      "texte": "Pourtant, vers 2300 avant notre ère, le roi Sargon d'Akkad conquiert leurs cités. Sumer s'efface peu à peu…",
+      "mouvement": "impact_zoom",
+      "format": "9:16",
+      "image": "images/scene_12.png",
+      "outro": false,
+      "sujet": "an army of Akkadian countryballs with bronze helmets and spears, led by King Sargon (a bigger countryball with a tall golden crown and a braided beard), marching toward a Sumerian mud-brick city, dramatic red sky",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: an army of Akkadian countryballs with bronze helmets and spears, led by King Sargon (a bigger countryball with a tall golden crown and a braided beard), marching toward a Sumerian mud-brick city, dramatic red sky. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing, main subject centered in the upper half of the image, bottom third kept clear and uncluttered (reserved for subtitles). Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_13",
+      "texte": "mais ses inventions, elles, ont survécu jusqu'à vous. Quelle civilisation voulez-vous découvrir ensuite ?",
+      "mouvement": "push_in",
+      "format": "9:16",
+      "image": "images/scene_13.png",
+      "outro": true,
+      "sujet": "a recap composition: a cuneiform clay tablet, a wooden wheel, a stepped ziggurat and a round clock float in the upper half of the image in a soft golden gradient, glowing; the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) appears small at the bottom center, looking up at them with a half-moon smile",
+      "prompt": "2D cartoon vector illustration, countryball style. Characters are perfectly round balls with a thick black outline and big expressive white cartoon eyes (often half-closed, frowning eyebrows or a half-moon smile), no mouth. The ball's skin carries a pattern related to the theme, accessories are symbolic, hands (when present) are white cartoon gloves. Scene: a recap composition: a cuneiform clay tablet, a wooden wheel, a stepped ziggurat and a round clock float in the upper half of the image in a soft golden gradient, glowing; the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard) appears small at the bottom center, looking up at them with a half-moon smile. Soft warm gradient background (ochre, sand, gold, orange, red), simple flat-color ground, soft drop shadow under the characters, subtle glow and small floating light particles. Vertical 9:16 framing. The symbols float in the upper half of the image; the main character is small, at the bottom center of the image, with a calm uncluttered area around it. Absolutely no text, no letters, no numbers, no watermark, no signature."
+    },
+    {
+      "id": "scene_14",
+      "texte": "Dites-le-nous dans les commentaires.",
+      "mouvement": "white_screen",
+      "format": "9:16",
+      "image": null,
+      "outro": false,
+      "sujet": "",
+      "prompt": null
+    }
+  ]
+}

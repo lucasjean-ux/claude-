@@ -1,0 +1,94 @@
+{
+  "civilisation": "mesopotamienne",
+  "titre": "La Mésopotamie",
+  "lexique": ["Sumériens", "Sumer", "Mésopotamie", "Tigre", "Euphrate", "Uruk", "ziggourat", "cunéiforme", "Gilgamesh", "Sargon d'Akkad"],
+  "personnage": "the Mesopotamian countryball (a clay-colored terracotta ball with a long neatly braided black beard)",
+  "scenes": [
+    {
+      "id": "scene_01",
+      "debut": "Et si la toute première",
+      "mouvement": "impact_zoom",
+      "sujet": "the Egyptian countryball (golden skin, blue and gold striped nemes headdress) looking very surprised with wide-open eyes and raised eyebrows, pyramids in the background, while the large shadow of {perso} looms over it from the side"
+    },
+    {
+      "id": "scene_02",
+      "debut": "Il y a plus de cinq mille ans",
+      "mouvement": "push_in",
+      "sujet": "{perso} standing proudly on fertile land between two winding bright blue rivers, at sunrise, the sun rising behind it, palm trees and reeds along the rivers"
+    },
+    {
+      "id": "scene_03",
+      "debut": "Les Grecs appelleront",
+      "mouvement": "pan_right",
+      "sujet": "a vast fertile valley seen from a low hill: two winding blue rivers (the Tigris and the Euphrates) run side by side across a golden plain; a white and blue Greek countryball with a golden laurel wreath stands on the hill and points at the land with a white cartoon glove"
+    },
+    {
+      "id": "scene_04",
+      "debut": "Au départ",
+      "mouvement": "pan_right",
+      "sujet": "a landscape that transforms from one side to the other: a dry cracked arid plain where {perso} digs a canal with a wooden hoe, then straight irrigation canals full of blue water and lush golden wheat fields swaying under the sun"
+    },
+    {
+      "id": "scene_05",
+      "debut": "Les villages deviennent",
+      "mouvement": "push_in",
+      "sujet": "the city of Uruk seen from a distance: thick mud-brick walls with gates, flat-roofed houses, a temple on a terrace, and many tiny clay-colored countryball inhabitants walking around, warm afternoon light"
+    },
+    {
+      "id": "scene_06",
+      "debut": "Pour gérer tout ce blé",
+      "mouvement": "white_screen",
+      "sujet": ""
+    },
+    {
+      "id": "scene_07",
+      "debut": "Alors, vers 3300",
+      "mouvement": "impact_zoom",
+      "sujet": "extreme close-up of a white cartoon glove holding a sharpened reed stylus and pressing wedge-shaped cuneiform marks into a soft wet clay tablet, small clay crumbs, warm golden light"
+    },
+    {
+      "id": "scene_08",
+      "debut": "Ils sont aussi parmi les premiers",
+      "mouvement": "icon_dark",
+      "sujet": "an ancient solid wooden wheel made of three planks held together with wooden crossbars, with a small axle hole in the center"
+    },
+    {
+      "id": "scene_09",
+      "debut": "et ils comptent en base soixante",
+      "mouvement": "icon_dark",
+      "chiffres": true,
+      "sujet": "a round golden clock whose dial shows only the number 60 at the top, surrounded by a thin graduated circle with 360 small tick marks like a protractor"
+    },
+    {
+      "id": "scene_10",
+      "debut": "Au cœur de chaque ville",
+      "mouvement": "pan_left",
+      "sujet": "a huge stepped ziggurat with several terraced levels and a long central staircase, a small temple at the top, at sunset with an orange and red sky; {perso} stands at the foot of the ziggurat, looking up at it"
+    },
+    {
+      "id": "scene_11",
+      "debut": "Et c'est sur leurs tablettes",
+      "mouvement": "push_in",
+      "sujet": "Gilgamesh as a heroic countryball: clay-colored skin, a golden royal crown, a long curly braided black beard, determined frowning eyes, facing a big roaring cartoon lion, epic warm lighting"
+    },
+    {
+      "id": "scene_12",
+      "debut": "Pourtant, vers 2300",
+      "mouvement": "impact_zoom",
+      "sujet": "an army of Akkadian countryballs with bronze helmets and spears, led by King Sargon (a bigger countryball with a tall golden crown and a braided beard), marching toward a Sumerian mud-brick city, dramatic red sky"
+    },
+    {
+      "id": "scene_13",
+      "debut": "mais ses inventions",
+      "mouvement": "push_in",
+      "outro": true,
+      "sujet": "a recap composition: a cuneiform clay tablet, a wooden wheel, a stepped ziggurat and a round clock float in the upper half of the image in a soft golden gradient, glowing; {perso} appears small at the bottom center, looking up at them with a half-moon smile"
+    },
+    {
+      "id": "scene_14",
+      "debut": "Dites-le-nous",
+      "mouvement": "white_screen",
+      "sujet": ""
+    }
+  ]
+}

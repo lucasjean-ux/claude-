@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+episodes/*/cache/
+episodes/*/final.mp4
+episodes/*/final_preview.mp4
+episodes/*/scenes.json.bak
+episodes/_test/
